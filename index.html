@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL Ուսուցման Կայք</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+            rgba(248, 249, 250, 0.85),
+            rgba(36, 66, 97, 0.85)
+          ),
+          url("./images/images(2).jpeg");
+        background-size: cover;
+        background-attachment: fixed;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      .section-title {
+        color: #0d6efd;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      }
+
+      .feature-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        cursor: pointer;
+      }
+
+      .feature-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer-link {
+        color: #adb5bd;
+        text-decoration: none;
+      }
+
+      .footer-link:hover {
+        color: white;
+      }
+
+      .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        margin-bottom: 30px;
+      }
+
+      .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      img.responsive-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      header.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      header nav a {
+        position: relative;
+        color: #e9ecef !important;
+        margin: 0 12px;
+        font-weight: 500;
+        text-decoration: none !important;
+        padding-bottom: 4px;
+      }
+
+      header nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: #ffffff;
+        transition: width 0.25s ease;
+      }
+
+      header nav a:hover {
+        color: #ffffff !important;
+      }
+
+      header nav a:hover::after {
+        width: 100%;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.7s ease;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .feature-card img {
+        transition: transform 0.4s ease;
+      }
+
+      .feature-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .btn-custom {
+        background: linear-gradient(135deg, #0d6efd, #6610f2);
+        color: white;
+        padding: 12px 25px;
+        border-radius: 30px;
+        border: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .btn-custom:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(13, 110, 253, 0.4);
+      }
+
+      #backToTop {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        background: #0d6efd;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        z-index: 999;
+        transition: opacity 0.3s;
+      }
+
+      .main-header {
+        background: linear-gradient(135deg, #0d6efd, #292664);
+        color: white;
+        padding: 35px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .main-header h1 {
+        font-size: 2.2rem;
+        letter-spacing: 0.5px;
+      }
+
+      .main-header nav a {
+        font-weight: 500;
+        opacity: 0.9;
+      }
+
+      .main-header nav a:hover {
+        opacity: 1;
+        transform: translateY(-1px);
+      }
+
+      /* Modal fixes - Critical */
+      .modal {
+        z-index: 1055;
+      }
+
+      .modal-backdrop {
+        z-index: 1050;
+      }
+
+      .modal-dialog {
+        pointer-events: auto;
+      }
+
+      .modal-body {
+        max-height: 60vh;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 20px;
+      }
+
+      /* Fix body scroll issues */
+      body.modal-open {
+        overflow: hidden !important;
+        padding-right: 0 !important;
+      }
+
+      body.modal-open #backToTop {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="main-header">
+      <div class="container text-center">
+        <h1 class="fw-bold">SQL լեզվի ուսուցման աջակցման վեբ կայք</h1>
+        <nav class="mt-3">
+          <a href="intro.html" class="text-white mx-2">Ներածություն</a>
+          <a href="application.html" class="text-white mx-2">Կիրառությունը</a>
+          <a href="commands.html" class="text-white mx-2"
+            >SQL գործիքի հրամանները</a
+          >
+          <a href="quiz.html" class="text-white mx-2">Անցնել թեստը</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mt-5">
+      <!-- Welcome Section -->
+      <section class="reveal">
+        <h2 class="section-title text-center">
+          Բարի գալուստ SQL ուսուցման վեբ կայք
+        </h2>
+        <p>
+          Այս կայքը ստեղծվել է որպես ուսուցողական միջավայր՝ SQL լեզվի
+          հիմունքները, կիրառման ոլորտները, հրամանները և գիտելիքների ստուգման
+          թեստը ներկայացնելու նպատակով։
+        </p>
+        <p>Կայքը նախատեսված է սկսնակ և միջին մակարդակի ուսանողների համար։</p>
+        <ul>
+          <li>📘 Տեսական նյութ</li>
+          <li>⚙ Գործնական օրինակներ</li>
+          <li>🧠 Ինտերակտիվ թեստ</li>
+        </ul>
+        <div class="text-center my-4">
+          <img
+            src="./images/17136.jpg"
+            alt="SQL Schema"
+            class="responsive-img"
+          />
+        </div>
+      </section>
+
+      <!-- SQL պատմություն -->
+      <section class="reveal">
+        <h2 class="section-title">SQL լեզվի ստեղծման պատմություն</h2>
+        <p>
+          SQL (Structured Query Language) ստեղծվել է 1970-ականներին IBM-ում
+          Edgar F. Codd-ի relational model-ի հիման վրա: Այն նախատեսված էր
+          relational database-ների հետ աշխատելու համար՝ հեշտ և արագ տվյալների
+          որոնում, փոփոխություն և կառավարում ապահովելու նպատակով։
+        </p>
+        <p>
+          1974-ին IBM-ը մշակեց SEQUEL (Structured English Query Language),
+          այնուհետև այն վերանվանվեց SQL, և այսօր այն համարվում է
+          արդյունաբերության ստանդարտ:
+        </p>
+        <div class="text-center my-4">
+          <img
+            src="./images//history-of-sql-standards.png"
+            alt="SQL History Timeline"
+            class="responsive-img"
+          />
+        </div>
+      </section>
+
+      <!-- SQL և ծրագրավորման լեզուներ -->
+      <section class="reveal">
+        <h2 class="section-title">SQL և ծրագրավորման լեզուները</h2>
+        <p>
+          SQL-ը հաճախ օգտագործվում է այլ ծրագրավորման լեզուների հետ՝ տվյալների
+          բազաներին մուտք, փոփոխություն և վերլուծություն կատարելու համար:
+        </p>
+        <ul>
+          <li>Python + SQLAlchemy / psycopg2 / SQLite3</li>
+          <li>JavaScript + Node.js + MySQL / PostgreSQL</li>
+          <li>Java + JDBC + Oracle / PostgreSQL</li>
+          <li>C# + Entity Framework + SQL Server</li>
+        </ul>
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/9Pzj7Aj25lw"
+            title="SQL Tutorial"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+
+      <!-- SQL կիրառման ոլորտներ -->
+      <section class="reveal">
+        <h2 class="section-title">SQL լեզվի կիրառման ոլորտները</h2>
+        <p>
+          SQL օգտագործվում է շատ ոլորտներում՝ տեղեկատվական համակարգերից մինչև
+          բիզնես վերլուծություն:
+        </p>
+
+        <div class="row text-center">
+          <div
+            class="col-md-3 feature-card"
+            data-bs-toggle="modal"
+            data-bs-target="#modal1"
+          >
+            <img
+              src="./images/images.jpeg"
+              class="responsive-img mb-2"
+              alt="Banking"
+            />
+            <h5>Բանկային համակարգեր</h5>
+            <p>
+              Անհրաժեշտ է ֆինանսական տվյալների կառավարում և հաշվետվություններ:
+            </p>
+          </div>
+
+          <div
+            class="col-md-3 feature-card"
+            data-bs-toggle="modal"
+            data-bs-target="#modal2"
+          >
+            <img
+              src="./images/data-lake-and-healthcare.webp"
+              class="responsive-img mb-2"
+              alt="Healthcare"
+            />
+            <h5>Հիվանդանոցային տվյալների բազաներ</h5>
+            <p>
+              Հիվանդների տեղեկատվության անվտանգ պահպանում և բուժման պատմություն:
+            </p>
+          </div>
+
+          <div
+            class="col-md-3 feature-card"
+            data-bs-toggle="modal"
+            data-bs-target="#modal3"
+          >
+            <img
+              src="./images/online_grocery_retail_trend_403342016-1280x850.jpg"
+              class="responsive-img mb-2"
+              alt="E-commerce"
+            />
+            <h5>Էլեկտրոնային առևտուր</h5>
+            <p>
+              Պատվերների, ապրանքների և հաճախորդների տվյալների կառավարման համար:
+            </p>
+          </div>
+
+          <div
+            class="col-md-3 feature-card"
+            data-bs-toggle="modal"
+            data-bs-target="#modal4"
+          >
+            <img
+              src="./images/images (1).jpeg"
+              class="responsive-img mb-2"
+              alt="Analytics"
+            />
+            <h5>Վերլուծական համակարգեր</h5>
+            <p>Տվյալների վերլուծություն և ռեպորտինգ, BI գործիքներ:</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Բանկային համակարգեր</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              src="./images/images.jpeg"
+              class="img-fluid mb-3"
+              alt="Banking"
+            />
+            <h3 style="color: #0d6efd">
+              SQL-ի դերը և կիրառությունը բանկային համակարգերում
+            </h3>
+
+            <p>
+              Ժամանակակից բանկային գործունեությունը հնարավոր չէ պատկերացնել
+              առանց տվյալների բազաների կառավարման հզոր համակարգերի։ SQL
+              (Structured Query Language) լեզուն հանդիսանում է այն հիմնաքարը,
+              որի վրա կառուցված են բանկային տեղեկատվական համակարգերը։
+            </p>
+
+            <h4 style="color: #292664">
+              1. Գործարքների անվտանգություն և հուսալիություն
+            </h4>
+            <p>
+              Բանկային համակարգում SQL-ի կիրառման ամենակարևոր ասպեկտը
+              տրանզակցիաների կառավարումն է։ Այն ապահովում է տվյալների
+              ամբողջականությունը ACID սկզբունքների միջոցով, ինչը երաշխավորում է,
+              որ դրամական փոխանցումները կատարվում են անսխալ, իսկ համակարգի
+              խափանման դեպքում տվյալները չեն կորչում կամ կրկնապատկվում։
+            </p>
+
+            <h4 style="color: #292664">
+              2. Հաճախորդների տվյալների կենտրոնացված կառավարում
+            </h4>
+            <p>
+              SQL-ը թույլ է տալիս բանկերին պահպանել և արագ մշակել միլիոնավոր
+              հաճախորդների անձնական տվյալները, հաշվեհամարների մնացորդները,
+              վարկային պատմությունները և ավանդային պայմանագրերը։ Ռելյացիոն
+              մոդելի շնորհիվ բոլոր այս տվյալները փոխկապակցված են, ինչը
+              հնարավորություն է տալիս վայրկյանների ընթացքում ստանալ հաճախորդի
+              ամբողջական ֆինանսական պատկերը։
+            </p>
+
+            <h4 style="color: #292664">
+              3. Կեղծարարությունների հայտնաբերում և կանխարգելում
+            </h4>
+            <p>
+              Բանկային անվտանգության համակարգերն օգտագործում են SQL հարցումներ՝
+              իրական ժամանակում տրանզակցիաները մոնիթորինգի ենթարկելու համար։ Սա
+              թույլ է տալիս հայտնաբերել կասկածելի գործողությունները, օրինակ՝
+              անսովոր մեծ գումարի փոխանցումները կամ կարճ ժամանակահատվածում
+              տարբեր աշխարհագրական վայրերից կատարվող գնումները։
+            </p>
+
+            <h4 style="color: #292664">
+              4. Հաշվետվությունների պատրաստում և վերլուծություն
+            </h4>
+            <p>
+              SQL-ը հնարավորություն է տալիս բանկի աշխատակիցներին ստեղծել բարդ
+              հաշվետվություններ օրական շրջանառության, շահույթի, վարկային
+              պորտֆելի վիճակի և ռիսկերի վերաբերյալ։ Այս տվյալների հիման վրա
+              բանկի ղեկավարությունը կայացնում է ռազմավարական որոշումներ։
+            </p>
+
+            <h4 style="color: #292664">
+              5. Համապատասխանություն օրենսդրական պահանջներին
+            </h4>
+            <p>
+              Կենտրոնական բանկերը և կարգավորող մարմինները բանկերից պահանջում են
+              խիստ հաշվետվողականություն։ SQL-ի միջոցով բանկերն ապահովում են
+              տվյալների արխիվացումը և թափանցիկությունը, որոնք անհրաժեշտ են
+              աուդիտորական ստուգումների և օրենսդրական պահանջների բավարարման
+              համար։
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Հիվանդանոցային տվյալների բազաներ</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              src="./images/data-lake-and-healthcare.webp"
+              class="img-fluid mb-3"
+              alt="Healthcare"
+            />
+            <div class="healthcare-content">
+              <h3 style="color: #0d6efd">
+                SQL-ի կիրառությունը հիվանդանոցային տվյալների բազաներում
+              </h3>
+
+              <p>
+                Առողջապահության ոլորտում տվյալների ճշգրիտ և արագ կառավարումը
+                կենսական նշանակություն ունի։ SQL-ը հանդիսանում է այն հիմնական
+                գործիքը, որը թույլ է տալիս բժշկական հաստատություններին
+                կազմակերպել հիվանդների տվյալները, բուժման պատմությունը և
+                հիվանդանոցի ռեսուրսների արդյունավետ օգտագործումը։
+              </p>
+
+              <h4 style="color: #292664">
+                1. Հիվանդների էլեկտրոնային քարտարան (EHR)
+              </h4>
+              <p>
+                SQL-ի միջոցով ստեղծվում են բարդ տվյալների բազաներ, որտեղ պահվում
+                են հիվանդների անձնական տվյալները, ախտորոշումները, լաբորատոր
+                հետազոտությունների արդյունքները և դեղատոմսերը։ Սա թույլ է տալիս
+                բժշկին վայրկյանների ընթացքում ստանալ հիվանդի ամբողջական բժշկական
+                պատմությունը, ինչը կարող է վճռորոշ լինել անհետաձգելի օգնության
+                դեպքում։
+              </p>
+
+              <h4 style="color: #292664">
+                2. Դեղորայքի կառավարում և անվտանգություն
+              </h4>
+              <p>
+                Հիվանդանոցներն օգտագործում են SQL հարցումներ՝ դեղատան պաշարները
+                վերահսկելու և դեղերի ժամկետներին հետևելու համար։ Համակարգը կարող
+                է ավտոմատ կերպով ստուգել դեղերի համատեղելիությունը՝
+                նախազգուշացնելով բժշկին, եթե նշանակված նոր դեղամիջոցը կարող է
+                բացասաբար փոխազդել հիվանդի կողմից արդեն ընդունվող այլ դեղերի
+                հետ։
+              </p>
+
+              <h4 style="color: #292664">
+                3. Ժամադրությունների և ռեսուրսների պլանավորում
+              </h4>
+              <p>
+                SQL-ի շնորհիվ հնարավոր է արդյունավետ կերպով կառավարել բժիշկների
+                աշխատանքային գրաֆիկները, հիվանդասենյակների զբաղվածությունը և
+                վիրահատարանների հասանելիությունը։ Սա նվազեցնում է հերթերը և
+                ապահովում է հիվանդանոցի սարքավորումների (օրինակ՝ ՄՌՏ կամ ԿՏ
+                սարքերի) օպտիմալ օգտագործումը։
+              </p>
+
+              <h4 style="color: #292664">
+                4. Բժշկական վիճակագրություն և գիտական հետազոտություններ
+              </h4>
+              <p>
+                Տվյալների բազաներում կուտակված տեղեկատվությունը անփոխարինելի
+                աղբյուր է բժշկական վիճակագրության համար։ SQL-ի միջոցով
+                հետազոտողները կարող են վերլուծել հիվանդությունների
+                տարածվածությունը, բուժման մեթոդների արդյունավետությունը և
+                կանխատեսել հնարավոր համաճարակները՝ հիմնվելով հավաքագրված
+                տվյալների վրա։
+              </p>
+
+              <h4 style="color: #292664">
+                5. Տվյալների գաղտնիություն և պաշտպանություն
+              </h4>
+              <p>
+                Բժշկական տվյալները համարվում են խիստ գաղտնի։ Ժամանակակից SQL
+                տվյալների բազաները տրամադրում են հզոր մեխանիզմներ՝ մուտքի
+                իրավունքների սահմանափակման և գործողությունների լոգավորման համար,
+                ինչը երաշխավորում է, որ միայն լիազորված անձինք կարող են տեսնել
+                հիվանդի տեղեկատվությունը։
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Էլեկտրոնային առևտուր</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              src="./images/online_grocery_retail_trend_403342016-1280x850.jpg"
+              class="img-fluid mb-3"
+              alt="E-commerce"
+            />
+            <div class="ecommerce-content">
+              <h3 style="color: #0d6efd">
+                SQL-ի կիրառությունը էլեկտրոնային առևտրում
+              </h3>
+
+              <p>
+                Էլեկտրոնային առևտրի հարթակները (օրինակ՝ Amazon, eBay կամ տեղական
+                առցանց խանութները) հիմնված են հսկայական տվյալների բազաների վրա։
+                SQL-ը հանդիսանում է այն շարժիչը, որն ապահովում է ապրանքների
+                որոնումը, պատվերների մշակումը և հաճախորդների սպասարկումը:
+              </p>
+
+              <h4 style="color: #292664">
+                1. Ապրանքների կատալոգի և պաշարների կառավարում
+              </h4>
+              <p>
+                SQL-ը թույլ է տալիս կազմակերպել բարդ աստիճանակարգված կատալոգներ,
+                որտեղ յուրաքանչյուր ապրանք ունի իր նկարագրությունը, գինը,
+                նկարները և տեխնիկական բնութագրերը։ Տվյալների բազան իրական
+                ժամանակում հետևում է պահեստում ապրանքների քանակին՝ ավտոմատ
+                կերպով թարմացնելով կայքը, երբ որևէ ապրանք սպառվում է:
+              </p>
+
+              <h4 style="color: #292664">
+                2. Պատվերների մշակում և տրանզակցիաներ
+              </h4>
+              <p>
+                Երբ հաճախորդը կատարում է գնում, SQL-ի միջոցով իրականացվում է
+                տվյալների բարդ փոխանակում։ Համակարգը միաժամանակ գրանցում է նոր
+                պատվերը, նվազեցնում է ապրանքի քանակը պահեստում, կապվում է
+                վճարային համակարգի հետ և պահպանում է առաքման հասցեն։ Այս ամենը
+                կատարվում է տրանզակցիաների միջոցով՝ բացառելով սխալները:
+              </p>
+
+              <h4 style="color: #292664">
+                3. Անհատականացված առաջարկներ և մարքեթինգ
+              </h4>
+              <p>
+                SQL-ի շնորհիվ էլեկտրոնային առևտրի կայքերը վերլուծում են ձեր
+                գնումների պատմությունը և նախասիրությունները։ Վերլուծելով
+                «Հաճախորդներ» և «Պատվերներ» աղյուսակները՝ համակարգը կարողանում է
+                ձեզ առաջարկել ապրանքներ, որոնք ամենայն հավանականությամբ ձեզ
+                կհետաքրքրեն (օրինակ՝ «Մարդիկ, ովքեր գնել են սա, գնել են
+                նաև...»):
+              </p>
+
+              <h4 style="color: #292664">4. Լոգիստիկա և առաքման հետևում</h4>
+              <p>
+                SQL տվյալների բազաները կառավարում են նաև առաքման գործընթացը։
+                Յուրաքանչյուր պատվերի կարգավիճակի փոփոխություն (պատրաստվում է,
+                ուղարկված է, առաքված է) գրանցվում է բազայում, ինչը
+                հնարավորություն է տալիս հաճախորդին ցանկացած պահի տեսնել, թե
+                որտեղ է գտնվում իր փաթեթը:
+              </p>
+
+              <h4 style="color: #292664">
+                5. Հաճախորդների հավատարմության ծրագրեր
+              </h4>
+              <p>
+                Զեղչային կոդերը, բոնուսային միավորները և հատուկ ակցիաները
+                կառավարվում են SQL հարցումների միջոցով։ Բազան ստուգում է զեղչի
+                կոդի վավերականությունը, հաշվարկում է վերջնական գինը և թարմացնում
+                հաճախորդի կուտակային միավորները գնումից հետո:
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Վերլուծական համակարգեր</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              src="./images/images (1).jpeg"
+              class="img-fluid mb-3"
+              alt="Analytics"
+            />
+            <div class="analytics-content">
+              <h3 style="color: #0d6efd">
+                SQL-ի կիրառությունը վերլուծական համակարգերում
+              </h3>
+
+              <p>
+                Ժամանակակից աշխարհում տվյալները համարվում են «նոր նավթ»։
+                Վերլուծական համակարգերը (Business Intelligence կամ BI)
+                օգտագործում են SQL-ը՝ հում տվյալները վերամշակելու և դրանք բիզնես
+                որոշումների համար պիտանի տեղեկատվության վերածելու համար:
+              </p>
+
+              <h4 style="color: #292664">
+                1. Տվյալների պահեստավորում (Data Warehousing)
+              </h4>
+              <p>
+                Վերլուծական համակարգերի հիմքում ընկած են տվյալների հզոր
+                պահեստները (Data Warehouses): SQL-ի միջոցով տարբեր աղբյուրներից
+                (վաճառքներ, կայքի այցելություններ, սոցիալական ցանցեր)
+                հավաքագրված տվյալները կառուցվածքավորվում և պահպանվում են մեկ
+                միասնական վայրում, ինչը հնարավորություն է տալիս կատարել գլոբալ
+                վերլուծություններ:
+              </p>
+
+              <h4 style="color: #292664">
+                2. Բարդ հաշվետվությունների ստեղծում
+              </h4>
+              <p>
+                Ի տարբերություն սովորական հարցումների, վերլուծական SQL-ը թույլ է
+                տալիս կատարել տվյալների խորը ագրեգացում։ Վերլուծաբանները կարող
+                են վայրկյանների ընթացքում ստանալ տարեկան շրջանառության
+                համեմատականները, հաշվարկել միջին ցուցանիշները կամ գտնել
+                ամենաշահութաբեր ուղղությունները՝ օգտագործելով բարդ խմբավորումներ
+                և ֆունկցիաներ:
+              </p>
+
+              <h4 style="color: #292664">
+                3. Բիզնեսի կանխատեսումներ և միտումներ
+              </h4>
+              <p>
+                SQL-ը հնարավորություն է տալիս բացահայտել տվյալների մեջ առկա
+                օրինաչափությունները։ Օրինակ՝ վերլուծելով վերջին 5 տարիների
+                վաճառքի տվյալները, համակարգը կարող է կանխատեսել ապագա
+                պահանջարկը, ինչը օգնում է ընկերություններին ավելի ճիշտ
+                պլանավորել իրենց բյուջեն և ռեսուրսները:
+              </p>
+
+              <h4 style="color: #292664">
+                4. Տվյալների մաքրում և որակի ապահովում
+              </h4>
+              <p>
+                Մինչ վերլուծություն սկսելը, տվյալները հաճախ լինում են «աղմկոտ»
+                կամ անճշտություններով։ SQL-ն օգտագործվում է տվյալների մաքրման
+                համար (Data Cleaning)՝ հեռացնելով կրկնվող տողերը, լրացնելով
+                բացակայող արժեքները և ուղղելով սխալները, որպեսզի վերջնական
+                վերլուծությունը լինի հավաստի:
+              </p>
+
+              <h4 style="color: #292664">
+                5. Ինտեգրում վիզուալիզացիայի գործիքների հետ
+              </h4>
+              <p>
+                Վերլուծական համակարգերը հաճախ միացված են վիզուալիզացիայի
+                գործիքներին (օրինակ՝ Tableau, Power BI): Այս գործիքները
+                հետնամասում (backend) գեներացնում են SQL հարցումներ՝ տվյալների
+                բազայից թարմ տեղեկատվություն ստանալու և դրանք գեղեցիկ գրաֆիկների
+                ու դիագրամների տեսքով մարդկանց ներկայացնելու համար:
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="backToTop">↑</div>
+
+    <footer
+      style="
+        background-color: #212529;
+        color: #f8f9fa;
+        padding: 30px 0;
+        text-align: center;
+        box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.25);
+        font-size: 0.95rem;
+      "
+    >
+      <div class="container">
+        <p class="mb-2 fw-bold">
+          © 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ
+        </p>
+        <p class="mb-2" style="font-size: 0.85rem; color: #adb5bd">
+          Բոլոր իրավունքները պաշտպանված են
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+      const backToTop = document.getElementById("backToTop");
+      const reveals = document.querySelectorAll(".reveal");
+
+      function revealOnScroll() {
+        const windowHeight = window.innerHeight;
+        reveals.forEach((el) => {
+          const elementTop = el.getBoundingClientRect().top;
+          if (elementTop < windowHeight - 100) {
+            el.classList.add("active");
+          }
+        });
+      }
+
+      function updateBackToTop() {
+        if (document.body.classList.contains("modal-open")) {
+          backToTop.style.display = "none";
+        } else {
+          backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+        }
+      }
+
+      window.addEventListener("scroll", () => {
+        revealOnScroll();
+        updateBackToTop();
+      });
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      revealOnScroll();
+      updateBackToTop();
+    </script>
+  </body>
+</html>

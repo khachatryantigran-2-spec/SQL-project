@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SQL Հրամաններ</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(
+            rgba(248, 249, 250, 0.85),
+            rgba(36, 66, 97, 0.85)
+          ),
+          url("./images/images(2).jpeg");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      /* ===== HEADER ===== */
+      header {
+        background: linear-gradient(135deg, #0d6efd, #084298);
+        color: #fff;
+        padding: 25px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      header nav a {
+        position: relative;
+        color: #ffffff !important;
+        margin: 0 12px;
+        font-weight: 500;
+        text-decoration: none !important;
+        padding-bottom: 6px;
+      }
+
+      header nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: #ffffff;
+        transition: width 0.25s ease;
+      }
+
+      header nav a:hover::after {
+        width: 100%;
+      }
+
+      /* ===== ANIMATION ===== */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== MAIN CARD ===== */
+      main.container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 50px 55px;
+        border-radius: 30px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      h2 {
+        margin-top: 45px;
+        color: #0d6efd;
+        font-weight: 700;
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 10px;
+      }
+
+      /* ===== CODE BLOCKS ===== */
+      pre {
+        position: relative;
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 20px;
+        border-radius: 12px;
+        overflow-x: auto;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        margin: 20px 0;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 4px 10px;
+        font-size: 0.75rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 10;
+      }
+
+      .copy-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #fff;
+      }
+
+      .copy-btn.copied {
+        background: #28a745;
+        border-color: #28a745;
+      }
+
+      /* ===== PRACTICE BOX ===== */
+      .sql-practice-box {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 20px;
+        padding: 40px;
+        border: 1px solid #dee2e6;
+        margin: 60px auto;
+        max-width: 800px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #0d6efd, #084298);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: transform 0.2s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+      }
+
+      footer {
+        background-color: #212529;
+        color: #f8f9fa;
+        padding: 30px 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container text-center">
+        <h1 class="fw-bold">SQL լեզվի ուսուցման աջակցման վեբ կայք</h1>
+        <nav class="mt-3">
+          <a href="intro.html" class="text-white mx-2">Ներածություն</a>
+          <a href="application.html" class="text-white mx-2">Կիրառությունը</a>
+          <a href="commands.html" class="text-white mx-2">
+            SQL գործիքի հրամանները
+          </a>
+          <a href="quiz.html" class="text-white mx-2">Անցնել թեստը</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container mt-5">
+      <h1 class="text-center mb-5">SQL հրամաններ և օրինակներ</h1>
+
+      <h2>1. SELECT</h2>
+      <p>
+        SELECT հրամանը օգտագործվում է տվյալներ ընտրելու համար տվյալների բազայից:
+        Կարող ենք ընտրել ամբողջ աղյուսակը կամ միայն որոշ սյունակներ:
+      </p>
+      <pre>
+-- Բոլոր տողերը և սյունակները
+SELECT * FROM Users;
+
+-- Մոնորոշ սյունակներ
+SELECT name, age FROM Users;
+
+-- Հեռացում կրկնվող արժեքների
+SELECT DISTINCT age FROM Users;
+      </pre>
+      <p>Օրինակ՝ դասավորել ըստ տարիքի:</p>
+      <pre>SELECT name, age FROM Users ORDER BY age DESC;</pre>
+
+      <h2>2. INSERT</h2>
+      <p>INSERT հրամանը ավելացնում է նոր տվյալներ աղյուսակում:</p>
+      <pre>
+INSERT INTO Users (name, age, city)
+VALUES ('Անի', 20, 'Երևան');
+
+-- Ավելացնել մի քանի տող
+INSERT INTO Users (name, age, city)
+VALUES 
+('Մարի', 22, 'Գյումրի'),
+('Արամ', 19, 'Երևան');
+      </pre>
+
+      <h2>3. UPDATE</h2>
+      <p>
+        UPDATE-ը փոխում է գոյություն ունեցող տվյալները՝ ըստ որոշակի պայմանների:
+      </p>
+      <pre>
+-- Թարմացնել Անիի տարիքը
+UPDATE Users SET age=21 WHERE name='Անի';
+
+-- Թարմացնել բոլոր օգտագործողների քաղաքը
+UPDATE Users SET city='Վանաձոր' WHERE city='Գյումրի';
+      </pre>
+
+      <h2>4. DELETE</h2>
+      <p>DELETE հրամանը ջնջում է տվյալներ ըստ պայմանների:</p>
+      <pre>
+-- Ջնջել 18 տարեկանից փոքր օգտագործողներին
+DELETE FROM Users WHERE age < 18;
+
+-- Ջնջել բոլոր օգտագործողներին (Ուշադրություն!)
+DELETE FROM Users;
+      </pre>
+
+      <h2>5. CREATE TABLE & ALTER TABLE</h2>
+      <p>Աղյուսակ ստեղծելու և փոփոխելու հրամաններ:</p>
+      <pre>
+-- Աղյուսակ ստեղծել
+CREATE TABLE Users (
+  ID INT PRIMARY KEY,
+  name VARCHAR(50),
+  age INT,
+  city VARCHAR(50)
+);
+
+-- Ավելացնել նոր սյունակ
+ALTER TABLE Users ADD COLUMN email VARCHAR(100);
+
+-- Փոխել սյունակի տեսակը
+ALTER TABLE Users MODIFY COLUMN age SMALLINT;
+      </pre>
+
+      <h2>6. DROP TABLE & DROP COLUMN</h2>
+      <pre>
+-- Աղյուսակ ջնջել
+DROP TABLE Users;
+
+-- Սյունակ ջնջել
+ALTER TABLE Users DROP COLUMN email;
+      </pre>
+
+      <h2>7. WHERE պայմաններ</h2>
+      <p>WHERE-ով սահմանում ենք ֆիլտրի պայմաններ:</p>
+      <pre>
+-- հավասարություն
+SELECT * FROM Users WHERE city='Երևան';
+
+-- բազմապատիկ պայմաններ
+SELECT * FROM Users WHERE age>20 AND city='Երևան';
+
+-- OR և NOT օպերատորներ
+SELECT * FROM Users WHERE age<18 OR city='Գյումրի';
+SELECT * FROM Users WHERE NOT age=20;
+      </pre>
+
+      <h2>8. LIKE և IN օպերատորներ</h2>
+      <pre>
+-- LIKE օգտագործում ենք տեքստային ֆիլտրի համար
+SELECT * FROM Users WHERE name LIKE 'Ա%';
+
+-- IN օգտագործում ենք արժեքների ցուցակի համար
+SELECT * FROM Users WHERE city IN ('Երևան','Գյումրի');
+      </pre>
+
+      <h2>9. BETWEEN & IS NULL</h2>
+      <pre>
+-- Միջակայք
+SELECT * FROM Users WHERE age BETWEEN 18 AND 25;
+
+-- NULL արժեքներ
+SELECT * FROM Users WHERE email IS NULL;
+      </pre>
+
+      <h2>10. AGGREGATE ֆունկցիաներ</h2>
+      <p>Հաշվարկներ և խմբավորումներ:</p>
+      <pre>
+SELECT COUNT(*) FROM Users;         -- Հաշվել տողերի քանակը
+SELECT AVG(age) FROM Users;         -- Միջին տարիքը
+SELECT SUM(age) FROM Users;         -- Տարիքների գումարը
+SELECT MIN(age) FROM Users;         -- Նվազագույն տարիքը
+SELECT MAX(age) FROM Users;         -- Ամենամեծ տարիքը
+      </pre>
+
+      <h2>11. GROUP BY & HAVING</h2>
+      <pre>
+-- Խմբավորել ըստ քաղաքի
+SELECT city, COUNT(*) FROM Users GROUP BY city;
+
+-- Խմբավորել եւ ֆիլտրել
+SELECT city, COUNT(*) FROM Users 
+GROUP BY city 
+HAVING COUNT(*) > 1;
+      </pre>
+
+      <h2>12. ORDER BY & LIMIT</h2>
+      <pre>
+-- Դասավորել ըստ տարիքի
+SELECT * FROM Users ORDER BY age ASC;
+
+-- Դասավորել և սահմանափակել արդյունքը
+SELECT * FROM Users ORDER BY age DESC LIMIT 5;
+      </pre>
+
+      <h2>13. JOIN-ներ</h2>
+      <p>Միացնում ենք տարբեր աղյուսակներ:</p>
+      <pre>
+-- INNER JOIN: միայն համընկնող տողերը
+SELECT Users.name, Orders.amount
+FROM Users
+INNER JOIN Orders ON Users.ID = Orders.user_id;
+
+-- LEFT JOIN: բոլոր Users, նույնիսկ առանց պատվերի
+SELECT Users.name, Orders.amount
+FROM Users
+LEFT JOIN Orders ON Users.ID = Orders.user_id;
+
+-- RIGHT JOIN: բոլոր Orders, նույնիսկ առանց օգտվողի
+SELECT Users.name, Orders.amount
+FROM Users
+RIGHT JOIN Orders ON Users.ID = Orders.user_id;
+
+-- FULL JOIN (եթե աջակցվում է)
+SELECT Users.name, Orders.amount
+FROM Users
+FULL OUTER JOIN Orders ON Users.ID = Orders.user_id;
+      </pre>
+
+      <h2>14. TRANSACTIONS</h2>
+      <pre>
+-- Թարմացնել մի քանի աղյուսակ և հաստատել
+START TRANSACTION;
+UPDATE Users SET age=25 WHERE name='Անի';
+INSERT INTO Logs (action) VALUES ('Age updated');
+COMMIT;
+
+-- Հակադարձել (rollback)
+START TRANSACTION;
+DELETE FROM Users WHERE age<18;
+ROLLBACK;
+      </pre>
+
+      <h2>15. INDEXES</h2>
+      <pre>
+-- Ավելացնել ինդեքս արագ որոնումների համար
+CREATE INDEX idx_name ON Users(name);
+
+-- Ջնջել ինդեքս
+DROP INDEX idx_name ON Users;
+      </pre>
+
+      <h2>16. VIEWS</h2>
+      <pre>
+-- Ստեղծել դիտում
+CREATE VIEW ActiveUsers AS
+SELECT * FROM Users WHERE active=1;
+
+-- Օգտագործել դիտումը
+SELECT * FROM ActiveUsers;
+      </pre>
+
+      <h2>17. PRIMARY KEY & FOREIGN KEY</h2>
+      <pre>
+-- PRIMARY KEY
+CREATE TABLE Users (
+  ID INT PRIMARY KEY,
+  name VARCHAR(50)
+);
+
+-- FOREIGN KEY
+CREATE TABLE Orders (
+  ID INT PRIMARY KEY,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES Users(ID)
+);
+      </pre>
+
+      <h2>18. UNIQUE & CHECK</h2>
+      <pre>
+-- UNIQUE
+CREATE TABLE Users (
+  ID INT PRIMARY KEY,
+  email VARCHAR(100) UNIQUE
+);
+
+-- CHECK
+CREATE TABLE Users (
+  ID INT PRIMARY KEY,
+  age INT CHECK(age>0)
+);
+      </pre>
+
+      <div class="sql-practice-box text-center mt-5">
+        <h4 class="mb-3">Փորձիր SQL-ը գործնականում</h4>
+        <p>
+          Սեղմիր ներքևի կոճակը և բացիր առցանց SQL Live Editor՝ քո հարցումները
+          անմիջապես փորձարկելու համար։
+        </p>
+
+        <a
+          href="https://sqliteonline.com"
+          target="_blank"
+          class="btn btn-primary"
+          style="margin-bottom: 50px"
+        >
+          🚀 Բացել SQL Live Editor
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p class="mb-1">
+          © 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ
+        </p>
+        <p class="mb-0" style="font-size: 0.85rem; color: #adb5bd">
+          Բոլոր իրավունքները պաշտպանված են
+        </p>
+      </div>
+    </footer>
+    <script>
+      document.querySelectorAll("pre").forEach((codeBlock) => {
+        // Ստեղծել կոճակը
+        const button = document.createElement("button");
+        button.className = "copy-btn";
+        button.type = "button";
+        button.innerText = "Copy";
+
+        // Ավելացնել կոճակը կոդի բլոկի մեջ
+        codeBlock.appendChild(button);
+
+        button.addEventListener("click", () => {
+          // Վերցնել տեքստը (բացառելով հենց կոճակի տեքստը)
+          const code = codeBlock.innerText.replace("Copy", "").trim();
+
+          navigator.clipboard
+            .writeText(code)
+            .then(() => {
+              button.innerText = "Copied!";
+              button.classList.add("copied");
+
+              // Հետ բերել նախնական տեսքին 2 վայրկյան անց
+              setTimeout(() => {
+                button.innerText = "Copy";
+                button.classList.remove("copied");
+              }, 2000);
+            })
+            .catch((err) => {
+              console.error("Error in copying text: ", err);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

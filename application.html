@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL Կիրառությունը</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===== PAGE BACKGROUND ===== */
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(
+            rgba(248, 249, 250, 0.85),
+            rgba(36, 66, 97, 0.85)
+          ),
+          url("./images/images(2).jpeg");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      /* ===== HEADER ===== */
+      header {
+        background: linear-gradient(135deg, #0d6efd, #084298);
+        color: #fff;
+        padding: 25px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      header nav a {
+        position: relative;
+        color: #ffffff !important;
+        margin: 0 12px;
+        font-weight: 500;
+        text-decoration: none !important;
+        padding-bottom: 6px;
+      }
+
+      header nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: #ffffff;
+        transition: width 0.25s ease;
+      }
+
+      header nav a:hover::after {
+        width: 100%;
+      }
+
+      /* ===== ANIMATION ===== */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== MAIN CARD (Updated with Animation) ===== */
+      main.container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 50px 55px;
+        border-radius: 30px;
+        margin-top: 60px;
+        margin-bottom: 80px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        /* Անիմացիայի կիրառում */
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      main h2 {
+        font-weight: 800;
+        margin-bottom: 35px;
+        color: #084298;
+        text-align: center;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      main h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: #0d6efd;
+        border-radius: 2px;
+      }
+
+      h4 {
+        margin-top: 40px;
+        font-weight: 700;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Ավելացնում ենք փոքրիկ կապույտ գիծ վերնագրերի կողքին */
+      h4::before {
+        content: "";
+        width: 5px;
+        height: 24px;
+        background: #0d6efd;
+        margin-right: 12px;
+        border-radius: 3px;
+        display: inline-block;
+      }
+
+      p {
+        line-height: 1.8;
+        color: #374151;
+        font-size: 1.05rem;
+      }
+
+      /* ===== CODE BLOCKS (Updated Color Scheme) ===== */
+      pre {
+        background: #1e293b;
+        color: #f8fafc;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-family: "Consolas", "Monaco", monospace;
+        margin: 20px 0;
+      }
+
+      code {
+        color: #38bdf8; /* Կոդի բաց կապույտ գույն */
+      }
+
+      /* ===== BUTTON ===== */
+      .btn-primary {
+        background: linear-gradient(135deg, #0d6efd, #084298);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 35px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 10px 25px rgba(13, 110, 253, 0.4);
+        transform: translateY(-3px);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background-color: #212529;
+        color: #f8f9fa;
+        padding: 40px 0;
+        text-align: center;
+        box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.25);
+        margin-top: 50px;
+        width: 100%;
+      }
+
+      footer p {
+        color: #adb5bd;
+        margin-bottom: 0;
+        text-align: center; /* Ապահովում ենք կենտրոնացումը */
+      }
+
+      footer .fw-bold {
+        color: #ffffff;
+      }
+
+      /* ===== MOBILE FIX ===== */
+      @media (max-width: 768px) {
+        main.container {
+          padding: 30px 20px;
+          margin-top: 30px;
+        }
+        header h1 {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container text-center">
+        <h1 class="fw-bold">SQL լեզվի ուսուցման աջակցման վեբ կայք</h1>
+        <nav class="mt-3">
+          <a href="intro.html" class="text-white mx-2">Ներածություն</a>
+          <a href="application.html" class="text-white mx-2">Կիրառությունը</a>
+          <a href="commands.html" class="text-white mx-2">
+            SQL գործիքի հրամանները
+          </a>
+          <a href="quiz.html" class="text-white mx-2">Անցնել թեստը</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>SQL լեզվի կիրառման ոլորտները</h2>
+
+      <p>
+        SQL (Structured Query Language) լեզուն հանդիսանում է տվյալների
+        կառավարման հիմնական գործիքը և կիրառվում է գրեթե բոլոր ոլորտներում, որտեղ
+        անհրաժեշտ է տվյալների պահպանում, մշակումը և վերլուծությունը: SQL-ի
+        կիրառումը թույլ է տալիս կազմակերպել մեծ քանակությամբ տվյալներ, արագ և
+        ճշգրիտ որոնել, խմբավորել, դասավորել և հաշվարկել տարբեր ցուցանիշներ։
+      </p>
+
+      <h4>1. Բանկային և ֆինանսական համակարգեր</h4>
+      <p>
+        Բանկերում և ֆինանսական կազմակերպություններում SQL օգտագործվում է
+        հաճախորդների հաշիվների, փոխանցումների, վարկերի, վճարումների և ֆինանսական
+        վերլուծության տվյալների կառավարման համար։ Օրինակ, մեկ հարցումով կարող
+        ենք գտնել բոլոր հաճախորդներին, որոնց հաշիվներում գումարն ավելի է 1000
+        դոլարից:
+      </p>
+      <pre><code>SELECT * FROM Customers WHERE Balance &gt; 1000;</code></pre>
+
+      <h4>2. Հիվանդանոցային և առողջապահական համակարգեր</h4>
+      <p>
+        Հիվանդանոցներում SQL օգտագործվում է հիվանդների տեղեկությունների,
+        բժշկական պատմությունների, նշանակումների և դեղորայքի ռեկորդների
+        կառավարման համար: Տվյալների բազան ապահովում է, որ բժիշկները և սպասարկող
+        անձնակազմը հեշտությամբ կարողանան հասանելի լինել անհրաժեշտ
+        տեղեկատվությանը:
+      </p>
+      <pre><code>
+SELECT PatientName, AppointmentDate
+FROM Appointments
+WHERE DoctorID = 123;
+      </code></pre>
+
+      <h4>3. Էլեկտրոնային առևտուր և e-commerce</h4>
+      <p>
+        SQL-ը կարևոր դեր ունի առցանց խանութների և վաճառքի համակարգերի տվյալների
+        կառավարման մեջ: Այն թույլ է տալիս պահպանել ապրանքների ցանկը, պատվերները,
+        հաճախորդների տվյալները և վերլուծել վաճառքի ցուցանիշները:
+      </p>
+      <pre><code>
+SELECT ProductName, SUM(Quantity) as TotalSold
+FROM Orders
+GROUP BY ProductName
+ORDER BY TotalSold DESC;
+      </code></pre>
+
+      <h4>4. Վեբ և ծրագրային հավելվածներ</h4>
+      <p>
+        Ներկայիս վեբ հավելվածները հաճախ օգտագործում են SQL տվյալների բազաներ
+        (MySQL, PostgreSQL, SQLite) օգտագործելով օգտագործողի հաշվի, սեսիաների,
+        հրապարակումների և գործողությունների տվյալների կառավարումը:
+      </p>
+      <pre><code>
+SELECT UserName, LastLogin
+FROM Users
+WHERE Active = 1;
+      </code></pre>
+
+      <h4>5. Վերլուծական և բիզնես ինտելեկտուալ համակարգեր</h4>
+      <p>
+        SQL-ը լայնորեն օգտագործվում է բիզնես վերլուծության, BI (Business
+        Intelligence) համակարգերի, և մեծ տվյալների (Big Data) վերլուծության
+        համար: Այն հնարավորություն է տալիս ստեղծել հաշվետվություններ, վերլուծել
+        ֆինանսական, մարքեթինգային և արտադրական տվյալներ:
+      </p>
+      <pre><code>
+SELECT Department, AVG(Salary) as AvgSalary
+FROM Employees
+GROUP BY Department;
+      </code></pre>
+
+      <h4>6. Կրթություն և ուսուցում</h4>
+      <p>
+        SQL լեզվի ուսուցումը կարևոր է տվյալների կառավարում սովորող ուսանողների
+        համար: Այն օգնում է զարգացնել տրամաբանական մտածողությունը, ծրագրավորման
+        հմտությունները և պատրաստում է ուսանողներին աշխատել իրական տվյալների
+        բազաներում:
+      </p>
+
+      <h4>7. Տվյալների գիտություն և AI/ML ծրագրեր</h4>
+      <p>
+        Տվյալների գիտության և մեքենայական ուսուցման ծրագրերում SQL օգտագործվում
+        է տվյալների նախապատրաստման, ֆիլտրացիայի և վերլուծության համար: Օրինակ,
+        Python ծրագրերում կարող ենք SQL հարցումների միջոցով վերցնել միայն
+        անհրաժեշտ տվյալները՝ վերլուծության համար:
+      </p>
+      <pre><code>
+import sqlite3
+conn = sqlite3.connect('data.db')
+cursor = conn.cursor()
+cursor.execute("SELECT Age, Income FROM Customers WHERE Country='Armenia'")
+data = cursor.fetchall()
+      </code></pre>
+
+      <h4>8. Տվյալների միգրացիա և ինտեգրացիա</h4>
+      <p>
+        SQL-ը օգտակար է տարբեր տվյալների բազաների ինտեգրման և միգրացիայի
+        ժամանակ, երբ անհրաժեշտ է տվյալները տեղափոխել մեկ համակարգից մյուսը՝
+        պահպանելով ամբողջականությունը և կապերը:
+      </p>
+
+      <h4>9. Խոշոր ընկերությունների տվյալների կառավարում</h4>
+      <p>
+        SQL-ը օգտագործվում է խոշոր ընկերություններում՝ միլիոնավոր գրառումներ
+        պարունակող տվյալների բազաներում աշխատելու համար, որտեղ անհրաժեշտ է
+        ապահովել արագ հարցումներ, բարձր հուսալիություն և տվյալների
+        անվտանգություն:
+      </p>
+
+      <h4>10. Օգտագործման հեշտություն և բազմակողմանիություն</h4>
+      <p>
+        SQL-ը համատեղելի է բազմաթիվ համակարգերի հետ, ունի պարզ և հասկանալի
+        շարահյուսություն, և կարող է օգտագործվել տարբեր ծրագրավորման լեզուների
+        հետ՝ ստեղծելով հզոր և արդյունավետ տվյալների կառավարման լուծումներ:
+      </p>
+
+      <p class="mt-4">
+        Արդյունքում, SQL լեզուն հանդիսանում է տվյալների կառավարման ամենակարևոր
+        գործիքը, և նրա ուսուցումը և կիրառումը անհրաժեշտ են գրեթե բոլոր
+        ոլորտներում՝ բանկային, առողջապահական, e-commerce, վերլուծական, կրթական և
+        տեխնոլոգիական համակարգերում:
+      </p>
+
+      <a href="index.html" class="btn btn-primary mt-4">
+        Վերադառնալ հիմնական էջ
+      </a>
+    </main>
+    <footer class="main-footer">
+      <div class="container">
+        <p>© 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ</p>
+        <p>Բոլոր իրավունքները պաշտպանված են</p>
+      </div>
+    </footer>
+    <script>
+      // header shadow
+      window.addEventListener("scroll", () => {
+        document
+          .querySelector(".main-header")
+          .classList.toggle("scrolled", window.scrollY > 50);
+      });
+    </script>
+  </body>
+</html>
