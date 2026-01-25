@@ -12,7 +12,7 @@
       /* ===== GLOBAL ===== */
       html,
       body {
-        overflow-x: hidden; /* Արգելափակում է ամբողջ էջի հորիզոնական սքրոլը */
+        overflow-x: hidden;
         width: 100%;
         margin: 0;
         padding: 0;
@@ -29,50 +29,40 @@
         background-attachment: fixed;
       }
 
-      /* ===== HEADER ===== */
-      header.main-header {
-        background: linear-gradient(135deg, #0d6efd, #084298);
-        color: #fff;
-        padding: 10px 0; /* Մի փոքր փոքրացրել ենք padding-ը սքրոլի ժամանակ հարմար լինելու համար */
-        position: fixed; /* Sticky-ի փոխարեն օգտագործում ենք fixed՝ ավելի կայուն վարքագծի համար */
+      /* ===== HEADER (Synchronized with application.html) ===== */
+      .main-header {
+        background: linear-gradient(135deg, #0d6efd, #292664);
+        color: white;
+        padding: 35px 0;
+        position: sticky;
         top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 2000; /* Ավելի բարձր z-index */
+        z-index: 1000;
+        transition:
+          box-shadow 0.3s ease,
+          padding 0.3s ease;
+      }
+
+      /* This class is toggled via JavaScript when scrolling */
+      .main-header.scrolled {
+        padding: 15px 0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
 
-      /* Քանի որ header-ը fixed է, մարմնին տալիս ենք padding-top, որպեսզի բովանդակությունը չմնա տակը */
-      body {
-        padding-top: 100px; 
+      .main-header h1 {
+        font-size: 2.2rem;
+        letter-spacing: 0.5px;
       }
 
-      header .navbar-brand {
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: #fff !important;
+      header nav a {
         position: relative;
-        text-decoration: none !important;
-      }
-
-      /* Հեռացնում ենք գիծը ԼՈԳՈՅԻ տակից */
-      header .navbar-brand::after {
-        display: none !important;
-        content: none !important;
-      }
-
-      header .navbar-nav .nav-link {
-        position: relative;
-        color: rgba(255, 255, 255, 0.9) !important;
+        color: #e9ecef !important;
         margin: 0 12px;
         font-weight: 500;
         text-decoration: none !important;
-        padding-bottom: 5px;
-        transition: color 0.3s ease;
+        padding-bottom: 4px;
       }
 
-      /* Գիծը ՄԻԱՅՆ ՄԵՆՅՈՒԻ հղումների համար */
-      header .navbar-nav .nav-link::after {
+      header nav a::after {
         content: "";
         position: absolute;
         left: 0;
@@ -83,14 +73,36 @@
         transition: width 0.25s ease;
       }
 
-      header .navbar-nav .nav-link:hover::after {
+      header nav a:hover {
+        color: #ffffff !important;
+        opacity: 1;
+        transform: translateY(-1px);
+      }
+
+      header nav a:hover::after {
         width: 100%;
       }
 
-      header .navbar-nav .nav-link:hover {
-        color: #fff !important;
+      .navbar-brand::after {
+        display: none !important;
+        content: none !important;
       }
 
+      .navbar-brand:hover {
+        opacity: 0.8;
+        text-decoration: none !important;
+      }
+
+      /* Mobile Adjustment */
+      @media (max-width: 768px) {
+        .main-header {
+          text-align: center;
+          padding: 20px 0;
+        }
+        .navbar-brand {
+          font-size: 1.5rem;
+        }
+      }
       /* ===== MAIN CARD ===== */
       main.container {
         background: rgba(255, 255, 255, 0.95);
@@ -229,30 +241,36 @@
     </style>
   </head>
   <body>
-<header class="main-header">
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-          <a class="navbar-brand fw-bold" href="index.html">SQL ուսուցման Կայք</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <header class="main-header">
+      <nav class="navbar navbar-expand-lg navbar-dark container">
+        <a class="navbar-brand fw-bold" href="#">SQL ուսուցման Կայք</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link" href="intro.html">Ներածություն</a></li>
-              <li class="nav-item"><a class="nav-link" href="application.html">Կիրառությունը</a></li>
-              <li class="nav-item"><a class="nav-link" href="commands.html">SQL հրամանները</a></li>
-              <li class="nav-item"><a class="nav-link" href="quiz.html">Թեստ</a></li>
-            </ul>
-          </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="intro.html">Ներածություն</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="application.html">Կիրառությունը</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="commands.html">SQL հրամանները</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="quiz.html">Թեստ</a>
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
