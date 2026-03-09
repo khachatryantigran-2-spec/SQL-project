@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SQL լեզվի ուսուցման աջակցման կայք</title>
+    <title>SQL Թեստ - Ըստ Թեմաների</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -22,7 +22,6 @@
       }
 
       /* ===== HEADER ===== */
-      /* ===== HEADER (Matched to application.html) ===== */
       .main-header {
         background: linear-gradient(135deg, #0d6efd, #292664);
         color: white;
@@ -33,15 +32,9 @@
         transition: all 0.3s ease;
       }
 
-      /* Shrink effect on scroll */
       .main-header.scrolled {
         padding: 15px 0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      }
-
-      .main-header h1 {
-        font-size: 2.2rem;
-        letter-spacing: 0.5px;
       }
 
       header nav a {
@@ -51,7 +44,6 @@
         font-weight: 500;
         text-decoration: none !important;
         padding-bottom: 4px;
-        transition: color 0.3s ease;
       }
 
       header nav a::after {
@@ -65,121 +57,51 @@
         transition: width 0.25s ease;
       }
 
-      header nav a:hover {
-        color: #ffffff !important;
-        transform: translateY(-1px);
-      }
-
       header nav a:hover::after {
         width: 100%;
       }
 
-      .navbar-brand {
-        font-size: 1.5rem;
-        color: #fff !important;
-        font-weight: bold;
-        text-decoration: none !important;
-      }
-
-      .navbar-brand:hover {
-        opacity: 0.8;
-      }
-
-      /* Ensure no lines under the logo */
       .navbar-brand::after {
         display: none !important;
-        content: none !important;
       }
 
-      /* Մենյուի հղումների ոճը */
-      .navbar-nav .nav-link {
-        color: rgba(255, 255, 255, 0.9) !important;
-        font-weight: 500;
-        position: relative;
-        margin-left: 15px;
-        transition: color 0.3s ease;
-      }
-
-      /* Սահող գիծը ՄԻԱՅՆ nav-link-երի համար */
-      .navbar-nav .nav-link::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: #ffffff;
-        transition: width 0.3s ease;
-      }
-
-      .navbar-nav .nav-link:hover::after {
-        width: 100%;
-      }
-
-      .navbar-nav .nav-link:hover {
-        color: #fff !important;
-      }
-
-      /* Logo-ի ոճը (ԱՌԱՆՑ ԳԾԻ) */
-      .navbar-brand {
-        font-size: 1.5rem;
-        color: #fff !important;
-        position: relative;
-      }
-
-      .navbar-brand:hover {
-        opacity: 0.9;
-      }
-
-      /* Հեռացնում ենք հնարավոր բոլոր գծերը լոգոյի տակից */
-      .navbar-brand::after {
-        display: none !important;
-        content: none !important;
-      }
-
-      /* ===== MAIN CONTAINER (Glassmorphism) ===== */
+      /* ===== MAIN CONTAINER ===== */
       main.container {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px); /* Ապակու էֆեկտ */
-        padding: 40px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 50px;
         border-radius: 30px;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        animation: fadeIn 0.8s ease-in-out;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        margin-top: 60px;
+        margin-bottom: 80px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
       }
 
       main h2 {
+        text-align: center;
         font-weight: 800;
         color: #084298;
-        text-align: center;
         margin-bottom: 40px;
-        position: relative;
-        padding-bottom: 15px;
       }
 
-      main h2::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 4px;
-        background: #0d6efd;
-        border-radius: 2px;
+      /* ===== TOPIC SECTIONS ===== */
+      .topic-section {
+        margin-bottom: 60px;
+      }
+
+      .topic-title {
+        font-weight: 700;
+        color: #0d6efd;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #0d6efd;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .topic-icon {
+        font-size: 2rem;
       }
 
       /* ===== QUESTION BLOCKS ===== */
@@ -204,7 +126,7 @@
         margin-bottom: 15px;
       }
 
-      /* ===== OPTIONS (Radio Buttons Custom Style) ===== */
+      /* ===== OPTIONS ===== */
       .option {
         padding: 12px 15px;
         border-radius: 10px;
@@ -224,7 +146,7 @@
         transform: scale(1.2);
       }
 
-      /* ===== RESULTS & FEEDBACK ===== */
+      /* ===== RESULTS ===== */
       .correct {
         background-color: #d4edda !important;
         border-color: #c3e6cb !important;
@@ -249,669 +171,261 @@
         border-radius: 20px;
         padding: 6px 20px;
         font-weight: 600;
-        transition: all 0.3s;
       }
 
       .btn-primary {
         border-radius: 25px;
-        padding: 10px 30px;
+        padding: 12px 30px;
         font-weight: 600;
-        box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
       }
 
+      /* ===== FOOTER ===== */
       footer {
         background-color: #212529;
         color: #adb5bd;
         padding: 30px 0;
-        margin-top: 60px;
+        text-align: center;
       }
 
       @media (max-width: 768px) {
-        .main-header {
-          padding: 20px 0;
-          text-align: center;
+        main.container {
+          padding: 30px 20px;
         }
-
-        .navbar-brand {
-          font-size: 1.5rem;
-        }
-
-        .navbar-nav .nav-link {
-          margin: 5px 0;
-        }
-
-        .navbar-brand span {
-          display: none;
+        
+        .topic-title {
+          font-size: 1.4rem;
         }
       }
     </style>
   </head>
   <body>
+    <!-- ===== HEADER ===== -->
     <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-dark container">
-        <!-- LOGO + TITLE -->
-        <a
-          class="navbar-brand d-flex align-items-center gap-2 fw-bold"
-          href="#"
-        >
-          <img
-            src="./images/logo.png"
-            alt="ASPU Logo"
-            height="45"
-            class="d-inline-block align-text-top"
-          />
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+          <img src="./images/logo.png" alt="ASPU Logo" height="45" />
           <span class="d-none d-lg-inline">SQL ուսուցման Կայք</span>
         </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="intro.html">Ներածություն</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="application.html">Կիրառությունը</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="commands.html">SQL հրամանները</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="videos.html">Տեսադասեր</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="quiz.html">Թեստ</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="intro.html">Ներածություն</a></li>
+            <li class="nav-item"><a class="nav-link" href="application.html">Կիրառությունը</a></li>
+            <li class="nav-item"><a class="nav-link" href="commands.html">SQL հրամանները</a></li>
+            <li class="nav-item"><a class="nav-link" href="videos.html">Տեսադասեր</a></li>
+            <li class="nav-item"><a class="nav-link active" href="quiz.html">Թեստ</a></li>
           </ul>
         </div>
       </nav>
     </header>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <main class="container">
-      <section id="practice" class="quiz-section">
-        <h2>Թեստ․ Ստուգիր գիտելիքդ SQL-ից</h2>
-        <form id="quizForm"></form>
-        <div class="result mt-4" id="quizResult"></div>
+      <h2>SQL Թեստ - Ըստ Թեմաների</h2>
+
+      <!-- ========== SQL ՀԻՄՈՒՆՔՆԵՐ ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">📚</span>
+          SQL Հիմունքներ և Ներածություն
+        </h3>
+        <div id="quiz-basics"></div>
       </section>
-      <a href="index.html" class="btn btn-primary mt-4">
-        Վերադառնալ հիմնական էջ
-      </a>
+
+      <!-- ========== SELECT & QUERIES ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">🔍</span>
+          SELECT և Հարցումներ
+        </h3>
+        <div id="quiz-select"></div>
+      </section>
+
+      <!-- ========== INSERT, UPDATE, DELETE ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">✏️</span>
+          INSERT, UPDATE, DELETE
+        </h3>
+        <div id="quiz-dml"></div>
+      </section>
+
+      <!-- ========== AGGREGATE FUNCTIONS ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">📊</span>
+          Ագրեգատ Ֆունկցիաներ
+        </h3>
+        <div id="quiz-aggregate"></div>
+      </section>
+
+      <!-- ========== JOIN OPERATIONS ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">🔗</span>
+          JOIN-եր և Կապեր
+        </h3>
+        <div id="quiz-joins"></div>
+      </section>
+
+      <!-- ========== DATABASE DESIGN ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">🏗️</span>
+          Բազայի Դիզայն և Կառուցվածք
+        </h3>
+        <div id="quiz-design"></div>
+      </section>
+
+      <!-- ========== ADVANCED TOPICS ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">⚡</span>
+          Առաջադեմ Թեմաներ
+        </h3>
+        <div id="quiz-advanced"></div>
+      </section>
+
+      <div class="text-center mt-5">
+        <a href="index.html" class="btn btn-primary">Վերադառնալ հիմնական էջ</a>
+      </div>
     </main>
 
-    <footer
-      style="
-        background-color: #212529;
-        color: #f8f9fa;
-        padding: 25px 0;
-        text-align: center;
-        box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
-        font-size: 0.95rem;
-      "
-    >
+    <!-- ===== FOOTER ===== -->
+    <footer>
       <div class="container">
-        <p class="mb-1">
-          © 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ
-        </p>
-        <p class="mb-0" style="font-size: 0.85rem; color: #adb5bd">
-          Բոլոր իրավունքները պաշտպանված են
-        </p>
+        <p class="mb-1">© 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ</p>
+        <p class="mb-0">Բոլոր իրավունքները պաշտպանված են</p>
       </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-      const quizData = [
-        {
-          q: "Ո՞ր հրամանը կվերադարձնի բոլոր տվյալները 'Users' աղյուսակից։",
-          options: [
-            "GET * FROM Users;",
-            "SELECT * FROM Users;",
-            "SHOW ALL Users;",
-            "FETCH * Users;",
-          ],
-          correct: 1,
-        },
-        {
-          q: "INSERT հրամանը ինչի համար է օգտագործվում?",
-          options: [
-            "Տվյալների հեռացում",
-            "Նոր տվյալների ավելացում",
-            "Տվյալների որոնում",
-            "Աղյուսակի վերացում",
-          ],
-          correct: 1,
-        },
-        {
-          q: "UPDATE հրամանը ...",
-          options: [
-            "Հեռացնում է տվյալներ",
-            "Փոփոխում է տվյալներ",
-            "Ցուցադրում է աղյուսակը",
-            "Ավելացնում է սյունակ",
-          ],
-          correct: 1,
-        },
-        {
-          q: "DELETE հրամանը ...",
-          options: [
-            "Ավելացնում է տվյալներ",
-            "Ջնջում է տվյալներ",
-            "Թարմացնում է աղյուսակը",
-            "Ավելացնում է աղյուսակ",
-          ],
-          correct: 1,
-        },
-        {
-          q: "Ո՞ր հրամանն է ստեղծում նոր աղյուսակ:",
-          options: ["CREATE TABLE", "ADD TABLE", "NEW TABLE", "INSERT TABLE"],
-          correct: 0,
-        },
-        {
-          q: "Ո՞ր հրամանն է ավելացնում նոր սյունակ:",
-          options: [
-            "ADD COLUMN",
-            "ALTER TABLE",
-            "CREATE COLUMN",
-            "MODIFY COLUMN",
-          ],
-          correct: 1,
-        },
-        {
-          q: "Ո՞ր հրամանն է ջնջում աղյուսակը:",
-          options: [
-            "DELETE TABLE",
-            "DROP TABLE",
-            "REMOVE TABLE",
-            "ERASE TABLE",
-          ],
-          correct: 1,
-        },
-        {
-          q: "WHERE պայմանը օգտագործվում է՝",
-          options: [
-            "Տվյալները ֆիլտրելու համար",
-            "Աղյուսակ ստեղծելու համար",
-            "Ավելացնելու համար",
-            "Ցուցադրելու բոլոր տվյալները",
-          ],
-          correct: 0,
-        },
-        {
-          q: "ORDER BY հրամանը՝",
-          options: [
-            "Դասավորում է արդյունքը",
-            "Ջնջում է տվյալներ",
-            "Ավելացնում է տվյալներ",
-            "Փոխում է սյունակների անունները",
-          ],
-          correct: 0,
-        },
-        {
-          q: "COUNT() ֆունկցիան՝",
-          options: [
-            "Հաշվում է տողերի քանակը",
-            "Ավելացնում է տվյալներ",
-            "Ջնջում է տվյալներ",
-            "Դասավորում է",
-          ],
-          correct: 0,
-        },
-        {
-          q: "AVG() ֆունկցիան հաշվարկում է՝",
-          options: [
-            "Տողի երկարությունը",
-            "Միջին արժեքը",
-            "Տողի քանակը",
-            "Գումարը",
-          ],
-          correct: 1,
-        },
-        {
-          q: "GROUP BY օգտագործվում է՝",
-          options: [
-            "Տվյալները խմբավորելու համար",
-            "Ջնջելու համար",
-            "Փոխելու համար",
-            "Հաշվելու համար",
-          ],
-          correct: 0,
-        },
-        {
-          q: "HAVING հրամանը կիրառվում է՝",
-          options: [
-            "GROUP BY-ից հետո պայման դնելու համար",
-            "Աղյուսակ ստեղծելու համար",
-            "Տվյալներ ավելացնելու համար",
-            "Ջնջելու համար",
-          ],
-          correct: 0,
-        },
-        {
-          q: "LIKE օպերատորը՝",
-          options: [
-            "Ֆիլտրում է տեքստային ձևաչափով",
-            "Ավելացնում է նոր սյունակ",
-            "Հաշվում է արժեքներ",
-            "Փոխում է աղյուսակ",
-          ],
-          correct: 0,
-        },
-        {
-          q: "IN օպերատորը՝",
-          options: [
-            "Ստուգում է արժեքը ցուցակի մեջ",
-            "Ավելացնում է արժեքներ",
-            "Ջնջում է աղյուսակ",
-            "Փոխում է տվյալներ",
-          ],
-          correct: 0,
-        },
-        {
-          q: "BETWEEN օպերատորը՝",
-          options: [
-            "Սահմանում է միջակայք",
-            "Հաշվում է միջինը",
-            "Փոխում է աղյուսակ",
-            "Ջնջում է",
-          ],
-          correct: 0,
-        },
-        {
-          q: "MIN() վերադարձնում է՝",
-          options: ["Մինիմալ արժեքը", "Մաքսիմալ արժեքը", "Գումարը", "Միջինը"],
-          correct: 0,
-        },
-        {
-          q: "MAX() վերադարձնում է՝",
-          options: ["Մաքսիմալ արժեքը", "Մինիմալ արժեքը", "Գումարը", "Միջինը"],
-          correct: 0,
-        },
-        {
-          q: "SUM() հաշվարկում է՝",
-          options: ["Գումարը", "Միջինը", "Քանակը", "Ամենամեծը"],
-          correct: 0,
-        },
-        {
-          q: "DISTINCT բառը՝",
-          options: [
-            "Հեռացնում է կրկնվող արժեքները",
-            "Ավելացնում է նոր սյունակ",
-            "Փոխում է աղյուսակը",
-            "Թարմացնում է",
-          ],
-          correct: 0,
-        },
-        {
-          q: "AS օգտագործվում է՝",
-          options: [
-            "Անվանման համար (alias)",
-            "Ավելացնելու համար",
-            "Ջնջելու համար",
-            "Փոփոխելու համար",
-          ],
-          correct: 0,
-        },
-        {
-          q: "JOIN հրամանը՝",
-          options: [
-            "Միացնում է աղյուսակները",
-            "Ջնջում է տվյալները",
-            "Փոխում է սյունակները",
-            "Ավելացնում է սյունակ",
-          ],
-          correct: 0,
-        },
-        {
-          q: "INNER JOIN վերադարձնում է՝",
-          options: [
-            "Միայն համընկնող տողերը",
-            "Բոլոր տողերը",
-            "Առաջինը միայն",
-            "Երկրորդը միայն",
-          ],
-          correct: 0,
-        },
-        {
-          q: "LEFT JOIN վերադարձնում է՝",
-          options: [
-            "Ձախ աղյուսակի բոլոր տողերը",
-            "Աջ աղյուսակի բոլոր տողերը",
-            "Միայն ընդհանուրները",
-            "Ավելի փոքրերը",
-          ],
-          correct: 0,
-        },
-        {
-          q: "SQL-ում PRIMARY KEY-ը՝",
-          options: [
-            "Յուրահատուկ նույնացուցիչ է",
-            "Գրառման անունն է",
-            "Աղյուսակի անվանումն է",
-            "Կոդավորման ձև է",
-          ],
-          correct: 0,
-        },
-        {
-          q: "Ո՞ր հրամանն է հեռացնում աղյուսակի բոլոր տվյալները՝ առանց աղյուսակը ջնջելու:",
-          options: [
-            "DROP TABLE",
-            "DELETE TABLE",
-            "TRUNCATE TABLE",
-            "CLEAR TABLE",
-          ],
-          correct: 2,
-        },
-        {
-          q: "NULL արժեքը SQL-ում նշանակում է՝",
-          options: [
-            "Զրո",
-            "Դատարկ տող",
-            "Անհայտ կամ բացակայող արժեք",
-            "Կեղծ արժեք",
-          ],
-          correct: 2,
-        },
-        {
-          q: "Ո՞ր հրամանն է օգտագործվում տվյալների բազա ստեղծելու համար:",
-          options: [
-            "NEW DATABASE",
-            "CREATE DATABASE",
-            "ADD DATABASE",
-            "MAKE DATABASE",
-          ],
-          correct: 1,
-        },
-        {
-          q: "RIGHT JOIN վերադարձնում է՝",
-          options: [
-            "Ձախ աղյուսակի բոლոր տողերը",
-            "Միայն ընդհանուր տողերը",
-            "Աջ աղյուսակի բոլոր տողերը",
-            "Բոլոր տողերը երկու աղյուսակից",
-          ],
-          correct: 2,
-        },
-        {
-          q: "FULL OUTER JOIN վերադարձնում է՝",
-          options: [
-            "Միայն համընկնող տողերը",
-            "Ձախ աղյուսակի տողերը",
-            "Աջ աղյուսակի տողերը",
-            "Բոլոր տողերը երկու աղյուսակից",
-          ],
-          correct: 3,
-        },
-        {
-          q: "FOREIGN KEY-ը SQL-ում՝",
-          options: [
-            "Յուրահատուկ նույնացուցիչ է",
-            "Կապ է ստեղծում երկու աղյուսակի միջև",
-            "Ջնջում է կրկնող արժեքները",
-            "Ինդեքս է ստեղծում",
-          ],
-          correct: 1,
-        },
-        {
-          q: "NOT NULL սահմանափակումը՝",
-          options: [
-            "Թույլ է տալիս NULL արժեքներ",
-            "Ջնջում է NULL արժեքները",
-            "Արգելում է NULL արժեքներ",
-            "Փոխում է NULL-ը զրոյի",
-          ],
-          correct: 2,
-        },
-        {
-          q: "UNIQUE սահմանափակումը ապահովում է՝",
-          options: [
-            "Բոլոր արժեքները լինեն NULL",
-            "Սյունակի բոլոր արժեքները լինեն տարբեր",
-            "Արժեքները լինեն թվային",
-            "Սյունակը ունենա PRIMARY KEY",
-          ],
-          correct: 1,
-        },
-        {
-          q: "INDEX-ը SQL-ում ստեղծվում է՝",
-          options: [
-            "Տվյալները ջնջելու համար",
-            "Տվյալների որոնման արագությունը բարձրացնելու համար",
-            "Աղյուսակ ստեղծելու համար",
-            "Կրկնվող արժեքները հեռացնելու համար",
-          ],
-          correct: 1,
-        },
-        {
-          q: "SUBQUERY (ենթահարցում) SQL-ում՝",
-          options: [
-            "Հարցում մի ուրիշ հարցման ներսում",
-            "Աղյուսակների միացում",
-            "Տվյալների ջնջում",
-            "Նոր սյունակի ստեղծում",
-          ],
-          correct: 0,
-        },
-        {
-          q: "CHECK սահմանափակումը SQL-ում՝",
-          options: [
-            "Ստուգում է օգտատիրոջ գաղտնաբառը",
-            "Սահմանում է պայման սյունակի արժեքների համար",
-            "Ջնջում է կրկնվող տվյալները",
-            "Ստեղծում է նոր աղյուսակ",
-          ],
-          correct: 1,
-        },
-        {
-          q: "DEFAULT սահմանափակումը՝",
-          options: [
-            "Ջնջում է դատարկ արժեքները",
-            "Սահմանում է լռելյայն արժեք սյունակի համար",
-            "Ստեղծում է ինդեքս",
-            "Կապում է երկու աղյուసակ",
-          ],
-          correct: 1,
-        },
-        {
-          q: "AUTO_INCREMENT հատկությունը՝",
-          options: [
-            "Ավտոմատ կրկնապատկում է արժեքը",
-            "Ավտոմատ մեծացնում է թվային արժեքը ամեն նոր տողի ժամանակ",
-            "Ջնջում է ամենամեծ արժեքը",
-            "Ստեղծում է նոր սյունակ",
-          ],
-          correct: 1,
-        },
-        {
-          q: "UNION օպերատորը՝",
-          options: [
-            "Միացնում է երկու SELECT հարցումների արդյունքները",
-            "Ջնջում է կրկնվող աղյուսակները",
-            "Ստեղծում է նոր տվյալների բազա",
-            "Փոխում է սյունակի տիպը",
-          ],
-          correct: 0,
-        },
-        {
-          q: "UNION ALL-ը UNION-ից տարբերվում է նրանով, որ՝",
-          options: [
-            "Ավելի արագ է աշխատում",
-            "Վերադարձնում է նաև կրկնվող տողերը",
-            "Աշխատում է միայն թվային տվյալների հետ",
-            "Ջնջում է NULL արժեքները",
-          ],
-          correct: 1,
-        },
-        {
-          q: "EXISTS օպերատորը SQL-ում՝",
-          options: [
-            "Ստուգում է՝ արդյոք ենթահարցումը վերադարձնում է տողեր",
-            "Հաշվում է տողերի քանակը",
-            "Ջնջում է գոյություն ունեցող տվյալները",
-            "Ստեղծում է նոր ինդեքս",
-          ],
-          correct: 0,
-        },
-        {
-          q: "CASE արտահայտությունը SQL-ում՝",
-          options: [
-            "Ջնջում է պայմանական տողերը",
-            "Ստեղծում է նոր աղյուսակ",
-            "Կատարում է պայմանական տրամաբանություն (if-else)",
-            "Կրկնօրինակում է աղյուսակը",
-          ],
-          correct: 2,
-        },
-        {
-          q: "COALESCE() ֆունկցիան՝",
-          options: [
-            "Վերադարձնում է ամենամեծ արժեքը",
-            "Վերադարձնում է առաջին NOT NULL արժեքը ցուցակից",
-            "Հաշվարկում է տողերի գումարը",
-            "Ջնջում է NULL արժեքները",
-          ],
-          correct: 1,
-        },
-        {
-          q: "CAST() ֆունկցիան SQL-ում օգտագործվում է՝",
-          options: [
-            "Տվյալների տիպը փոխակերպելու համար",
-            "Տողերը կրկնօրինակելու համար",
-            "Ջնջելու NULL արժեքները",
-            "Աղյուսակները միացնելու համար",
-          ],
-          correct: 0,
-        },
-        {
-          q: "VIEW-ը SQL-ում՝",
-          options: [
-            "Ֆիզիկական աղյուսակ է",
-            "Պահպանված SELECT հարցման վիրտուալ աղյուսակ է",
-            "Ինդեքս ստեղծելու հրաման է",
-            "Տվյալների կրկնօրինակ է",
-          ],
-          correct: 1,
-        },
-        {
-          q: "STORED PROCEDURE-ը՝",
-          options: [
-            "Պահպանված SQL հրամանների շարք է, որը կարելի է կրկին կանչել",
-            "Ջնջում է ամբողջ տվյալների բազան",
-            "Ավտոմատ թարմացնում է ինդեքսները",
-            "Ստեղծում է օգտատեր",
-          ],
-          correct: 0,
-        },
-        {
-          q: "TRIGGER-ը SQL-ում՝",
-          options: [
-            "Ձեռքով գործարկվող հրաման է",
-            "Ավտոմատ կատարվող գործողություն է՝ կապված աղյուսակի իրադարձության հետ",
-            "Ստեղծում է նոր VIEW",
-            "Ջնջում է ինդեքսը",
-          ],
-          correct: 1,
-        },
-        {
-          q: "TRANSACTION-ը SQL-ում ապահովում է՝",
-          options: [
-            "Տվյալների արագ ջնջում",
-            "Հրամանների խումբն ամբողջությամբ կատարվի կամ ամբողջությամբ չեղարկվի",
-            "Ինդեքսների ավտոմատ թարմացում",
-            "Աղյուսակների կրկնօրինակում",
-          ],
-          correct: 1,
-        },
-        {
-          q: "ROLLBACK հրամանը՝",
-          options: [
-            "Հաստատում է transaction-ի փոփոխությունները",
-            "Չեղարկում է transaction-ի կատարված փոփոխությունները",
-            "Ջնջում է ամբողջ աղյուսակը",
-            "Ստեղծում է նոր VIEW",
-          ],
-          correct: 1,
-        },
-        {
-          q: "COMMIT հրամանը՝",
-          options: [
-            "Չեղարկում է բոլոր փոփոխությունները",
-            "Հաստատում և պահպանում է transaction-ի փոփոխությունները",
-            "Ջնջում է վերջին տողը",
-            "Փակում է տվյալների բազան",
-          ],
-          correct: 1,
-        },
-      ];
+      const quizData = {
+        basics: [
+          { q: "Ո՞ր հրամանը կվերադարձնի բոլոր տվյալները 'Users' աղյուսակից։", options: ["GET * FROM Users;", "SELECT * FROM Users;", "SHOW ALL Users;", "FETCH * Users;"], correct: 1 },
+          { q: "Ո՞ր հրամանն է ստեղծում նոր աղյուսակ:", options: ["CREATE TABLE", "ADD TABLE", "NEW TABLE", "INSERT TABLE"], correct: 0 },
+          { q: "Ո՞ր հրամանն է ջնջում աղյուսակը:", options: ["DELETE TABLE", "DROP TABLE", "REMOVE TABLE", "ERASE TABLE"], correct: 1 },
+          { q: "Ո՞ր հրամանն է օգտագործվում տվյալների բազա ստեղծելու համար:", options: ["NEW DATABASE", "CREATE DATABASE", "ADD DATABASE", "MAKE DATABASE"], correct: 1 },
+        ],
+        
+        select: [
+          { q: "WHERE պայմանը օգտագործվում է՝", options: ["Տվյալները ֆիլտրելու համար", "Աղյուսակ ստեղծելու համար", "Ավելացնելու համար", "Ցուցադրելու բոլոր տվյալները"], correct: 0 },
+          { q: "ORDER BY հրամանը՝", options: ["Դասավորում է արդյունքը", "Ջնջում է տվյալներ", "Ավելացնում է տվյալներ", "Փոխում է սյունակների անունները"], correct: 0 },
+          { q: "LIKE օպերատորը՝", options: ["Ֆիլտրում է տեքստային ձևաչափով", "Ավելացնում է նոր սյունակ", "Հաշվում է արժեքներ", "Փոխում է աղյուսակ"], correct: 0 },
+          { q: "IN օպերատորը՝", options: ["Ստուգում է արժեքը ցուցակի մեջ", "Ավելացնում է արժեքներ", "Ջնջում է աղյուսակ", "Փոխում է տվյալներ"], correct: 0 },
+          { q: "BETWEEN օպերատորը՝", options: ["Սահմանում է միջակայք", "Հաշվում է միջինը", "Փոխում է աղյուսակ", "Ջնջում է"], correct: 0 },
+          { q: "DISTINCT բառը՝", options: ["Հեռացնում է կրկնվող արժեքները", "Ավելացնում է նոր սյունակ", "Փոխում է աղյուսակը", "Թարմացնում է"], correct: 0 },
+          { q: "AS օգտագործվում է՝", options: ["Անվանման համար (alias)", "Ավելացնելու համար", "Ջնջելու համար", "Փոփոխելու համար"], correct: 0 },
+          { q: "SUBQUERY (ենթահարցում) SQL-ում՝", options: ["Հարցում մի ուրիշ հարցման ներսում", "Աղյուսակների միացում", "Տվյալների ջնջում", "Նոր սյունակի ստեղծում"], correct: 0 },
+        ],
+        
+        dml: [
+          { q: "INSERT հրամանը ինչի համար է օգտագործվում?", options: ["Տվյալների հեռացում", "Նոր տվյալների ավելացում", "Տվյալների որոնում", "Աղյուսակի վերացում"], correct: 1 },
+          { q: "UPDATE հրամանը ...", options: ["Հեռացնում է տվյալներ", "Փոփոխում է տվյալներ", "Ցուցադրում է աղյուսակը", "Ավելացնում է սյունակ"], correct: 1 },
+          { q: "DELETE հրամանը ...", options: ["Ավելացնում է տվյալներ", "Ջնջում է տվյալներ", "Թարմացնում է աղյուսակը", "Ավելացնում է աղյուսակ"], correct: 1 },
+          { q: "Ո՞ր հրամանն է հեռացնում աղյուսակի բոլոր տվյալները՝ առանց աղյուսակը ջնջելու:", options: ["DROP TABLE", "DELETE TABLE", "TRUNCATE TABLE", "CLEAR TABLE"], correct: 2 },
+          { q: "NULL արժեքը SQL-ում նշանակում է՝", options: ["Զրո", "Դատարկ տող", "Անհայտ կամ բացակայող արժեք", "Կեղծ արժեք"], correct: 2 },
+          { q: "Ո՞ր հրամանն է ավելացնում նոր սյունակ:", options: ["ADD COLUMN", "ALTER TABLE", "CREATE COLUMN", "MODIFY COLUMN"], correct: 1 },
+        ],
+        
+        aggregate: [
+          { q: "COUNT() ֆունկցիան՝", options: ["Հաշվում է տողերի քանակը", "Ավելացնում է տվյալներ", "Ջնջում է տվյալներ", "Դասավորում է"], correct: 0 },
+          { q: "AVG() ֆունկցիան հաշվարկում է՝", options: ["Տողի երկարությունը", "Միջին արժեքը", "Տողի քանակը", "Գումարը"], correct: 1 },
+          { q: "GROUP BY օգտագործվում է՝", options: ["Տվյալները խմբավորելու համար", "Ջնջելու համար", "Փոխելու համար", "Հաշվելու համար"], correct: 0 },
+          { q: "HAVING հրամանը կիրառվում է՝", options: ["GROUP BY-ից հետո պայման դնելու համար", "Աղյուսակ ստեղծելու համար", "Տվյալներ ավելացնելու համար", "Ջնջելու համար"], correct: 0 },
+          { q: "MIN() վերադարձնում է՝", options: ["Մինիմալ արժեքը", "Մաքսիմալ արժեքը", "Գումարը", "Միջինը"], correct: 0 },
+          { q: "MAX() վերադարձնում է՝", options: ["Մաքսիմալ արժեքը", "Մինիմալ արժեքը", "Գումարը", "Միջինը"], correct: 0 },
+          { q: "SUM() հաշվարկում է՝", options: ["Գումարը", "Միջինը", "Քանակը", "Ամենամեծը"], correct: 0 },
+        ],
+        
+        joins: [
+          { q: "JOIN հրամանը՝", options: ["Միացնում է աղյուսակները", "Ջնջում է տվյալները", "Փոխում է սյունակները", "Ավելացնում է սյունակ"], correct: 0 },
+          { q: "INNER JOIN վերադարձնում է՝", options: ["Միայն համընկնող տողերը", "Բոլոր տողերը", "Առաջինը միայն", "Երկրորդը միայն"], correct: 0 },
+          { q: "LEFT JOIN վերադարձնում է՝", options: ["Ձախ աղյուսակի բոլոր տողերը", "Աջ աղյուսակի բոլոր տողերը", "Միայն ընդհանուրները", "Ավելի փոքրերը"], correct: 0 },
+          { q: "RIGHT JOIN վերադարձնում է՝", options: ["Ձախ աղյուսակի բոլոր տողերը", "Միայն ընդհանուր տողերը", "Աջ աղյուսակի բոլոր տողերը", "Բոլոր տողերը երկու աղյուսակից"], correct: 2 },
+          { q: "FULL OUTER JOIN վերադարձնում է՝", options: ["Միայն համընկնող տողերը", "Ձախ աղյուսակի տողերը", "Աջ աղյուսակի տողերը", "Բոլոր տողերը երկու աղյուսակից"], correct: 3 },
+          { q: "UNION օպերատորը՝", options: ["Միացնում է երկու SELECT հարցումների արդյունքները", "Ջնջում է կրկնվող աղյուսակները", "Ստեղծում է նոր տվյալների բազա", "Փոխում է սյունակի տիպը"], correct: 0 },
+          { q: "UNION ALL-ը UNION-ից տարբերվում է նրանով, որ՝", options: ["Ավելի արագ է աշխատում", "Վերադարձնում է նաև կրկնվող տողերը", "Աշխատում է միայն թվային տվյալների հետ", "Ջնջում է NULL արժեքները"], correct: 1 },
+        ],
+        
+        design: [
+          { q: "SQL-ում PRIMARY KEY-ը՝", options: ["Յուրահատուկ նույնացուցիչ է", "Գրառման անունն է", "Աղյուսակի անվանումն է", "Կոդավորման ձև է"], correct: 0 },
+          { q: "FOREIGN KEY-ը SQL-ում՝", options: ["Յուրահատուկ նույնացուցիչ է", "Կապ է ստեղծում երկու աղյուսակի միջև", "Ջնջում է կրկնող արժեքները", "Ինդեքս է ստեղծում"], correct: 1 },
+          { q: "NOT NULL սահմանափակումը՝", options: ["Թույլ է տալիս NULL արժեքներ", "Ջնջում է NULL արժեքները", "Արգելում է NULL արժեքներ", "Փոխում է NULL-ը զրոյի"], correct: 2 },
+          { q: "UNIQUE սահմանափակումը ապահովում է՝", options: ["Բոլոր արժեքները լինեն NULL", "Սյունակի բոլոր արժեքները լինեն տարբեր", "Արժեքները լինեն թվային", "Սյունակը ունենա PRIMARY KEY"], correct: 1 },
+          { q: "CHECK սահմանափակումը SQL-ում՝", options: ["Ստուգում է օգտատիրոջ գաղտնաբառը", "Սահմանում է պայման սյունակի արժեքների համար", "Ջնջում է կրկնվող տվյալները", "Ստեղծում է նոր աղյուսակ"], correct: 1 },
+          { q: "DEFAULT սահմանափակումը՝", options: ["Ջնջում է դատարկ արժեքները", "Սահմանում է լռելյայն արժեք սյունակի համար", "Ստեղծում է ինդեքս", "Կապում է երկու աղյուսակ"], correct: 1 },
+          { q: "AUTO_INCREMENT հատկությունը՝", options: ["Ավտոմատ կրկնապատկում է արժեքը", "Ավտոմատ մեծացնում է թվային արժեքը ամեն նոր տողի ժամանակ", "Ջնջում է ամենամեծ արժեքը", "Ստեղծում է նոր սյունակ"], correct: 1 },
+        ],
+        
+        advanced: [
+          { q: "INDEX-ը SQL-ում ստեղծվում է՝", options: ["Տվյալները ջնջելու համար", "Տվյալների որոնման արագությունը բարձրացնելու համար", "Աղյուսակ ստեղծելու համար", "Կրկնվող արժեքները հեռացնելու համար"], correct: 1 },
+          { q: "EXISTS օպերատորը SQL-ում՝", options: ["Ստուգում է՝ արդյոք ենթահարցումը վերադարձնում է տողեր", "Հաշվում է տողերի քանակը", "Ջնջում է գոյություն ունեցող տվյալները", "Ստեղծում է նոր ինդեքս"], correct: 0 },
+          { q: "CASE արտահայտությունը SQL-ում՝", options: ["Ջնջում է պայմանական տողերը", "Ստեղծում է նոր աղյուսակ", "Կատարում է պայմանական տրամաբանություն (if-else)", "Կրկնօրինակում է աղյուսակը"], correct: 2 },
+          { q: "COALESCE() ֆունկցիան՝", options: ["Վերադարձնում է ամենամեծ արժեքը", "Վերադարձնում է առաջին NOT NULL արժեքը ցուցակից", "Հաշվարկում է տողերի գումարը", "Ջնջում է NULL արժեքները"], correct: 1 },
+          { q: "CAST() ֆունկցիան SQL-ում օգտագործվում է՝", options: ["Տվյալների տիպը փոխակերպելու համար", "Տողերը կրկնօրինակելու համար", "Ջնջելու NULL արժեքները", "Աղյուսակները միացնելու համար"], correct: 0 },
+          { q: "VIEW-ը SQL-ում՝", options: ["Ֆիզիկական աղյուսակ է", "Պահպանված SELECT հարցման վիրտուալ աղյուսակ է", "Ինդեքս ստեղծելու հրաման է", "Տվյալների կրկնօրինակ է"], correct: 1 },
+          { q: "STORED PROCEDURE-ը՝", options: ["Պահպանված SQL հրամանների շարք է, որը կարելի է կրկին կանչել", "Ջնջում է ամբողջ տվյալների բազան", "Ավտոմատ թարմացնում է ինդեքսները", "Ստեղծում է օգտատեր"], correct: 0 },
+          { q: "TRIGGER-ը SQL-ում՝", options: ["Ձեռքով գործարկվող հրաման է", "Ավտոմատ կատարվող գործողություն է՝ կապված աղյուսակի իրադարձության հետ", "Ստեղծում է նոր VIEW", "Ջնջում է ինդեքսը"], correct: 1 },
+          { q: "TRANSACTION-ը SQL-ում ապահովում է՝", options: ["Տվյալների արագ ջնջում", "Հրամանների խումբն ամբողջությամբ կատարվի կամ ամբողջությամբ չեղարկվի", "Ինդեքսների ավտոմատ թարմացում", "Աղյուսակների կրկնօրինակում"], correct: 1 },
+          { q: "ROLLBACK հրամանը՝", options: ["Հաստատում է transaction-ի փոփոխությունները", "Չեղարկում է transaction-ի կատարված փոփոխությունները", "Ջնջում է ամբողջ աղյուսակը", "Ստեղծում է նոր VIEW"], correct: 1 },
+          { q: "COMMIT հրամանը՝", options: ["Չեղարկում է բոլոր փոփոխությունները", "Հաստատում և պահպանում է transaction-ի փոփոխությունները", "Ջնջում է վերջին տողը", "Փակում է տվյալների բազան"], correct: 1 },
+        ],
+      };
 
-      const quizContainer = $("#quizForm");
-      quizData.forEach((item, i) => {
-        const html = `
-    <div class="mb-4 question-block" data-index="${i}">
-      <strong>${i + 1}. ${item.q}</strong><br>
-
-      ${item.options
-        .map(
-          (opt, j) => `
-        <label class="option d-block">
-          <input type="radio" name="q${i}" value="${j}" /> ${opt}
-        </label>
-      `,
-        )
-        .join("")}
-
-      <button type="button" class="btn btn-sm btn-outline-primary mt-2 check-one">
-        Ստուգել
-      </button>
-
-      <div class="mt-2 question-result"></div>
-    </div>
-  `;
-        quizContainer.append(html);
+      // Render each category
+      Object.entries(quizData).forEach(([category, questions]) => {
+        const container = $(`#quiz-${category}`);
+        questions.forEach((item, i) => {
+          const globalIndex = `${category}-${i}`;
+          const html = `
+            <div class="mb-4 question-block" data-category="${category}" data-index="${i}">
+              <strong>${i + 1}. ${item.q}</strong><br>
+              ${item.options.map((opt, j) => `
+                <label class="option d-block">
+                  <input type="radio" name="q${globalIndex}" value="${j}" /> ${opt}
+                </label>
+              `).join("")}
+              <button type="button" class="btn btn-sm btn-outline-primary mt-2 check-one">
+                Ստուգել
+              </button>
+              <div class="mt-2 question-result"></div>
+            </div>
+          `;
+          container.append(html);
+        });
       });
+
+      // Check answer logic
       $(document).on("click", ".check-one", function () {
         const block = $(this).closest(".question-block");
+        const category = block.data("category");
         const index = block.data("index");
-        const correct = quizData[index].correct;
-
+        const correct = quizData[category][index].correct;
         const selected = block.find("input[type=radio]:checked").val();
 
         block.find(".option").removeClass("correct incorrect");
         block.find(".question-result").text("");
 
         if (selected === undefined) {
-          block
-            .find(".question-result")
-            .text("Խնդրում ենք ընտրել պատասխան")
-            .css("color", "orange");
+          block.find(".question-result").text("Խնդրում ենք ընտրել պատասխան").css("color", "orange");
           return;
         }
 
         block.find(".option").each(function (j) {
-          if (j === correct) {
-            $(this).addClass("correct");
-          }
-          if (j == selected && j != correct) {
-            $(this).addClass("incorrect");
-          }
+          if (j === correct) $(this).addClass("correct");
+          if (j == selected && j != correct) $(this).addClass("incorrect");
         });
 
         if (selected == correct) {
-          block
-            .find(".question-result")
-            .text("Ճիշտ պատասխան ✅")
-            .css("color", "green");
+          block.find(".question-result").text("Ճիշտ պատասխան ✅").css("color", "green");
         } else {
-          block
-            .find(".question-result")
-            .text("Սխալ պատասխան ❌ Ճիշտը նշված է կանաչով")
-            .css("color", "red");
+          block.find(".question-result").text("Սխալ պատասխան ❌ Ճիշտը նշված է կանաչով").css("color", "red");
         }
       });
     </script>

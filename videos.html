@@ -39,6 +39,27 @@
         margin-bottom: 40px;
       }
 
+      /* ===== TOPIC SECTIONS ===== */
+      .topic-section {
+        margin-bottom: 60px;
+      }
+
+      .topic-title {
+        font-weight: 700;
+        color: #0d6efd;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #0d6efd;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .topic-icon {
+        font-size: 2rem;
+      }
+
       /* ===== VIDEO CARDS ===== */
       .video-card {
         border: none;
@@ -59,6 +80,7 @@
       .video-card h5 {
         font-weight: 700;
         color: #0d6efd;
+        font-size: 1.1rem;
       }
 
       .ratio iframe {
@@ -67,20 +89,9 @@
 
       /* ===== TAGS ===== */
       .badge {
-        background: #0d6efd;
         margin-right: 5px;
-      }
-
-      /* ===== PAGE BACKGROUND ===== */
-      body {
-        font-family: "Segoe UI", sans-serif;
-        background:
-          linear-gradient(rgba(248, 249, 250, 0.85), rgba(36, 66, 97, 0.85)),
-          url("./images/images(2).jpeg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+        font-size: 0.75rem;
+        padding: 5px 10px;
       }
 
       /* ===== HEADER ===== */
@@ -159,237 +170,363 @@
         .navbar-brand span {
           display: none;
         }
-      }
 
-      /* ===== MOBILE ===== */
-      @media (max-width: 768px) {
         main.container {
           padding: 30px 20px;
+        }
+
+        .topic-title {
+          font-size: 1.4rem;
+        }
+
+        .topic-icon {
+          font-size: 1.5rem;
         }
       }
     </style>
   </head>
 
   <body>
-    <!-- ===== HEADER (UNCHANGED) ===== -->
+    <!-- ===== HEADER ===== -->
     <header class="main-header">
-<nav class="navbar navbar-expand-lg navbar-dark container">
-  <!-- LOGO + TITLE -->
-  <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
-    <img
-      src="./images/logo.png"
-      alt="ASPU Logo"
-      height="45"
-      class="d-inline-block align-text-top"
-    />
-    <span class="d-none d-lg-inline">SQL ուսուցման Կայք</span>
-  </a>
+      <nav class="navbar navbar-expand-lg navbar-dark container">
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+          <img
+            src="./images/logo.png"
+            alt="ASPU Logo"
+            height="45"
+            class="d-inline-block align-text-top"
+          />
+          <span class="d-none d-lg-inline">SQL ուսուցման Կայք</span>
+        </a>
 
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarNav"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="intro.html">Ներածություն</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="application.html">Կիրառությունը</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="commands.html">SQL հրամանները</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="videos.html">Տեսադասեր</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="quiz.html">Թեստ</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="intro.html">Ներածություն</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="application.html">Կիրառությունը</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="commands.html">SQL հրամանները</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="videos.html">Տեսադասեր</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="quiz.html">Թեստ</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </header>
 
     <!-- ===== MAIN CONTENT ===== -->
     <main class="container">
-      <h2>SQL Տեսադասեր</h2>
+      <h2>SQL Տեսադասեր - Ըստ թեմաների</h2>
 
-<div class="row g-4">
-    <!-- VIDEO 1 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/7S_tz1z_5bA" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h5>SQL դասընթաց սկսնակների համար [ամբողջական դասընթաց]</h5>
-          <p>Ծանոթացում SQL լեզվին և հիմնական հասկացություններին։</p>
-          <span class="badge">Beginner</span>
-        </div>
-      </div>
-    </div>
+      <!-- ========== SQL ՀԻՄՈՒՆՔՆԵՐ ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">📚</span>
+          SQL Հիմունքներ և Ներածություն
+        </h3>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/7S_tz1z_5bA" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL դասընթաց սկսնակների համար</h5>
+                <p>Ծանոթացում SQL լեզվին, տվյալների բազաների հիմունքներ։</p>
+                <span class="badge bg-primary">Հիմունքներ</span>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- VIDEO 2 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/HXV3zeQKqGY" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h5>SQL Tutorial – Լրիվ դասընթաց</h5>
-          <p>Տվյալների բազայի հիմունքներ և SQL հրամաններ։</p>
-          <span class="badge">Beginner</span>
-        </div>
-      </div>
-    </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/HXV3zeQKqGY" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL Tutorial – Լրիվ դասընթաց</h5>
+                <p>Տվյալների բազայի հիմունքներ և SQL հրամաններ։</p>
+                <span class="badge bg-primary">Հիմունքներ</span>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- VIDEO 3 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/9Pzj7Aj25lw" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h5>Սովորեք SQL 1 ժամում</h5>
-          <p>SQL-ի հիմունքներ և ֆիլտրացիա։</p>
-          <span class="badge">Intermediate</span>
-        </div>
-      </div>
-    </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/Ofktsne-utM" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL Full Course 2024</h5>
+                <p>Սկսնակներից մինչև առաջադեմ մակարդակ։</p>
+                <span class="badge bg-primary">Հիմունքներ</span>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- VIDEO 4 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/Ofktsne-utM" allowfullscreen></iframe>
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/9Pzj7Aj25lw" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>Սովորեք SQL 1 ժամում</h5>
+                <p>Արագ ներածություն SQL-ի հիմնական հասկացություններին։</p>
+                <span class="badge bg-primary">Հիմունքներ</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <h5>SQL Full Course 2024</h5>
-          <p>Սկսնակներից մինչև առաջադեմ մակարդակ։</p>
-          <span class="badge">Beginner</span>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- VIDEO 5 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/zbMHLJ0dY4w" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h5>SELECT & WHERE</h5>
-          <p>Տվյալների ընտրություն SQL-ում։</p>
-          <span class="badge">Beginner</span>
-        </div>
-      </div>
-    </div>
+      <!-- ========== SELECT & QUERIES ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">🔍</span>
+          SELECT և Հարցումներ
+        </h3>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/zbMHLJ0dY4w" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SELECT & WHERE հրամաններ</h5>
+                <p>Տվյալների ընտրություն և ֆիլտրացիա SQL-ում։</p>
+                <span class="badge bg-info text-dark">SELECT</span>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- VIDEO 6 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/9yeOJ0ZMUYw" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h5>JOIN-եր SQL-ում</h5>
-          <p>INNER, LEFT, RIGHT JOIN օրինակներով։</p>
-          <span class="badge">Intermediate</span>
-        </div>
-      </div>
-    </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/2HVMiPPuPIM" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL Subqueries</h5>
+                <p>Ենթահարցումներ և բարդ SELECT հարցումներ։</p>
+                <span class="badge bg-info text-dark">SELECT</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- VIDEO 7 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/qw--VYLpxG4" allowfullscreen></iframe>
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/qw--VYLpxG4" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>GROUP BY & HAVING</h5>
+                <p>Տվյալների խմբավորում և ագրեգատ ֆունկցիաներ։</p>
+                <span class="badge bg-info text-dark">Ագրեգացիա</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <h5>GROUP BY & HAVING</h5>
-          <p>Խմբավորում և ագրեգացիա։</p>
-          <span class="badge">Intermediate</span>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- VIDEO 8 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/2HVMiPPuPIM" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h5>SQL Subqueries</h5>
-          <p>Ենթահարցումներ SQL-ում։</p>
-          <span class="badge">Intermediate</span>
-        </div>
-      </div>
-    </div>
+      <!-- ========== JOIN OPERATIONS ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">🔗</span>
+          JOIN-եր և Կապեր
+        </h3>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/9yeOJ0ZMUYw" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL JOIN-եր</h5>
+                <p>INNER, LEFT, RIGHT, FULL JOIN օրինակներով։</p>
+                <span class="badge bg-secondary">JOIN</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- VIDEO 9 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/7mz73uXD9DA" allowfullscreen></iframe>
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/0OQJDd3QqQM" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL Joins Explained</h5>
+                <p>JOIN-երի տեսակներ և օգտագործման դեպքեր։</p>
+                <span class="badge bg-secondary">JOIN</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <h5>SQL Indexes</h5>
-          <p>Արագագործության բարձրացում։</p>
-          <span class="badge">Advanced</span>
-        </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- VIDEO 10 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/k5E2AVpwsko" allowfullscreen></iframe>
-        </div>
-        <div class="card-body">
-          <h5>Stored Procedures</h5>
-          <p>Պահված պրոցեդուրաներ SQL-ում։</p>
-          <span class="badge">Advanced</span>
-        </div>
-      </div>
-    </div>
+      <!-- ========== INSERT, UPDATE, DELETE ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">✏️</span>
+          INSERT, UPDATE, DELETE
+        </h3>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/Cz3WcZLRaWc" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>INSERT, UPDATE, DELETE</h5>
+                <p>Տվյալների ավելացում, թարմացում և ջնջում։</p>
+                <span class="badge bg-warning text-dark">DML</span>
+                <span class="badge bg-success">Beginner</span>
+              </div>
+            </div>
+          </div>
 
-    <!-- VIDEO 11 -->
- <div class="col-lg-4 col-md-6">
-  <div class="card video-card">
-    <div class="ratio ratio-16x9">
-      <iframe src="https://www.youtube.com/embed/W2Z7fbCLSTw" allowfullscreen></iframe>
-    </div>
-    <div class="card-body">
-      <h5>Normalization</h5>
-      <p>Տվյալների բազայի նորմալիզացիա։</p>
-      <span class="badge">Intermediate</span>
-    </div>
-  </div>
-</div>
-
-
-    <!-- VIDEO 12 -->
-    <div class="col-lg-4 col-md-6">
-      <div class="card video-card">
-        <div class="ratio ratio-16x9">
-          <iframe src="https://www.youtube.com/embed/3EJlovevfcA" allowfullscreen></iframe>
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/M6lw8YmFxq4" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL Data Manipulation</h5>
+                <p>Տվյալների մանիպուլյացիայի հրամաններ։</p>
+                <span class="badge bg-warning text-dark">DML</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <h5>Transactions & ACID</h5>
-          <p>Տրանզակցիաների սկզբունքներ։</p>
-          <span class="badge">Advanced</span>
+      </section>
+
+      <!-- ========== DATABASE DESIGN ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">🏗️</span>
+          Բազայի Դիզայն և Նորմալիզացիա
+        </h3>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/W2Z7fbCLSTw" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>Database Normalization</h5>
+                <p>Տվյալների բազայի նորմալիզացիայի սկզբունքներ։</p>
+                <span class="badge bg-primary">Design</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/ztHopE5Wnpc" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>Database Design Tutorial</h5>
+                <p>Տվյալների բազայի ճիշտ նախագծում։</p>
+                <span class="badge bg-primary">Design</span>
+                <span class="badge bg-warning text-dark">Intermediate</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
+      </section>
+
+      <!-- ========== ADVANCED TOPICS ========== -->
+      <section class="topic-section">
+        <h3 class="topic-title">
+          <span class="topic-icon">⚡</span>
+          Առաջադեմ Թեմաներ
+        </h3>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/7mz73uXD9DA" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL Indexes</h5>
+                <p>Ինդեքսներ և արագագործության օպտիմիզացիա։</p>
+                <span class="badge bg-danger">Indexes</span>
+                <span class="badge bg-danger">Advanced</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/k5E2AVpwsko" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>Stored Procedures</h5>
+                <p>Պահված պրոցեդուրաներ և ֆունկցիաներ։</p>
+                <span class="badge bg-danger">Procedures</span>
+                <span class="badge bg-danger">Advanced</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/3EJlovevfcA" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>Transactions & ACID</h5>
+                <p>Տրանզակցիաներ և ACID սկզբունքներ։</p>
+                <span class="badge bg-danger">Transactions</span>
+                <span class="badge bg-danger">Advanced</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="card video-card">
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/zsjvFFKOm3c" allowfullscreen></iframe>
+              </div>
+              <div class="card-body">
+                <h5>SQL Performance Tuning</h5>
+                <p>Հարցումների օպտիմիզացիա և արագագործություն։</p>
+                <span class="badge bg-danger">Performance</span>
+                <span class="badge bg-danger">Advanced</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div class="text-center mt-5">
         <a href="index.html" class="btn btn-primary">
           Վերադառնալ հիմնական էջ
@@ -397,7 +534,7 @@
       </div>
     </main>
 
-    <!-- ===== FOOTER (UNCHANGED) ===== -->
+    <!-- ===== FOOTER ===== -->
     <footer class="main-footer">
       <div class="container">
         <p>© 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ</p>
