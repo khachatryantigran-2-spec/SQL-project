@@ -1145,8 +1145,13 @@
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-      const WEB3FORMS_KEY = "0534947f-c9f9-447f-add4-0d5b3099f2a3";
+      const EMAILJS_SERVICE_ID = "service_h6z4z71";
+      const EMAILJS_PUBLIC_KEY = "LMaZo_aD8CLNmMl9J";
+      const EMAILJS_TEMPLATE_ID = "template_9k82f8b";
+
+      emailjs.init(EMAILJS_PUBLIC_KEY);
 
       let generatedCode = "";
       let userEmail = localStorage.getItem("verifiedEmail") || "";
@@ -1189,25 +1194,21 @@
         $("sendCodeBtn").disabled = true;
 
         try {
-          const res = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              access_key: WEB3FORMS_KEY,
-              subject: "Your Verification Code",
-              from_name: "Comment System",
-              to: email,
-              message: `Your verification code is: ${generatedCode}\n\nExpires in 10 minutes.\n\nIf you didn't request this, ignore this email.`,
-            }),
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_email: email,
+            to_name: email, // adds a name (just use email if you don't have a name)
+            verification_code: generatedCode, // matches {{verification_code}} in template
           });
-          const data = await res.json();
-          if (!data.success) throw new Error(data.message);
 
           showAlert(`Code sent to ${email}. Check your inbox.`, "success");
           hide("emailStep");
           show("codeStep");
         } catch (err) {
-          showAlert("Failed to send code. Please try again.", "error");
+          console.error(err);
+          showAlert(
+            "Error: " + (err?.text || err?.message || JSON.stringify(err)),
+            "error",
+          );
         } finally {
           $("sendCodeBtn").disabled = false;
         }
