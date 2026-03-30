@@ -215,15 +215,13 @@
         content: none !important;
       }
 
-      /* Ապահովում ենք, որ hover-ի ժամանակ ոչ մի գիծ չհայտնվի լոգոյի համար */
       .navbar-brand:hover::after {
         width: 0 !important;
       }
 
-      /* Եթե ցանկանում եք, որ լոգոն hover-ի ժամանակ պարզապես մի փոքր փոխի գույնը կամ թափանցիկությունը */
       .navbar-brand:hover {
         opacity: 0.8;
-        text-decoration: none !important; /* Բացառում է նաև սովորական ընդգծումը */
+        text-decoration: none !important;
       }
 
       /* Fix body scroll issues */
@@ -413,12 +411,8 @@
       }
 
       @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
 
       .hidden {
@@ -430,7 +424,6 @@
         display: block;
       }
 
-      /* Label fix */
       #commentForm .input-group label {
         display: block;
         margin-bottom: 8px;
@@ -438,7 +431,6 @@
         color: #333;
       }
 
-      /* Textarea full width + proper look */
       #commentForm .input-group textarea {
         width: 100% !important;
         max-width: 100%;
@@ -453,32 +445,26 @@
         background: #fff;
       }
 
-      /* Focus state */
       #commentForm .input-group textarea:focus {
         outline: none;
         border-color: #667eea;
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
       }
 
-      /* ===== Button fixes (without breaking Bootstrap elsewhere) ===== */
       #commentForm .btn {
         display: inline-block;
         margin-top: 10px;
       }
 
-      /* Prevent input-group flex from shrinking elements */
       #commentForm .input-group > * {
         flex: none !important;
       }
 
-      p,
-      ul,
-      li {
+      p, ul, li {
         font-size: 20px;
         line-height: 1.7;
       }
 
-      /* Mobile safety */
       @media (max-width: 576px) {
         #commentForm .input-group textarea {
           font-size: 15px;
@@ -503,6 +489,291 @@
           margin: 5px 0;
         }
       }
+
+      /* ===== ADMIN BUTTON ===== */
+      .btn-admin {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        color: white !important;
+        padding: 7px 18px;
+        border-radius: 25px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none !important;
+        white-space: nowrap;
+      }
+
+      .btn-admin::after {
+        display: none !important;
+        content: none !important;
+        width: 0 !important;
+      }
+
+      .btn-admin:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: white;
+        color: white !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      }
+
+      .btn-admin.logged-in {
+        background: rgba(16, 185, 129, 0.25);
+        border-color: #10b981;
+        color: #a7f3d0 !important;
+      }
+
+      .btn-admin.logged-in:hover {
+        background: rgba(16, 185, 129, 0.4);
+      }
+
+      .admin-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10b981;
+        display: inline-block;
+        animation: pulse-dot 2s infinite;
+      }
+
+      @keyframes pulse-dot {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+
+      /* ===== ADMIN MODAL ===== */
+      #adminModal .modal-content {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+      }
+
+      #adminModal .modal-header {
+        background: linear-gradient(135deg, #0d6efd, #292664);
+        border: none;
+        padding: 28px 30px 20px;
+      }
+
+      #adminModal .modal-header .modal-title {
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #adminModal .modal-header .btn-close {
+        filter: brightness(0) invert(1);
+        opacity: 0.8;
+      }
+
+      #adminModal .modal-header .btn-close:hover {
+        opacity: 1;
+      }
+
+      #adminModal .modal-body {
+        padding: 32px 30px;
+        max-height: none;
+        overflow-y: visible;
+      }
+
+      .admin-subtitle {
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      .admin-input-wrap {
+        margin-bottom: 20px;
+      }
+
+      .admin-input-wrap label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #374151;
+      }
+
+      .admin-input-wrap input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 15px;
+        transition: border-color 0.25s, box-shadow 0.25s;
+        box-sizing: border-box;
+        color: #111;
+        background: #fafafa;
+      }
+
+      .admin-input-wrap input:focus {
+        outline: none;
+        border-color: #0d6efd;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+      }
+
+      .admin-input-wrap input.error {
+        border-color: #dc2626;
+        background: #fff5f5;
+      }
+
+      .btn-admin-submit {
+        width: 100%;
+        background: linear-gradient(135deg, #0d6efd, #292664);
+        color: white;
+        border: none;
+        padding: 13px 20px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        margin-top: 4px;
+        letter-spacing: 0.3px;
+      }
+
+      .btn-admin-submit:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
+      }
+
+      .btn-admin-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .admin-alert {
+        padding: 11px 14px;
+        border-radius: 9px;
+        font-size: 0.88rem;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        line-height: 1.5;
+      }
+
+      .admin-alert.error {
+        background: #fef2f2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+      }
+
+      .admin-alert.success {
+        background: #f0fdf4;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+      }
+
+      .admin-alert.info {
+        background: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #bfdbfe;
+      }
+
+      .admin-alert-icon {
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .admin-step {
+        animation: fadeSlideIn 0.3s ease;
+      }
+
+      @keyframes fadeSlideIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .admin-panel-banner {
+        background: linear-gradient(135deg, #065f46, #047857);
+        color: white;
+        padding: 16px 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .admin-panel-banner .admin-icon {
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .admin-panel-banner h4 {
+        margin: 0 0 4px;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .admin-panel-banner p {
+        margin: 0;
+        font-size: 0.82rem;
+        opacity: 0.85;
+        line-height: 1.4;
+      }
+
+      .btn-admin-logout {
+        width: 100%;
+        background: transparent;
+        border: 2px solid #dc2626;
+        color: #dc2626;
+        padding: 11px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 10px;
+      }
+
+      .btn-admin-logout:hover {
+        background: #dc2626;
+        color: white;
+      }
+
+      .code-input-hint {
+        font-size: 0.8rem;
+        color: #9ca3af;
+        margin-top: 6px;
+        display: block;
+      }
+
+      .resend-link {
+        background: none;
+        border: none;
+        color: #0d6efd;
+        font-size: 0.85rem;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+        margin-top: 8px;
+        display: inline-block;
+      }
+
+      .resend-link:hover {
+        color: #0856d6;
+      }
+
+      .resend-link:disabled {
+        color: #9ca3af;
+        text-decoration: none;
+        cursor: default;
+      }
     </style>
   </head>
   <body>
@@ -510,10 +781,7 @@
     <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-dark container">
         <!-- LOGO + TITLE -->
-        <a
-          class="navbar-brand d-flex align-items-center gap-2 fw-bold"
-          href="#"
-        >
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
           <img
             src="./images/logo.png"
             alt="ASPU Logo"
@@ -533,7 +801,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item">
               <a class="nav-link" href="intro.html">Ներածություն</a>
             </li>
@@ -548,6 +816,22 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="quiz.html">Թեստ</a>
+            </li>
+            <!-- ADMIN BUTTON -->
+            <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+              <a
+                href="#"
+                id="adminNavBtn"
+                class="btn-admin"
+                data-bs-toggle="modal"
+                data-bs-target="#adminModal"
+                onclick="openAdminModal(event)"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <span id="adminNavLabel">Admin</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -716,90 +1000,28 @@
       </section>
     </main>
 
-    <!-- Modals -->
+    <!-- ==================== MODALS (original) ==================== -->
     <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Բանկային համակարգեր</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center">
-            <img
-              src="./images/images.jpeg"
-              class="img-fluid mb-3"
-              alt="Banking"
-            />
-            <h3 style="color: #0d6efd">
-              SQL-ի դերը և կիրառությունը բանկային համակարգերում
-            </h3>
-
-            <p>
-              Ժամանակակից բանկային գործունեությունը հնարավոր չէ պատկերացնել
-              առանց տվյալների բազաների կառավարման հզոր համակարգերի։ SQL
-              (Structured Query Language) լեզուն հանդիսանում է այն հիմնաքարը,
-              որի վրա կառուցված են բանկային տեղեկատվական համակարգերը։
-            </p>
-
-            <h4 style="color: #292664">
-              1. Գործարքների անվտանգություն և հուսալիություն
-            </h4>
-            <p>
-              Բանկային համակարգում SQL-ի կիրառման ամենակարևոր ասպեկտը
-              տրանզակցիաների կառավարումն է։ Այն ապահովում է տվյալների
-              ամբողջականությունը ACID սկզբունքների միջոցով, ինչը երաշխավորում է,
-              որ դրամական փոխանցումները կատարվում են անսխալ, իսկ համակարգի
-              խափանման դեպքում տվյալները չեն կորչում կամ կրկնապատկվում։
-            </p>
-
-            <h4 style="color: #292664">
-              2. Հաճախորդների տվյալների կենտրոնացված կառավարում
-            </h4>
-            <p>
-              SQL-ը թույլ է տալիս բանկերին պահպանել և արագ մշակել միլիոնավոր
-              հաճախորդների անձնական տվյալները, հաշվեհամարների մնացորդները,
-              վարկային պատմությունները և ավանդային պայմանագրերը։ Ռելյացիոն
-              մոդելի շնորհիվ բոլոր այս տվյալները փոխկապակցված են, ինչը
-              հնարավորություն է տալիս վայրկյանների ընթացքում ստանալ հաճախորդի
-              ամբողջական ֆինանսական պատկերը։
-            </p>
-
-            <h4 style="color: #292664">
-              3. Կեղծարարությունների հայտնաբերում և կանխարգելում
-            </h4>
-            <p>
-              Բանկային անվտանգության համակարգերն օգտագործում են SQL հարցումներ՝
-              իրական ժամանակում տրանզակցիաները մոնիթորինգի ենթարկելու համար։ Սա
-              թույլ է տալիս հայտնաբերել կասկածելի գործողությունները, օրինակ՝
-              անսովոր մեծ գումարի փոխանցումները կամ կարճ ժամանակահատվածում
-              տարբեր աշխարհագրական վայրերից կատարվող գնումները։
-            </p>
-
-            <h4 style="color: #292664">
-              4. Հաշվետվությունների պատրաստում և վերլուծություն
-            </h4>
-            <p>
-              SQL-ը հնարավորություն է տալիս բանկի աշխատակիցներին ստեղծել բարդ
-              հաշվետվություններ օրական շրջանառության, շահույթի, վարկային
-              պորտֆելի վիճակի և ռիսկերի վերաբերյալ։ Այս տվյալների հիման վրա
-              բանկի ղեկավարությունը կայացնում է ռազմավարական որոշումներ։
-            </p>
-
-            <h4 style="color: #292664">
-              5. Համապատասխանություն օրենսդրական պահանջներին
-            </h4>
-            <p>
-              Կենտրոնական բանկերը և կարգավորող մարմինները բանկերից պահանջում են
-              խիստ հաշվետվողականություն։ SQL-ի միջոցով բանկերն ապահովում են
-              տվյալների արխիվացումը և թափանցիկությունը, որոնք անհրաժեշտ են
-              աուդիտորական ստուգումների և օրենսդրական պահանջների բավարարման
-              համար։
-            </p>
+            <img src="./images/images.jpeg" class="img-fluid mb-3" alt="Banking" />
+            <h3 style="color: #0d6efd">SQL-ի դերը և կիրառությունը բանկային համակարգերում</h3>
+            <p>Ժամանակակից բանկային գործունեությունը հնարավոր չէ պատկերացնել առանց տվյալների բազաների կառավարման հզոր համակարգերի։ SQL (Structured Query Language) լեզուն հանդիսանում է այն հիմնաքարը, որի վրա կառուցված են բանկային տեղեկատվական համակարգերը։</p>
+            <h4 style="color: #292664">1. Գործարքների անվտանգություն և հուսալիություն</h4>
+            <p>Բանկային համակարգում SQL-ի կիրառման ամենակարևոր ասպեկտը տրանզակցիաների կառավարումն է։ Այն ապահովում է տվյալների ամբողջականությունը ACID սկզբունքների միջոցով, ինչը երաշխավորում է, որ դրամական փոխանցումները կատարվում են անսխալ, իսկ համակարգի խափանման դեպքում տվյալները չեն կորչում կամ կրկնապատկվում։</p>
+            <h4 style="color: #292664">2. Հաճախորդների տվյալների կենտրոնացված կառավարում</h4>
+            <p>SQL-ը թույլ է տալիս բանկերին պահպանել և արագ մշակել միլիոնավոր հաճախորդների անձնական տվյալները, հաշվեհամարների մնացորդները, վարկային պատմությունները և ավանդային պայմանագրերը։</p>
+            <h4 style="color: #292664">3. Կեղծարարությունների հայտնաբերում և կանխարգելում</h4>
+            <p>Բանկային անվտանգության համակարգերն օգտագործում են SQL հարցումներ՝ իրական ժամանակում տրանզակցիաները մոնիթորինգի ենթարկելու համար։</p>
+            <h4 style="color: #292664">4. Հաշվետվությունների պատրաստում և վերլուծություն</h4>
+            <p>SQL-ը հնարավորություն է տալիս բանկի աշխատակիցներին ստեղծել բարդ հաշվետվություններ օրական շրջանառության, շահույթի, վարկային պորտֆելի վիճակի և ռիսկերի վերաբերյալ։</p>
+            <h4 style="color: #292664">5. Համապատասխանություն օրենսդրական պահանջներին</h4>
+            <p>SQL-ի միջոցով բանկերն ապահովում են տվյալների արխիվացումը և թափանցիկությունը, որոնք անհրաժեշտ են աուդիտորական ստուգումների համար։</p>
           </div>
         </div>
       </div>
@@ -810,90 +1032,18 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Հիվանդանոցային տվյալների բազաներ</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center">
-            <img
-              src="./images/data-lake-and-healthcare.webp"
-              class="img-fluid mb-3"
-              alt="Healthcare"
-            />
-            <div class="healthcare-content">
-              <h3 style="color: #0d6efd">
-                SQL-ի կիրառությունը հիվանդանոցային տվյալների բազաներում
-              </h3>
-
-              <p>
-                Առողջապահության ոլորտում տվյալների ճշգրիտ և արագ կառավարումը
-                կենսական նշանակություն ունի։ SQL-ը հանդիսանում է այն հիմնական
-                գործիքը, որը թույլ է տալիս բժշկական հաստատություններին
-                կազմակերպել հիվանդների տվյալները, բուժման պատմությունը և
-                հիվանդանոցի ռեսուրսների արդյունավետ օգտագործումը։
-              </p>
-
-              <h4 style="color: #292664">
-                1. Հիվանդների էլեկտրոնային քարտարան (EHR)
-              </h4>
-              <p>
-                SQL-ի միջոցով ստեղծվում են բարդ տվյալների բազաներ, որտեղ պահվում
-                են հիվանդների անձնական տվյալները, ախտորոշումները, լաբորատոր
-                հետազոտությունների արդյունքները և դեղատոմսերը։ Սա թույլ է տալիս
-                բժշկին վայրկյանների ընթացքում ստանալ հիվանդի ամբողջական բժշկական
-                պատմությունը, ինչը կարող է վճռորոշ լինել անհետաձգելի օգնության
-                դեպքում։
-              </p>
-
-              <h4 style="color: #292664">
-                2. Դեղորայքի կառավարում և անվտանգություն
-              </h4>
-              <p>
-                Հիվանդանոցներն օգտագործում են SQL հարցումներ՝ դեղատան պաշարները
-                վերահսկելու և դեղերի ժամկետներին հետևելու համար։ Համակարգը կարող
-                է ավտոմատ կերպով ստուգել դեղերի համատեղելիությունը՝
-                նախազգուշացնելով բժշկին, եթե նշանակված նոր դեղամիջոցը կարող է
-                բացասաբար փոխազդել հիվանդի կողմից արդեն ընդունվող այլ դեղերի
-                հետ։
-              </p>
-
-              <h4 style="color: #292664">
-                3. Ժամադրությունների և ռեսուրսների պլանավորում
-              </h4>
-              <p>
-                SQL-ի շնորհիվ հնարավոր է արդյունավետ կերպով կառավարել բժիշկների
-                աշխատանքային գրաֆիկները, հիվանդասենյակների զբաղվածությունը և
-                վիրահատարանների հասանելիությունը։ Սա նվազեցնում է հերթերը և
-                ապահովում է հիվանդանոցի սարքավորումների (օրինակ՝ ՄՌՏ կամ ԿՏ
-                սարքերի) օպտիմալ օգտագործումը։
-              </p>
-
-              <h4 style="color: #292664">
-                4. Բժշկական վիճակագրություն և գիտական հետազոտություններ
-              </h4>
-              <p>
-                Տվյալների բազաներում կուտակված տեղեկատվությունը անփոխարինելի
-                աղբյուր է բժշկական վիճակագրության համար։ SQL-ի միջոցով
-                հետազոտողները կարող են վերլուծել հիվանդությունների
-                տարածվածությունը, բուժման մեթոդների արդյունավետությունը և
-                կանխատեսել հնարավոր համաճարակները՝ հիմնվելով հավաքագրված
-                տվյալների վրա։
-              </p>
-
-              <h4 style="color: #292664">
-                5. Տվյալների գաղտնիություն և պաշտպանություն
-              </h4>
-              <p>
-                Բժշկական տվյալները համարվում են խիստ գաղտնի։ Ժամանակակից SQL
-                տվյալների բազաները տրամադրում են հզոր մեխանիզմներ՝ մուտքի
-                իրավունքների սահմանափակման և գործողությունների լոգավորման համար,
-                ինչը երաշխավորում է, որ միայն լիազորված անձինք կարող են տեսնել
-                հիվանդի տեղեկատվությունը։
-              </p>
-            </div>
+            <img src="./images/data-lake-and-healthcare.webp" class="img-fluid mb-3" alt="Healthcare" />
+            <h3 style="color: #0d6efd">SQL-ի կիրառությունը հիվանդանոցային տվյալների բազաներում</h3>
+            <p>Առողջապահության ոլորտում տվյալների ճշգրիտ և արագ կառավարումը կենսական նշանակություն ունի։</p>
+            <h4 style="color: #292664">1. Հիվանդների էլեկտրոնային քարտարան (EHR)</h4>
+            <p>SQL-ի միջոցով ստեղծվում են բարդ տվյալների բազաներ, որտեղ պահվում են հիվանդների անձնական տվյալները, ախտորոշումները, լաբորատոր հետազոտությունների արդյունքները և դեղատոմսերը։</p>
+            <h4 style="color: #292664">2. Դեղորայքի կառավարում և անվտանգություն</h4>
+            <p>Հիվանդանոցներն օգտագործում են SQL հարցումներ՝ դեղատան պաշարները վերահսկելու և դեղերի ժամկետներին հետևելու համար։</p>
+            <h4 style="color: #292664">3. Ժամադրությունների և ռեսուրսների պլանավորում</h4>
+            <p>SQL-ի շնորհիվ հնարավոր է արդյունավետ կերպով կառավարել բժիշկների աշխատանքային գրաֆիկները, հիվանդասենյակների զբաղվածությունը և վիրահատարանների հասանելիությունը։</p>
           </div>
         </div>
       </div>
@@ -904,84 +1054,16 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Էլեկտրոնային առևտուր</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center">
-            <img
-              src="./images/online_grocery_retail_trend_403342016-1280x850.jpg"
-              class="img-fluid mb-3"
-              alt="E-commerce"
-            />
-            <div class="ecommerce-content">
-              <h3 style="color: #0d6efd">
-                SQL-ի կիրառությունը էլեկտրոնային առևտրում
-              </h3>
-
-              <p>
-                Էլեկտրոնային առևտրի հարթակները (օրինակ՝ Amazon, eBay կամ տեղական
-                առցանց խանութները) հիմնված են հսկայական տվյալների բազաների վրա։
-                SQL-ը հանդիսանում է այն շարժիչը, որն ապահովում է ապրանքների
-                որոնումը, պատվերների մշակումը և հաճախորդների սպասարկումը:
-              </p>
-
-              <h4 style="color: #292664">
-                1. Ապրանքների կատալոգի և պաշարների կառավարում
-              </h4>
-              <p>
-                SQL-ը թույլ է տալիս կազմակերպել բարդ աստիճանակարգված կատալոգներ,
-                որտեղ յուրաքանչյուր ապրանք ունի իր նկարագրությունը, գինը,
-                նկարները և տեխնիկական բնութագրերը։ Տվյալների բազան իրական
-                ժամանակում հետևում է պահեստում ապրանքների քանակին՝ ավտոմատ
-                կերպով թարմացնելով կայքը, երբ որևէ ապրանք սպառվում է:
-              </p>
-
-              <h4 style="color: #292664">
-                2. Պատվերների մշակում և տրանզակցիաներ
-              </h4>
-              <p>
-                Երբ հաճախորդը կատարում է գնում, SQL-ի միջոցով իրականացվում է
-                տվյալների բարդ փոխանակում։ Համակարգը միաժամանակ գրանցում է նոր
-                պատվերը, նվազեցնում է ապրանքի քանակը պահեստում, կապվում է
-                վճարային համակարգի հետ և պահպանում է առաքման հասցեն։ Այս ամենը
-                կատարվում է տրանզակցիաների միջոցով՝ բացառելով սխալները:
-              </p>
-
-              <h4 style="color: #292664">
-                3. Անհատականացված առաջարկներ և մարքեթինգ
-              </h4>
-              <p>
-                SQL-ի շնորհիվ էլեկտրոնային առևտրի կայքերը վերլուծում են ձեր
-                գնումների պատմությունը և նախասիրությունները։ Վերլուծելով
-                «Հաճախորդներ» և «Պատվերներ» աղյուսակները՝ համակարգը կարողանում է
-                ձեզ առաջարկել ապրանքներ, որոնք ամենայն հավանականությամբ ձեզ
-                կհետաքրքրեն (օրինակ՝ «Մարդիկ, ովքեր գնել են սա, գնել են
-                նաև...»):
-              </p>
-
-              <h4 style="color: #292664">4. Լոգիստիկա և առաքման հետևում</h4>
-              <p>
-                SQL տվյալների բազաները կառավարում են նաև առաքման գործընթացը։
-                Յուրաքանչյուր պատվերի կարգավիճակի փոփոխություն (պատրաստվում է,
-                ուղարկված է, առաքված է) գրանցվում է բազայում, ինչը
-                հնարավորություն է տալիս հաճախորդին ցանկացած պահի տեսնել, թե
-                որտեղ է գտնվում իր փաթեթը:
-              </p>
-
-              <h4 style="color: #292664">
-                5. Հաճախորդների հավատարմության ծրագրեր
-              </h4>
-              <p>
-                Զեղչային կոդերը, բոնուսային միավորները և հատուկ ակցիաները
-                կառավարվում են SQL հարցումների միջոցով։ Բազան ստուգում է զեղչի
-                կոդի վավերականությունը, հաշվարկում է վերջնական գինը և թարմացնում
-                հաճախորդի կուտակային միավորները գնումից հետո:
-              </p>
-            </div>
+            <img src="./images/online_grocery_retail_trend_403342016-1280x850.jpg" class="img-fluid mb-3" alt="E-commerce" />
+            <h3 style="color: #0d6efd">SQL-ի կիրառությունը էլեկտրոնային առևտրում</h3>
+            <p>Էլեկտրոնային առևտրի հարթակները հիմնված են հսկայական տվյալների բազաների վրա։</p>
+            <h4 style="color: #292664">1. Ապրանքների կատալոգի և պաշարների կառավարում</h4>
+            <p>SQL-ը թույլ է տալիս կազմակերպել բարդ աստիճանակարգված կատալոգներ, որտեղ յուրաքանչյուր ապրանք ունի իր նկարագրությունը, գինը, նկարները և տեխնիկական բնութագրերը։</p>
+            <h4 style="color: #292664">2. Պատվերների մշակում և տրանզակցիաներ</h4>
+            <p>Երբ հաճախորդը կատարում է գնում, SQL-ի միջոցով իրականացվում է տվյալների բարդ փոխանակում։</p>
           </div>
         </div>
       </div>
@@ -992,93 +1074,103 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Վերլուծական համակարգեր</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center">
-            <img
-              src="./images/images (1).jpeg"
-              class="img-fluid mb-3"
-              alt="Analytics"
-            />
-            <div class="analytics-content">
-              <h3 style="color: #0d6efd">
-                SQL-ի կիրառությունը վերլուծական համակարգերում
-              </h3>
+            <img src="./images/images (1).jpeg" class="img-fluid mb-3" alt="Analytics" />
+            <h3 style="color: #0d6efd">SQL-ի կիրառությունը վերլուծական համակարգերում</h3>
+            <p>Վերլուծական համակարգերը (Business Intelligence կամ BI) օգտագործում են SQL-ը՝ հում տվյալները վերամշակելու համար:</p>
+            <h4 style="color: #292664">1. Տվյալների պահեստավորում (Data Warehousing)</h4>
+            <p>SQL-ի միջոցով տարբեր աղբյուրներից հավաքագրված տվյալները կառուցվածքավորվում և պահպանվում են մեկ միասնական վայրում։</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-              <p>
-                Ժամանակակից աշխարհում տվյալները համարվում են «նոր նավթ»։
-                Վերլուծական համակարգերը (Business Intelligence կամ BI)
-                օգտագործում են SQL-ը՝ հում տվյալները վերամշակելու և դրանք բիզնես
-                որոշումների համար պիտանի տեղեկատվության վերածելու համար:
-              </p>
+    <!-- ==================== ADMIN MODAL ==================== -->
+    <div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="margin-right:6px">
+                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+              </svg>
+              Admin Panel
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Alert box -->
+            <div id="adminAlert" class="admin-alert hidden" role="alert">
+              <span class="admin-alert-icon"></span>
+              <span id="adminAlertMsg"></span>
+            </div>
 
-              <h4 style="color: #292664">
-                1. Տվյալների պահեստավորում (Data Warehousing)
-              </h4>
-              <p>
-                Վերլուծական համակարգերի հիմքում ընկած են տվյալների հզոր
-                պահեստները (Data Warehouses): SQL-ի միջոցով տարբեր աղբյուրներից
-                (վաճառքներ, կայքի այցելություններ, սոցիալական ցանցեր)
-                հավաքագրված տվյալները կառուցվածքավորվում և պահպանվում են մեկ
-                միասնական վայրում, ինչը հնարավորություն է տալիս կատարել գլոբալ
-                վերլուծություններ:
-              </p>
+            <!-- Step 1: Email -->
+            <div id="adminEmailStep" class="admin-step">
+              <p class="admin-subtitle">Մուտք գործելու համար մուտքագրեք ձեր էլ. փոստը</p>
+              <div class="admin-input-wrap">
+                <label for="adminEmailInput">Էլ. փոստ (Email)</label>
+                <input
+                  type="email"
+                  id="adminEmailInput"
+                  placeholder="example@domain.com"
+                  autocomplete="email"
+                />
+              </div>
+              <button class="btn-admin-submit" id="adminSendCodeBtn">
+                Ուղարկել հաստատման կոդ
+              </button>
+            </div>
 
-              <h4 style="color: #292664">
-                2. Բարդ հաշվետվությունների ստեղծում
-              </h4>
-              <p>
-                Ի տարբերություն սովորական հարցումների, վերլուծական SQL-ը թույլ է
-                տալիս կատարել տվյալների խորը ագրեգացում։ Վերլուծաբանները կարող
-                են վայրկյանների ընթացքում ստանալ տարեկան շրջանառության
-                համեմատականները, հաշվարկել միջին ցուցանիշները կամ գտնել
-                ամենաշահութաբեր ուղղությունները՝ օգտագործելով բարդ խմբավորումներ
-                և ֆունկցիաներ:
+            <!-- Step 2: Code verification -->
+            <div id="adminCodeStep" class="admin-step hidden">
+              <p class="admin-subtitle">
+                6-նիշ կոդ է ուղարկվել ձեր էլ. փոստին
               </p>
+              <div class="admin-input-wrap">
+                <label for="adminCodeInput">Հաստատման կոդ</label>
+                <input
+                  type="text"
+                  id="adminCodeInput"
+                  placeholder="••••••"
+                  maxlength="6"
+                  autocomplete="one-time-code"
+                  style="letter-spacing: 4px; font-size: 20px; font-weight: 700; text-align: center;"
+                />
+                <span class="code-input-hint">Ստուգեք ձեր inbox և spam թղթապանակները</span>
+              </div>
+              <button class="btn-admin-submit" id="adminVerifyBtn">
+                Հաստատել և մուտք գործել
+              </button>
+              <div style="text-align:center; margin-top:12px;">
+                <button class="resend-link" id="adminResendBtn">Կրկին ուղարկել կոդը</button>
+              </div>
+            </div>
 
-              <h4 style="color: #292664">
-                3. Բիզնեսի կանխատեսումներ և միտումներ
-              </h4>
-              <p>
-                SQL-ը հնարավորություն է տալիս բացահայտել տվյալների մեջ առկա
-                օրինաչափությունները։ Օրինակ՝ վերլուծելով վերջին 5 տարիների
-                վաճառքի տվյալները, համակարգը կարող է կանխատեսել ապագա
-                պահանջարկը, ինչը օգնում է ընկերություններին ավելի ճիշտ
-                պլանավորել իրենց բյուջեն և ռեսուրսները:
+            <!-- Step 3: Logged in as admin -->
+            <div id="adminLoggedStep" class="admin-step hidden">
+              <div class="admin-panel-banner">
+                <span class="admin-icon">🛡️</span>
+                <div>
+                  <h4>Admin Panel</h4>
+                  <p id="adminLoggedEmail">Դուք մուտք եք գործել որպես ադմին</p>
+                </div>
+              </div>
+              <p style="font-size:0.9rem; color:#374151; text-align:center; margin-bottom:16px;">
+                Ադմինի հնարավորությունները կարող են ավելացվել այստեղ։
               </p>
-
-              <h4 style="color: #292664">
-                4. Տվյալների մաքրում և որակի ապահովում
-              </h4>
-              <p>
-                Մինչ վերլուծություն սկսելը, տվյալները հաճախ լինում են «աղմկոտ»
-                կամ անճշտություններով։ SQL-ն օգտագործվում է տվյալների մաքրման
-                համար (Data Cleaning)՝ հեռացնելով կրկնվող տողերը, լրացնելով
-                բացակայող արժեքները և ուղղելով սխալները, որպեսզի վերջնական
-                վերլուծությունը լինի հավաստի:
-              </p>
-
-              <h4 style="color: #292664">
-                5. Ինտեգրում վիզուալիզացիայի գործիքների հետ
-              </h4>
-              <p>
-                Վերլուծական համակարգերը հաճախ միացված են վիզուալիզացիայի
-                գործիքներին (օրինակ՝ Tableau, Power BI): Այս գործիքները
-                հետնամասում (backend) գեներացնում են SQL հարցումներ՝ տվյալների
-                բազայից թարմ տեղեկատվություն ստանալու և դրանք գեղեցիկ գրաֆիկների
-                ու դիագրամների տեսքով մարդկանց ներկայացնելու համար:
-              </p>
+              <button class="btn-admin-logout" id="adminLogoutBtn">
+                🚪 Ելք (Logout)
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ==================== COMMENT SECTION ==================== -->
     <div class="container mt-5">
       <h2 class="section-title text-center">💬 Community Comments</h2>
       <p class="text-center text-muted mb-4">
@@ -1093,11 +1185,7 @@
           <h2 style="margin-bottom: 20px">Verify Your Email</h2>
           <div class="input-group">
             <label for="emailInput">Email Address</label>
-            <input
-              type="email"
-              id="emailInput"
-              placeholder="Enter your email"
-            />
+            <input type="email" id="emailInput" placeholder="Enter your email" />
           </div>
           <button class="btn" id="sendCodeBtn">Send Verification Code</button>
         </div>
@@ -1120,18 +1208,11 @@
 
         <!-- Comment form -->
         <div id="commentForm" class="hidden">
-          <div
-            id="verifiedBadge"
-            class="alert alert-success"
-            style="margin-bottom: 20px"
-          ></div>
+          <div id="verifiedBadge" class="alert alert-success" style="margin-bottom: 20px"></div>
           <h2 style="margin-bottom: 20px">Leave a Comment</h2>
           <div id="commentFormInner" class="input-group">
             <label for="commentText">Your Comment</label>
-            <textarea
-              id="commentText"
-              placeholder="Share your thoughts..."
-            ></textarea>
+            <textarea id="commentText" placeholder="Share your thoughts..."></textarea>
           </div>
           <button class="btn" id="postBtn">Post Comment</button>
           <button class="btn btn-secondary" id="logoutBtn">Logout</button>
@@ -1146,6 +1227,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- ==================== ORIGINAL COMMENT SCRIPT ==================== -->
     <script>
       const EMAILJS_SERVICE_ID = "service_h6z4z71";
       const EMAILJS_PUBLIC_KEY = "LMaZo_aD8CLNmMl9J";
@@ -1196,8 +1279,8 @@
         try {
           await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
             to_email: email,
-            to_name: email, // adds a name (just use email if you don't have a name)
-            verification_code: generatedCode, // matches {{verification_code}} in template
+            to_name: email,
+            verification_code: generatedCode,
           });
 
           showAlert(`Code sent to ${email}. Check your inbox.`, "success");
@@ -1205,10 +1288,7 @@
           show("codeStep");
         } catch (err) {
           console.error(err);
-          showAlert(
-            "Error: " + (err?.text || err?.message || JSON.stringify(err)),
-            "error",
-          );
+          showAlert("Error: " + (err?.text || err?.message || JSON.stringify(err)), "error");
         } finally {
           $("sendCodeBtn").disabled = false;
         }
@@ -1285,7 +1365,7 @@
         </div>
         <div class="comment-text">${escapeHtml(c.text)}</div>
       </div>
-    `,
+    `
           )
           .join("");
       }
@@ -1310,6 +1390,231 @@
         div.textContent = text;
         return div.innerHTML;
       }
+    </script>
+
+    <!-- ==================== ADMIN SCRIPT ==================== -->
+    <script>
+      // ── Allowed admin emails (lowercase for comparison) ──
+      const ADMIN_EMAILS = [
+        "tigran.khachatryan.2022@gmail.com",
+        "nadaryanarsen06@aspu.am"
+      ];
+
+      const ADMIN_SESSION_KEY = "adminSession";
+
+      let adminGeneratedCode = "";
+      let adminPendingEmail = "";
+
+      // ── Helpers ──
+      function getEl(id) { return document.getElementById(id); }
+
+      function showAdminAlert(msg, type = "info") {
+        const icons = { error: "❌", success: "✅", info: "ℹ️" };
+        const el = getEl("adminAlert");
+        const msgEl = getEl("adminAlertMsg");
+        el.className = `admin-alert ${type}`;
+        getEl("adminAlert").querySelector(".admin-alert-icon").textContent = icons[type] || "ℹ️";
+        msgEl.textContent = msg;
+        el.classList.remove("hidden");
+        clearTimeout(el._t);
+        el._t = setTimeout(() => el.classList.add("hidden"), 6000);
+      }
+
+      function hideAdminAlert() {
+        getEl("adminAlert").classList.add("hidden");
+      }
+
+      function showAdminStep(stepId) {
+        ["adminEmailStep", "adminCodeStep", "adminLoggedStep"].forEach(id => {
+          getEl(id).classList.add("hidden");
+        });
+        getEl(stepId).classList.remove("hidden");
+      }
+
+      // ── Update header button state ──
+      function updateAdminNavBtn() {
+        const session = localStorage.getItem(ADMIN_SESSION_KEY);
+        const btn = getEl("adminNavBtn");
+        const label = getEl("adminNavLabel");
+
+        if (session) {
+          btn.classList.add("logged-in");
+          label.innerHTML = `<span class="admin-dot"></span> Admin`;
+        } else {
+          btn.classList.remove("logged-in");
+          label.innerHTML = "Admin";
+        }
+      }
+
+      // ── Open modal: decide which step to show ──
+      function openAdminModal(e) {
+        // Let Bootstrap handle the modal open; we just set the right step
+        setTimeout(() => {
+          hideAdminAlert();
+          const session = localStorage.getItem(ADMIN_SESSION_KEY);
+          if (session) {
+            const data = JSON.parse(session);
+            getEl("adminLoggedEmail").textContent = `✓ ${data.email}`;
+            showAdminStep("adminLoggedStep");
+          } else {
+            getEl("adminEmailInput").value = "";
+            getEl("adminCodeInput").value = "";
+            adminGeneratedCode = "";
+            adminPendingEmail = "";
+            showAdminStep("adminEmailStep");
+          }
+        }, 10);
+      }
+
+      // ── Step 1: Check email and send code ──
+      async function adminSendCode() {
+        const email = getEl("adminEmailInput").value.trim().toLowerCase();
+
+        if (!email || !email.includes("@")) {
+          getEl("adminEmailInput").classList.add("error");
+          showAdminAlert("Խնդրում ենք մուտքագրել վավեր էլ. փոստ:", "error");
+          return;
+        }
+
+        getEl("adminEmailInput").classList.remove("error");
+
+        // ── Access check ──
+        if (!ADMIN_EMAILS.includes(email)) {
+          getEl("adminEmailInput").classList.add("error");
+          showAdminAlert(
+            "Մուտք արգելված է։ Ձեր էլ. փոստը ադմինի ցուցակում չէ։",
+            "error"
+          );
+          return;
+        }
+
+        adminPendingEmail = email;
+        adminGeneratedCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+        const btn = getEl("adminSendCodeBtn");
+        btn.disabled = true;
+        btn.textContent = "Ուղարկվում է...";
+
+        showAdminAlert("Կոդ է ուղարկվում ձեր փոստին…", "info");
+
+        try {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_email: email,
+            to_name: email,
+            verification_code: adminGeneratedCode,
+          });
+
+          showAdminAlert(`Կոդ ուղարկված է ${email}-ին։ Ստուգեք inbox-ը։`, "success");
+          showAdminStep("adminCodeStep");
+          getEl("adminCodeInput").focus();
+        } catch (err) {
+          console.error(err);
+          showAdminAlert("Սխալ կոդ ուղարկելիս։ Կրկին փորձեք։", "error");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Ուղարկել հաստատման կոդ";
+        }
+      }
+
+      // ── Step 2: Verify code and login ──
+      function adminVerifyCode() {
+        const input = getEl("adminCodeInput").value.trim();
+
+        if (input.length !== 6) {
+          showAdminAlert("Խնդրում ենք մուտքագրել 6-նիշ կոդ։", "error");
+          return;
+        }
+
+        if (input !== adminGeneratedCode) {
+          showAdminAlert("Սխալ կոդ։ Կրկին փորձեք կամ ուղարկեք նոր կոդ։", "error");
+          getEl("adminCodeInput").style.borderColor = "#dc2626";
+          setTimeout(() => {
+            getEl("adminCodeInput").style.borderColor = "";
+          }, 1500);
+          return;
+        }
+
+        // ── Success: store session ──
+        const session = {
+          email: adminPendingEmail,
+          loginTime: new Date().toISOString(),
+        };
+        localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(session));
+
+        showAdminAlert("Բարի գալուստ, ադմին! ✅", "success");
+        getEl("adminLoggedEmail").textContent = `✓ ${adminPendingEmail}`;
+
+        setTimeout(() => {
+          showAdminStep("adminLoggedStep");
+          updateAdminNavBtn();
+        }, 800);
+      }
+
+      // ── Resend code ──
+      async function adminResendCode() {
+        if (!adminPendingEmail) return;
+
+        adminGeneratedCode = Math.floor(100000 + Math.random() * 900000).toString();
+        const btn = getEl("adminResendBtn");
+        btn.disabled = true;
+        btn.textContent = "Ուղարկվում է...";
+
+        try {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_email: adminPendingEmail,
+            to_name: adminPendingEmail,
+            verification_code: adminGeneratedCode,
+          });
+          showAdminAlert("Նոր կոդ ուղարկվեց։", "success");
+        } catch (err) {
+          showAdminAlert("Կրկնակի ուղարկման սխալ։ Կրկին փորձեք։", "error");
+        } finally {
+          // Cooldown 30s
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.textContent = "Կրկին ուղարկել կոդը";
+          }, 30000);
+          btn.textContent = "Ուղարկվեց ✓";
+        }
+      }
+
+      // ── Admin logout ──
+      function adminLogout() {
+        localStorage.removeItem(ADMIN_SESSION_KEY);
+        adminGeneratedCode = "";
+        adminPendingEmail = "";
+
+        showAdminAlert("Դուք դուրս եք եկել ադմին վահանակից։", "info");
+        showAdminStep("adminEmailStep");
+        getEl("adminEmailInput").value = "";
+        getEl("adminCodeInput").value = "";
+        updateAdminNavBtn();
+      }
+
+      // ── Wire up admin events ──
+      document.addEventListener("DOMContentLoaded", () => {
+        updateAdminNavBtn();
+
+        getEl("adminSendCodeBtn").addEventListener("click", adminSendCode);
+        getEl("adminVerifyBtn").addEventListener("click", adminVerifyCode);
+        getEl("adminResendBtn").addEventListener("click", adminResendCode);
+        getEl("adminLogoutBtn").addEventListener("click", adminLogout);
+
+        // Allow Enter key in code input
+        getEl("adminCodeInput").addEventListener("keydown", (e) => {
+          if (e.key === "Enter") adminVerifyCode();
+        });
+
+        // Allow Enter key in email input
+        getEl("adminEmailInput").addEventListener("keydown", (e) => {
+          if (e.key === "Enter") adminSendCode();
+        });
+
+        // Clear error styling on type
+        getEl("adminEmailInput").addEventListener("input", () => {
+          getEl("adminEmailInput").classList.remove("error");
+        });
+      });
     </script>
 
     <div id="backToTop">↑</div>
