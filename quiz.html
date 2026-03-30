@@ -266,91 +266,70 @@
       </nav>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main class="container">
-      <h2>SQL Թեստ - Ըստ Թեմաների</h2>
+      <h2 class="text-center mb-5">SQL Թեստ - Ըստ Թեմաների</h2>
 
-      <!-- ========== SQL ՀԻՄՈՒՆՔՆԵՐ ========== -->
       <section class="topic-section" id="quiz-basics">
-        <h3 class="topic-title">
-          <span class="topic-icon">📚</span>
-          SQL Հիմունքներ և Ներածություն
-        </h3>
-        <div id="quiz-basics-questions"></div>
+        <h3 class="topic-title">📚 SQL Հիմունքներ</h3>
+        <div id="quiz-basics-questions" class="loading-text">Բեռնվում է...</div>
       </section>
 
-      <!-- ========== SELECT & QUERIES ========== -->
       <section class="topic-section" id="quiz-select">
-        <h3 class="topic-title">
-          <span class="topic-icon">🔍</span>
-          SELECT և Հարցումներ
-        </h3>
-        <div id="quiz-select-questions"></div>
+        <h3 class="topic-title">🔍 SELECT և Հարցումներ</h3>
+        <div id="quiz-select-questions" class="loading-text">Բեռնվում է...</div>
       </section>
 
-      <!-- ========== INSERT, UPDATE, DELETE ========== -->
       <section class="topic-section" id="quiz-dml">
-        <h3 class="topic-title">
-          <span class="topic-icon">✏️</span>
-          INSERT, UPDATE, DELETE
-        </h3>
-        <div id="quiz-dml-questions"></div>
+        <h3 class="topic-title">✏️ INSERT, UPDATE, DELETE</h3>
+        <div id="quiz-dml-questions" class="loading-text">Բեռնվում է...</div>
       </section>
 
-      <!-- ========== AGGREGATE FUNCTIONS ========== -->
       <section class="topic-section" id="quiz-aggregate">
-        <h3 class="topic-title">
-          <span class="topic-icon">📊</span>
-          Ագրեգատ Ֆունկցիաներ
-        </h3>
-        <div id="quiz-aggregate-questions"></div>
+        <h3 class="topic-title">📊 Ագրեգատ Ֆունկցիաներ</h3>
+        <div id="quiz-aggregate-questions" class="loading-text">
+          Բեռնվում է...
+        </div>
       </section>
 
-      <!-- ========== JOIN OPERATIONS ========== -->
       <section class="topic-section" id="quiz-joins">
-        <h3 class="topic-title">
-          <span class="topic-icon">🔗</span>
-          JOIN-եր և Կապեր
-        </h3>
-        <div id="quiz-joins-questions"></div>
+        <h3 class="topic-title">🔗 JOIN-եր և Կապեր</h3>
+        <div id="quiz-joins-questions" class="loading-text">Բեռնվում է...</div>
       </section>
 
-      <!-- ========== DATABASE DESIGN ========== -->
-      <section class="topic-section" id="quiz-design">
-        <h3 class="topic-title">
-          <span class="topic-icon">🏗️</span>
-          Բազայի Դիզայն և Կառուցվածք
-        </h3>
-        <div id="quiz-design-questions"></div>
-      </section>
-
-      <!-- ========== ADVANCED TOPICS ========== -->
-      <section class="topic-section" id="quiz-advanced">
-        <h3 class="topic-title">
-          <span class="topic-icon">⚡</span>
-          Առաջադեմ Թեմաներ
-        </h3>
-        <div id="quiz-advanced-questions"></div>
-      </section>
-
-      <div class="text-center mt-5">
-        <a href="index.html" class="btn btn-primary">Վերադառնալ հիմնական էջ</a>
+      <div class="text-center mt-4">
+        <a href="index.html" class="btn btn-primary btn-lg">Վերադառնալ</a>
       </div>
     </main>
 
-    <!-- ===== FOOTER ===== -->
-    <footer>
-      <div class="container">
-        <p class="mb-1">
-          © 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ
-        </p>
-        <p class="mb-0">Բոլոր իրավունքները պաշտպանված են</p>
-      </div>
-    </footer>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getFirestore,
+        doc,
+        setDoc,
+        addDoc,
+        collection,
+        getDocs,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script>
-      const quizData = {
+      // 1. Սկզբից դրեք Config-ը
+      const firebaseConfig = {
+        apiKey: "AIzaSyBdKdi6gA6Ueqoqk-Czb0oA5IPbnFtg6fc",
+        authDomain: "sql-learning-site.firebaseapp.com",
+        projectId: "sql-learning-site",
+        storageBucket: "sql-learning-site.firebasestorage.app",
+        messagingSenderId: "827366778670",
+        appId: "1:827366778670:web:fce75ef92e459ccd9b7cbf",
+        measurementId: "G-6NVGFKT77X",
+      };
+
+      // 2. Init արեք Firebase-ը
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      let remoteQuizData = {};
+
+      const allQuestions = {
         basics: [
           {
             q: "Ո՞ր հրամանը կվերադարձնի բոլոր տվյալները 'Users' աղյուսակից։",
@@ -853,67 +832,114 @@
         ],
       };
 
-      // Render each category into its dedicated questions div
-      Object.entries(quizData).forEach(([category, questions]) => {
-        const container = $(`#quiz-${category}-questions`);
-        questions.forEach((item, i) => {
-          const globalIndex = `${category}-${i}`;
-          const html = `
-            <div class="mb-4 question-block" data-category="${category}" data-index="${i}">
-              <strong>${i + 1}. ${item.q}</strong><br>
+      // 3. Ֆունկցիան, որը տվյալները կուղարկի Firestore
+      async function autoUpload() {
+        console.log("Սկսվում է վերբեռնումը...");
+        try {
+          for (const [category, questions] of Object.entries(allQuestions)) {
+            await setDoc(doc(db, "quiz", category), { active: true });
+            for (const q of questions) {
+              await addDoc(collection(db, "quiz", category, "questions"), q);
+            }
+          }
+          console.log("Բոլոր հարցերը հաջողությամբ վերբեռնվեցին Firestore!");
+          alert("Տվյալները բազայում են: Այժմ կարող եք անջատել autoUpload-ը:");
+        } catch (e) {
+          console.error("Վերբեռնման սխալ:", e);
+        }
+      }
+
+      // ԱՅՍ ՏՈՂԸ ՄԵԿ ԱՆԳԱՄ ՄԻԱՑՐԵՔ (ջնջեք //), ԷՋԸ ԹԱՐՄԱՑՐԵՔ, ՀԵՏՈ ՆՈՐԻՑ ԱՆՋԱՏԵՔ
+      // autoUpload();
+
+      async function fetchQuizData() {
+        const categories = [
+          "basics",
+          "select",
+          "dml",
+          "aggregate",
+          "joins",
+          "design",
+          "advanced",
+        ];
+        const result = {};
+        for (const cat of categories) {
+          try {
+            const snap = await getDocs(
+              collection(db, "quiz", cat, "questions"),
+            );
+            result[cat] = snap.docs.map((doc) => doc.data());
+          } catch (err) {
+            console.error(`Error loading ${cat}:`, err);
+            result[cat] = [];
+          }
+        }
+        return result;
+      }
+
+      function renderQuiz(data) {
+        Object.entries(data).forEach(([category, questions]) => {
+          const container = document.getElementById(
+            `quiz-${category}-questions`,
+          );
+          if (!container || questions.length === 0) return;
+          container.innerHTML = "";
+          questions.forEach((item, i) => {
+            const html = `
+          <div class="question-block" data-category="${category}" data-index="${i}">
+            <strong>${i + 1}. ${item.q}</strong>
+            <div class="options-list mt-3">
               ${item.options
                 .map(
                   (opt, j) => `
                 <label class="option d-block">
-                  <input type="radio" name="q${globalIndex}" value="${j}" /> ${opt}
+                  <input type="radio" name="q-${category}-${i}" value="${j}"> ${opt}
                 </label>
               `,
                 )
                 .join("")}
-              <button type="button" class="btn btn-sm btn-outline-primary mt-2 check-one">
-                Ստուգել
-              </button>
-              <div class="mt-2 question-result"></div>
             </div>
-          `;
-          container.append(html);
+            <button class="btn btn-sm btn-outline-primary mt-3 check-btn">Ստուգել</button>
+            <div class="result-msg mt-2 fw-bold"></div>
+          </div>
+        `;
+            container.insertAdjacentHTML("beforeend", html);
+          });
         });
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        remoteQuizData = await fetchQuizData();
+        renderQuiz(remoteQuizData);
       });
 
-      // Check answer logic
-      $(document).on("click", ".check-one", function () {
-        const block = $(this).closest(".question-block");
-        const category = block.data("category");
-        const index = block.data("index");
-        const correct = quizData[category][index].correct;
-        const selected = block.find("input[type=radio]:checked").val();
-
-        block.find(".option").removeClass("correct incorrect");
-        block.find(".question-result").text("");
-
+      document.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("check-btn")) return;
+        const block = e.target.closest(".question-block");
+        const cat = block.dataset.category;
+        const idx = block.dataset.index;
+        const question = remoteQuizData[cat][idx];
+        const selected = block.querySelector("input:checked")?.value;
+        const msg = block.querySelector(".result-msg");
+        block
+          .querySelectorAll(".option")
+          .forEach((el) => el.classList.remove("correct", "incorrect"));
         if (selected === undefined) {
-          block
-            .find(".question-result")
-            .text("Խնդրում ենք ընտրել պատասխան")
-            .css("color", "orange");
+          msg.textContent = "Ընտրեք պատասխանը";
+          msg.style.color = "orange";
           return;
         }
-
-        block.find(".option").each(function (j) {
-          if (j === correct) $(this).addClass("correct");
-          if (j == selected && j != correct) $(this).addClass("incorrect");
+        block.querySelectorAll(".option").forEach((el, j) => {
+          if (j == question.correct) el.classList.add("correct");
+          if (j == selected && j != question.correct)
+            el.classList.add("incorrect");
         });
-
-        if (selected == correct) {
-          block
-            .find(".question-result")
-            .text("Ճիշտ պատասխան ✅")
-            .css("color", "green");
+        if (selected == question.correct) {
+          msg.textContent = "Ճիշտ է ✅";
+          msg.style.color = "green";
         } else {
-          block
-            .find(".question-result")
-            .text("Սխալ պատասխան ❌ Ճիշտը նշված է կանաչով")
-            .css("color", "red");
+          msg.textContent = "Սխալ է ❌";
+          msg.style.color = "red";
         }
       });
     </script>
