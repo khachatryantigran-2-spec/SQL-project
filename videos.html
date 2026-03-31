@@ -342,6 +342,83 @@
         flex: 1;
         min-width: 120px;
       }
+
+      @media (max-width: 576px) {
+        /* HEADER */
+        .main-header {
+          padding: 12px 0;
+        }
+
+        .navbar-brand img {
+          height: 32px;
+        }
+
+        /* MAIN CONTAINER */
+        main.container {
+          padding: 20px 12px;
+          margin-top: 20px;
+          border-radius: 20px;
+        }
+
+        main h2 {
+          font-size: 1.3rem;
+          margin-bottom: 25px;
+        }
+
+        /* TOPIC TITLE */
+        .topic-title {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+          font-size: 1.2rem;
+        }
+
+        .topic-title-text {
+          width: 100%;
+        }
+
+        .btn-quiz {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .btn-add-in-topic {
+          width: 100%;
+          text-align: center;
+        }
+
+        /* VIDEO CARDS */
+        .video-card {
+          border-radius: 16px;
+        }
+
+        .video-card h5 {
+          font-size: 0.95rem;
+        }
+
+        .video-card p {
+          font-size: 0.8rem;
+        }
+
+        /* GRID */
+        .row.g-4 {
+          gap: 12px !important;
+        }
+
+        /* ADMIN TOOLBAR */
+        #adminToolbar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+          padding: 10px;
+        }
+
+        /* FOOTER */
+        footer {
+          padding: 20px 0;
+          font-size: 0.8rem;
+        }
+      }
     </style>
   </head>
   <body>
