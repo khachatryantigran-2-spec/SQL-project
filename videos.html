@@ -1,62 +1,38 @@
 <!doctype html>
-
 <html lang="hy">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>SQL Տեսադասեր</title>
-
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
     <style>
-      /* ===== PAGE BACKGROUND ===== */
-
       body {
         font-family: "Segoe UI", sans-serif;
-
         background:
           linear-gradient(rgba(248, 249, 250, 0.85), rgba(36, 66, 97, 0.85)),
           url("./images/images(2).jpeg");
-
         background-size: cover;
-
         background-attachment: fixed;
       }
 
-      /* ===== MAIN CARD ===== */
-
       main.container {
         background: rgba(255, 255, 255, 0.95);
-
         backdrop-filter: blur(10px);
-
         padding: 50px;
-
         border-radius: 30px;
-
         margin-top: 60px;
-
         margin-bottom: 80px;
-
         box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
       }
-
       main h2 {
         text-align: center;
-
         font-weight: 800;
-
         color: #084298;
-
         margin-bottom: 40px;
       }
-
-      /* ===== TOPIC SECTIONS ===== */
 
       .topic-section {
         margin-bottom: 60px;
@@ -64,270 +40,312 @@
 
       .topic-title {
         font-weight: 700;
-
         color: #0d6efd;
-
         margin-bottom: 30px;
-
         padding-bottom: 15px;
-
         border-bottom: 3px solid #0d6efd;
-
         font-size: 1.8rem;
-
         display: flex;
-
         align-items: center;
-
         gap: 15px;
-
         flex-wrap: wrap;
       }
-
       .topic-title-text {
         flex: 1;
-
         display: flex;
-
         align-items: center;
-
         gap: 15px;
-
         min-width: 0;
       }
-
       .topic-icon {
         font-size: 2rem;
-
         flex-shrink: 0;
       }
-
-      /* ===== QUIZ BUTTON ===== */
 
       .btn-quiz {
         background: linear-gradient(135deg, #198754, #0f5132);
-
         color: #fff;
-
         border: none;
-
         border-radius: 20px;
-
         padding: 7px 18px;
-
         font-size: 0.85rem;
-
         font-weight: 600;
-
         text-decoration: none;
-
         display: inline-flex;
-
         align-items: center;
-
         gap: 6px;
-
         white-space: nowrap;
-
         flex-shrink: 0;
-
         transition:
           transform 0.2s ease,
           box-shadow 0.2s ease,
           background 0.2s ease;
-
         box-shadow: 0 4px 12px rgba(25, 135, 84, 0.35);
       }
-
       .btn-quiz:hover {
         background: linear-gradient(135deg, #157347, #0a3622);
-
         transform: translateY(-2px);
-
         box-shadow: 0 8px 20px rgba(25, 135, 84, 0.45);
-
         color: #fff;
-
         text-decoration: none;
       }
-
       .btn-quiz svg {
         flex-shrink: 0;
       }
 
-      /* ===== VIDEO CARDS ===== */
-
       .video-card {
         border: none;
-
         border-radius: 20px;
-
         overflow: hidden;
-
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-
         transition:
           transform 0.3s ease,
           box-shadow 0.3s ease;
-
         height: 100%;
       }
-
       .video-card:hover {
         transform: translateY(-6px);
-
         box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
       }
-
       .video-card h5 {
         font-weight: 700;
-
         color: #0d6efd;
-
         font-size: 1.1rem;
       }
-
       .ratio iframe {
         border-radius: 20px 20px 0 0;
       }
 
-      /* ===== TAGS ===== */
-
       .badge {
         margin-right: 5px;
-
         font-size: 0.75rem;
-
         padding: 5px 10px;
       }
 
-      /* ===== HEADER ===== */
-
       .main-header {
         background: linear-gradient(135deg, #0d6efd, #292664);
-
         color: white;
-
         padding: 35px 0;
-
         position: sticky;
-
         top: 0;
-
         z-index: 1000;
-
         transition: box-shadow 0.3s ease;
       }
-
       header nav a {
         position: relative;
-
         color: #e9ecef !important;
-
         margin: 0 12px;
-
         font-weight: 500;
-
         text-decoration: none !important;
-
         padding-bottom: 4px;
       }
-
       header nav a::after {
         content: "";
-
         position: absolute;
-
         left: 0;
-
         bottom: 0;
-
         width: 0;
-
         height: 2px;
-
         background-color: #ffffff;
-
         transition: width 0.25s ease;
       }
-
       header nav a:hover::after {
         width: 100%;
       }
-
       .navbar-brand::after {
         display: none !important;
       }
 
-      /* ===== FOOTER ===== */
-
       footer {
         background-color: #212529;
-
         color: #f8f9fa;
-
         padding: 40px 0;
-
         text-align: center;
-
         box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.25);
       }
-
       footer p {
         color: #adb5bd;
-
         margin-bottom: 0;
       }
 
-      /* ===== BUTTON ===== */
-
       .btn-primary {
         background: linear-gradient(135deg, #0d6efd, #084298);
-
         border: none;
-
         border-radius: 25px;
-
         padding: 12px 35px;
-
         font-weight: 600;
       }
-
-      /* ===== MOBILE ===== */
 
       @media (max-width: 768px) {
         .main-header {
           padding: 20px 0;
-
           text-align: center;
         }
-
         .navbar-nav .nav-link {
           margin: 5px 0;
         }
-
         .navbar-brand span {
           display: none;
         }
-
         main.container {
           padding: 30px 20px;
         }
-
         .topic-title {
           font-size: 1.4rem;
         }
-
         .topic-icon {
           font-size: 1.5rem;
         }
       }
+
+      /* ===== ADMIN TOOLBAR ===== */
+      #adminToolbar {
+        display: none;
+        background: linear-gradient(135deg, #fff8e1, #fff3cd);
+        border: 2px solid #ffc107;
+        border-radius: 15px;
+        padding: 14px 22px;
+        margin-bottom: 32px;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      #adminToolbar.visible {
+        display: flex;
+      }
+      #adminToolbar .admin-label {
+        font-weight: 700;
+        color: #856404;
+        font-size: 0.95rem;
+      }
+
+      /* Add button per topic (hidden unless admin) */
+      .btn-add-in-topic {
+        display: none;
+        border-radius: 20px;
+        padding: 5px 18px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        background: #0d6efd;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.2s;
+      }
+      .btn-add-in-topic:hover {
+        background: #0b5ed7;
+      }
+      body.admin-mode .btn-add-in-topic {
+        display: inline-block;
+      }
+
+      /* Edit / Delete buttons per video card (hidden unless admin) */
+      .admin-card-actions {
+        display: none;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 0 16px 16px;
+      }
+      body.admin-mode .admin-card-actions {
+        display: flex;
+      }
+
+      .btn-edit-v,
+      .btn-delete-v {
+        border-radius: 20px;
+        padding: 4px 16px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-edit-v {
+        background: #e8f0fe;
+        color: #1a56db;
+      }
+      .btn-edit-v:hover {
+        background: #1a56db;
+        color: #fff;
+      }
+      .btn-delete-v {
+        background: #fde8e8;
+        color: #c81e1e;
+      }
+      .btn-delete-v:hover {
+        background: #c81e1e;
+        color: #fff;
+      }
+
+      /* ===== SKELETON LOADING ===== */
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          #e9ecef 25%,
+          #f8f9fa 37%,
+          #e9ecef 63%
+        );
+        background-size: 400% 100%;
+        animation: shimmer 1.4s ease infinite;
+        border-radius: 8px;
+      }
+
+      .skeleton-video {
+        width: 100%;
+        height: 200px;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .skeleton-title {
+        height: 18px;
+        width: 70%;
+      }
+
+      .skeleton-text {
+        height: 12px;
+        width: 100%;
+      }
+
+      .skeleton-text.short {
+        width: 60%;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -400px 0;
+        }
+        100% {
+          background-position: 400px 0;
+        }
+      }
+
+      /* ===== ADD/EDIT MODAL ===== */
+      #videoAdminModal .modal-header {
+        background: linear-gradient(135deg, #0d6efd, #292664);
+        color: #fff;
+        border-radius: 12px 12px 0 0;
+      }
+      #videoAdminModal .modal-header .btn-close {
+        filter: invert(1);
+      }
+      #videoAdminModal .modal-title {
+        font-weight: 700;
+      }
+
+      .badge-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .badge-row input {
+        flex: 1;
+        min-width: 120px;
+      }
     </style>
   </head>
-
   <body>
     <!-- ===== HEADER ===== -->
-
     <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-dark container">
         <a
@@ -340,10 +358,8 @@
             height="45"
             class="d-inline-block align-text-top"
           />
-
           <span class="d-none d-lg-inline">SQL ուսուցման Կայք</span>
         </a>
-
         <button
           class="navbar-toggler"
           type="button"
@@ -352,25 +368,20 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <a class="nav-link" href="intro.html">Ներածություն</a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="application.html">Կիրառությունը</a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="commands.html">SQL հրամանները</a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="videos.html">Տեսադասեր</a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="quiz.html">Թեստ</a>
             </li>
@@ -379,21 +390,29 @@
       </nav>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
-
+    <!-- ===== MAIN ===== -->
     <main class="container">
       <h2>SQL Տեսադասեր - Ըստ թեմաների</h2>
 
-      <!-- ========== SQL ՀԻՄՈՒՆՔՆԵՐ ========== -->
+      <!-- Admin toolbar -->
+      <div id="adminToolbar">
+        <span class="admin-label">🛡️ Admin ռեժիմ</span>
+        <span
+          id="adminEmailDisplay"
+          style="color: #856404; font-size: 0.9rem"
+        ></span>
+        <span style="color: #aaa; font-size: 0.82rem; margin-left: 4px"
+          >— Ավելացնել/Խմբագրել/Ջնջել տեսանյութեր ամեն բաժնից</span
+        >
+      </div>
 
-      <section class="topic-section">
+      <!-- ========== SQL ՀԻՄՈՒՆՔՆԵՐ ========== -->
+      <section class="topic-section" id="section-basics">
         <h3 class="topic-title">
           <span class="topic-title-text">
             <span class="topic-icon">📚</span>
-
             SQL Հիմունքներ և Ներածություն
           </span>
-
           <a href="quiz.html#quiz-basics" class="btn-quiz">
             <svg
               width="15"
@@ -407,108 +426,22 @@
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-
             Անցնել Թեստին
           </a>
+          <button class="btn-add-in-topic" onclick="openAddModal('basics')">
+            + Ավելացնել
+          </button>
         </h3>
-
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/7S_tz1z_5bA"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL դասընթաց սկսնակների համար</h5>
-
-                <p>Ծանոթացում SQL լեզվին, տվյալների բազաների հիմունքներ։</p>
-
-                <span class="badge bg-primary">Հիմունքներ</span>
-
-                <span class="badge bg-success">Beginner</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/HXV3zeQKqGY"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL Tutorial – Լրիվ դասընթաց</h5>
-
-                <p>Տվյալների բազայի հիմունքներ և SQL հրամաններ։</p>
-
-                <span class="badge bg-primary">Հիմունքներ</span>
-
-                <span class="badge bg-success">Beginner</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/Ofktsne-utM"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL Full Course 2024</h5>
-
-                <p>Սկսնակներից մինչև առաջադեմ մակարդակ։</p>
-
-                <span class="badge bg-primary">Հիմունքներ</span>
-
-                <span class="badge bg-success">Beginner</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/9Pzj7Aj25lw"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>Սովորեք SQL 1 ժամում</h5>
-
-                <p>Արագ ներածություն SQL-ի հիմնական հասկացություններին։</p>
-
-                <span class="badge bg-primary">Հիմունքներ</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="videos-basics"></div>
       </section>
 
       <!-- ========== SELECT & QUERIES ========== -->
-
-      <section class="topic-section">
+      <section class="topic-section" id="section-select">
         <h3 class="topic-title">
           <span class="topic-title-text">
             <span class="topic-icon">🔍</span>
-
             SELECT և Հարցումներ
           </span>
-
           <a href="quiz.html#quiz-select" class="btn-quiz">
             <svg
               width="15"
@@ -522,87 +455,22 @@
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-
             Անցնել Թեստին
           </a>
+          <button class="btn-add-in-topic" onclick="openAddModal('select')">
+            + Ավելացնել
+          </button>
         </h3>
-
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/zbMHLJ0dY4w"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SELECT & WHERE հրամաններ</h5>
-
-                <p>Տվյալների ընտրություն և ֆիլտրացիա SQL-ում։</p>
-
-                <span class="badge bg-info text-dark">SELECT</span>
-
-                <span class="badge bg-success">Beginner</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/2HVMiPPuPIM"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL Subqueries</h5>
-
-                <p>Ենթահարցումներ և բարդ SELECT հարցումներ։</p>
-
-                <span class="badge bg-info text-dark">SELECT</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/qw--VYLpxG4"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>GROUP BY & HAVING</h5>
-
-                <p>Տվյալների խմբավորում և ագրեգատ ֆունկցիաներ։</p>
-
-                <span class="badge bg-info text-dark">Ագրեգացիա</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="videos-select"></div>
       </section>
 
       <!-- ========== JOIN OPERATIONS ========== -->
-
-      <section class="topic-section">
+      <section class="topic-section" id="section-joins">
         <h3 class="topic-title">
           <span class="topic-title-text">
             <span class="topic-icon">🔗</span>
-
             JOIN-եր և Կապեր
           </span>
-
           <a href="quiz.html#quiz-joins" class="btn-quiz">
             <svg
               width="15"
@@ -616,66 +484,22 @@
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-
             Անցնել Թեստին
           </a>
+          <button class="btn-add-in-topic" onclick="openAddModal('joins')">
+            + Ավելացնել
+          </button>
         </h3>
-
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/9yeOJ0ZMUYw"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL JOIN-եր</h5>
-
-                <p>INNER, LEFT, RIGHT, FULL JOIN օրինակներով։</p>
-
-                <span class="badge bg-secondary">JOIN</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/0OQJDd3QqQM"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL Joins Explained</h5>
-
-                <p>JOIN-երի տեսակներ և օգտագործման դեպքեր։</p>
-
-                <span class="badge bg-secondary">JOIN</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="videos-joins"></div>
       </section>
 
       <!-- ========== INSERT, UPDATE, DELETE ========== -->
-
-      <section class="topic-section">
+      <section class="topic-section" id="section-dml">
         <h3 class="topic-title">
           <span class="topic-title-text">
             <span class="topic-icon">✏️</span>
-
             INSERT, UPDATE, DELETE
           </span>
-
           <a href="quiz.html#quiz-dml" class="btn-quiz">
             <svg
               width="15"
@@ -689,66 +513,22 @@
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-
             Անցնել Թեստին
           </a>
+          <button class="btn-add-in-topic" onclick="openAddModal('dml')">
+            + Ավելացնել
+          </button>
         </h3>
-
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/Cz3WcZLRaWc"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>INSERT, UPDATE, DELETE</h5>
-
-                <p>Տվյալների ավելացում, թարմացում և ջնջում։</p>
-
-                <span class="badge bg-warning text-dark">DML</span>
-
-                <span class="badge bg-success">Beginner</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/M6lw8YmFxq4"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL Data Manipulation</h5>
-
-                <p>Տվյալների մանիպուլյացիայի հրամաններ։</p>
-
-                <span class="badge bg-warning text-dark">DML</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="videos-dml"></div>
       </section>
 
       <!-- ========== DATABASE DESIGN ========== -->
-
-      <section class="topic-section">
+      <section class="topic-section" id="section-design">
         <h3 class="topic-title">
           <span class="topic-title-text">
             <span class="topic-icon">🏗️</span>
-
             Բազայի Դիզայն և Նորմալիզացիա
           </span>
-
           <a href="quiz.html#quiz-design" class="btn-quiz">
             <svg
               width="15"
@@ -762,66 +542,22 @@
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-
             Անցնել Թեստին
           </a>
+          <button class="btn-add-in-topic" onclick="openAddModal('design')">
+            + Ավելացնել
+          </button>
         </h3>
-
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/W2Z7fbCLSTw"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>Database Normalization</h5>
-
-                <p>Տվյալների բազայի նորմալիզացիայի սկզբունքներ։</p>
-
-                <span class="badge bg-primary">Design</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/ztHopE5Wnpc"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>Database Design Tutorial</h5>
-
-                <p>Տվյալների բազայի ճիշտ նախագծում։</p>
-
-                <span class="badge bg-primary">Design</span>
-
-                <span class="badge bg-warning text-dark">Intermediate</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="videos-design"></div>
       </section>
 
       <!-- ========== ADVANCED TOPICS ========== -->
-
-      <section class="topic-section">
+      <section class="topic-section" id="section-advanced">
         <h3 class="topic-title">
           <span class="topic-title-text">
             <span class="topic-icon">⚡</span>
-
             Առաջադեմ Թեմաներ
           </span>
-
           <a href="quiz.html#quiz-advanced" class="btn-quiz">
             <svg
               width="15"
@@ -835,114 +571,977 @@
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-
             Անցնել Թեստին
           </a>
+          <button class="btn-add-in-topic" onclick="openAddModal('advanced')">
+            + Ավելացնել
+          </button>
         </h3>
-
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/7mz73uXD9DA"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL Indexes</h5>
-
-                <p>Ինդեքսներ և արագագործության օպտիմիզացիա։</p>
-
-                <span class="badge bg-danger">Indexes</span>
-
-                <span class="badge bg-danger">Advanced</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/k5E2AVpwsko"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>Stored Procedures</h5>
-
-                <p>Պահված պրոցեդուրաներ և ֆունկցիաներ։</p>
-
-                <span class="badge bg-danger">Procedures</span>
-
-                <span class="badge bg-danger">Advanced</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/3EJlovevfcA"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>Transactions & ACID</h5>
-
-                <p>Տրանզակցիաներ և ACID սկզբունքներ։</p>
-
-                <span class="badge bg-danger">Transactions</span>
-
-                <span class="badge bg-danger">Advanced</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="card video-card">
-              <div class="ratio ratio-16x9">
-                <iframe
-                  src="https://www.youtube.com/embed/zsjvFFKOm3c"
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <div class="card-body">
-                <h5>SQL Performance Tuning</h5>
-
-                <p>Հարցումների օպտիմիզացիա և արագագործություն։</p>
-
-                <span class="badge bg-danger">Performance</span>
-
-                <span class="badge bg-danger">Advanced</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="videos-advanced"></div>
       </section>
 
       <div class="text-center mt-5">
-        <a href="index.html" class="btn btn-primary">
-          Վերադառնալ հիմնական էջ
-        </a>
+        <a href="index.html" class="btn btn-primary">Վերադառնալ հիմնական էջ</a>
       </div>
     </main>
 
     <!-- ===== FOOTER ===== -->
-
     <footer class="main-footer">
       <div class="container">
         <p>© 2025 SQL ուսուցման վեբ կայք․ Մագիստրոսական աշխատանքի բաղադրիչ</p>
-
         <p>Բոլոր իրավունքները պաշտպանված են</p>
       </div>
     </footer>
+
+    <!-- ===== ADD / EDIT MODAL ===== -->
+    <div
+      class="modal fade"
+      id="videoAdminModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div
+          class="modal-content"
+          style="border-radius: 15px; overflow: hidden"
+        >
+          <div class="modal-header">
+            <h5 class="modal-title" id="videoModalTitle">
+              Ավելացնել տեսանյութ
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="mb-3">
+              <label class="form-label fw-bold">Կատեգորիա</label>
+              <select id="vModalCategory" class="form-select">
+                <option value="basics">📚 SQL Հիմունքներ</option>
+                <option value="select">🔍 SELECT և Հարցումներ</option>
+                <option value="joins">🔗 JOIN-եր և Կապեր</option>
+                <option value="dml">✏️ INSERT, UPDATE, DELETE</option>
+                <option value="design">🏗️ Բազայի Դիզայն</option>
+                <option value="advanced">⚡ Առաջադեմ Թեմաներ</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                YouTube Video ID կամ URL <span class="text-danger">*</span>
+                <small class="text-muted fw-normal ms-1"
+                  >(օր.՝ 7S_tz1z_5bA կամ https://youtu.be/7S_tz1z_5bA)</small
+                >
+              </label>
+              <input
+                type="text"
+                id="vModalYoutubeId"
+                class="form-control"
+                placeholder="YouTube ID կամ URL..."
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold"
+                >Վերնագիր <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                id="vModalTitle"
+                class="form-control"
+                placeholder="Տեսանյութի անվանում..."
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Նկարագրություն</label>
+              <textarea
+                id="vModalDesc"
+                class="form-control"
+                rows="2"
+                placeholder="Կարճ նկարագրություն..."
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                Badge-ներ
+                <small class="text-muted fw-normal ms-1"
+                  >(մինչև 2 badge, օր.՝ «Հիմունքներ» և «Beginner»)</small
+                >
+              </label>
+              <div class="badge-row">
+                <input
+                  type="text"
+                  id="vModalBadge1"
+                  class="form-control"
+                  placeholder="Badge 1 (օր. Հիմունքներ)"
+                />
+                <select
+                  id="vModalBadge1Color"
+                  class="form-select"
+                  style="max-width: 140px"
+                >
+                  <option value="bg-primary">Կապույտ</option>
+                  <option value="bg-success">Կանաչ</option>
+                  <option value="bg-warning text-dark">Դեղին</option>
+                  <option value="bg-danger">Կարմիր</option>
+                  <option value="bg-info text-dark">Cyan</option>
+                  <option value="bg-secondary">Մոխրագույն</option>
+                </select>
+              </div>
+              <div class="badge-row mt-2">
+                <input
+                  type="text"
+                  id="vModalBadge2"
+                  class="form-control"
+                  placeholder="Badge 2 (օր. Beginner)"
+                />
+                <select
+                  id="vModalBadge2Color"
+                  class="form-select"
+                  style="max-width: 140px"
+                >
+                  <option value="bg-success">Կանաչ</option>
+                  <option value="bg-primary">Կապույտ</option>
+                  <option value="bg-warning text-dark">Դեղին</option>
+                  <option value="bg-danger">Կարմիր</option>
+                  <option value="bg-info text-dark">Cyan</option>
+                  <option value="bg-secondary">Մոխրագույն</option>
+                </select>
+              </div>
+            </div>
+
+            <div
+              id="vModalError"
+              class="text-danger fw-bold"
+              style="display: none"
+            ></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Չեղարկել
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="vModalSaveBtn"
+              onclick="saveVideo()"
+            >
+              💾 Պահպանել
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CONFIRM DELETE MODAL ===== -->
+    <div
+      class="modal fade"
+      id="confirmVideoDeleteModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 400px">
+        <div
+          class="modal-content"
+          style="border-radius: 15px; overflow: hidden"
+        >
+          <div class="modal-header" style="background: #dc3545; color: #fff">
+            <h5 class="modal-title">🗑️ Հաստատե՞ք ջնջումը</h5>
+            <button
+              type="button"
+              class="btn-close"
+              style="filter: invert(1)"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body text-center py-4">
+            <p class="mb-0">
+              Այս տեսանյութը կջնջվի Firestore-ից և չի կարող վերականգնվել:
+            </p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Չեղարկել
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              id="confirmVideoDeleteBtn"
+            >
+              Ջնջել
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FIREBASE MODULE ===== -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getFirestore,
+        doc,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        collection,
+        getDocs,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBdKdi6gA6Ueqoqk-Czb0oA5IPbnFtg6fc",
+        authDomain: "sql-learning-site.firebaseapp.com",
+        projectId: "sql-learning-site",
+        storageBucket: "sql-learning-site.firebasestorage.app",
+        messagingSenderId: "827366778670",
+        appId: "1:827366778670:web:fce75ef92e459ccd9b7cbf",
+        measurementId: "G-6NVGFKT77X",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // ── Expose CRUD helpers ──
+      window.fbVideoAdd = async (category, payload) => {
+        const ref = await addDoc(
+          collection(db, "videos", category, "items"),
+          payload,
+        );
+        return ref.id;
+      };
+      window.fbVideoUpdate = async (category, docId, payload) => {
+        await updateDoc(doc(db, "videos", category, "items", docId), payload);
+      };
+      window.fbVideoDelete = async (category, docId) => {
+        await deleteDoc(doc(db, "videos", category, "items", docId));
+      };
+
+      // ── Seed: upload hardcoded videos to Firestore once ──
+      // Set window.SEED_VIDEOS = true in console then reload to seed.
+      const SEED = false; // flip to true once to populate Firestore, then back to false
+      if (SEED) {
+        const seed = {
+          basics: [
+            {
+              youtubeId: "7S_tz1z_5bA",
+              title: "SQL դասընթաց սկսնակների համար",
+              desc: "Ծանոթացում SQL լեզվին, տվյալների բազաների հիմունքներ։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "HXV3zeQKqGY",
+              title: "SQL Tutorial – Լրիվ դասընթաց",
+              desc: "Տվյալների բազայի հիմունքներ և SQL հրամաններ։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "Ofktsne-utM",
+              title: "SQL Full Course 2024",
+              desc: "Սկսնակներից մինչև առաջադեմ մակարդակ։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "9Pzj7Aj25lw",
+              title: "Սովորեք SQL 1 ժամում",
+              desc: "Արագ ներածություն SQL-ի հիմնական հասկացություններին։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+          select: [
+            {
+              youtubeId: "zbMHLJ0dY4w",
+              title: "SELECT & WHERE հրամաններ",
+              desc: "Տվյալների ընտրություն և ֆիլտրացիա SQL-ում։",
+              badge1: "SELECT",
+              badge1Color: "bg-info text-dark",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "2HVMiPPuPIM",
+              title: "SQL Subqueries",
+              desc: "Ենթահարցումներ և բարդ SELECT հարցումներ։",
+              badge1: "SELECT",
+              badge1Color: "bg-info text-dark",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+            {
+              youtubeId: "qw--VYLpxG4",
+              title: "GROUP BY & HAVING",
+              desc: "Տվյալների խմբավորում և ագրեգատ ֆունկցիաներ։",
+              badge1: "Ագրեգացիա",
+              badge1Color: "bg-info text-dark",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+          joins: [
+            {
+              youtubeId: "9yeOJ0ZMUYw",
+              title: "SQL JOIN-եր",
+              desc: "INNER, LEFT, RIGHT, FULL JOIN օրինակներով։",
+              badge1: "JOIN",
+              badge1Color: "bg-secondary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+            {
+              youtubeId: "0OQJDd3QqQM",
+              title: "SQL Joins Explained",
+              desc: "JOIN-երի տեսակներ և օգտագործման դեպքեր։",
+              badge1: "JOIN",
+              badge1Color: "bg-secondary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+          dml: [
+            {
+              youtubeId: "Cz3WcZLRaWc",
+              title: "INSERT, UPDATE, DELETE",
+              desc: "Տվյալների ավելացում, թարմացում և ջնջում։",
+              badge1: "DML",
+              badge1Color: "bg-warning text-dark",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "M6lw8YmFxq4",
+              title: "SQL Data Manipulation",
+              desc: "Տվյալների մանիպուլյացիայի հրամաններ։",
+              badge1: "DML",
+              badge1Color: "bg-warning text-dark",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+          design: [
+            {
+              youtubeId: "W2Z7fbCLSTw",
+              title: "Database Normalization",
+              desc: "Տվյալների բազայի նորմալիզացիայի սկզբունքներ։",
+              badge1: "Design",
+              badge1Color: "bg-primary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+            {
+              youtubeId: "ztHopE5Wnpc",
+              title: "Database Design Tutorial",
+              desc: "Տվյալների բազայի ճիշտ նախագծում։",
+              badge1: "Design",
+              badge1Color: "bg-primary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+          advanced: [
+            {
+              youtubeId: "7mz73uXD9DA",
+              title: "SQL Indexes",
+              desc: "Ինդեքսներ և արագագործության օպտիմիզացիա։",
+              badge1: "Indexes",
+              badge1Color: "bg-danger",
+              badge2: "Advanced",
+              badge2Color: "bg-danger",
+            },
+            {
+              youtubeId: "k5E2AVpwsko",
+              title: "Stored Procedures",
+              desc: "Պահված պրոցեդուրաներ և ֆունկցիաներ։",
+              badge1: "Procedures",
+              badge1Color: "bg-danger",
+              badge2: "Advanced",
+              badge2Color: "bg-danger",
+            },
+            {
+              youtubeId: "3EJlovevfcA",
+              title: "Transactions & ACID",
+              desc: "Տրանզակցիաներ և ACID սկզբունքներ։",
+              badge1: "Transactions",
+              badge1Color: "bg-danger",
+              badge2: "Advanced",
+              badge2Color: "bg-danger",
+            },
+            {
+              youtubeId: "zsjvFFKOm3c",
+              title: "SQL Performance Tuning",
+              desc: "Հարցումների օպտիմիզացիա և արագագործություն։",
+              badge1: "Performance",
+              badge1Color: "bg-danger",
+              badge2: "Advanced",
+              badge2Color: "bg-danger",
+            },
+          ],
+        };
+        for (const [cat, videos] of Object.entries(seed)) {
+          for (const v of videos) {
+            await addDoc(collection(db, "videos", cat, "items"), v);
+          }
+        }
+        console.log("✅ Seed complete — set SEED = false and reload.");
+      }
+
+      // ===== SEED VIDEOS FROM FIRST FILE =====
+      async function seedVideos() {
+        const data = {
+          basics: [
+            {
+              youtubeId: "7S_tz1z_5bA",
+              title: "SQL դասընթաց սկսնակների համար",
+              desc: "Ծանոթացում SQL լեզվին, տվյալների բազաների հիմունքներ։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "HXV3zeQKqGY",
+              title: "SQL Tutorial – Լրիվ դասընթաց",
+              desc: "Տվյալների բազայի հիմունքներ և SQL հրամաններ։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "Ofktsne-utM",
+              title: "SQL Full Course 2024",
+              desc: "Սկսնակներից մինչև առաջադեմ մակարդակ։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "9Pzj7Aj25lw",
+              title: "Սովորեք SQL 1 ժամում",
+              desc: "Արագ ներածություն SQL-ի հիմնական հասկացություններին։",
+              badge1: "Հիմունքներ",
+              badge1Color: "bg-primary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+
+          select: [
+            {
+              youtubeId: "zbMHLJ0dY4w",
+              title: "SELECT & WHERE հրամաններ",
+              desc: "Տվյալների ընտրություն և ֆիլտրացիա SQL-ում։",
+              badge1: "SELECT",
+              badge1Color: "bg-info text-dark",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "2HVMiPPuPIM",
+              title: "SQL Subqueries",
+              desc: "Ենթահարցումներ և բարդ SELECT հարցումներ։",
+              badge1: "SELECT",
+              badge1Color: "bg-info text-dark",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+            {
+              youtubeId: "qw--VYLpxG4",
+              title: "GROUP BY & HAVING",
+              desc: "Տվյալների խմբավորում և ագրեգատ ֆունկցիաներ։",
+              badge1: "Ագրեգացիա",
+              badge1Color: "bg-info text-dark",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+
+          joins: [
+            {
+              youtubeId: "9yeOJ0ZMUYw",
+              title: "SQL JOIN-եր",
+              desc: "INNER, LEFT, RIGHT, FULL JOIN օրինակներով։",
+              badge1: "JOIN",
+              badge1Color: "bg-secondary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+            {
+              youtubeId: "0OQJDd3QqQM",
+              title: "SQL Joins Explained",
+              desc: "JOIN-երի տեսակներ և օգտագործման դեպքեր։",
+              badge1: "JOIN",
+              badge1Color: "bg-secondary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+
+          dml: [
+            {
+              youtubeId: "Cz3WcZLRaWc",
+              title: "INSERT, UPDATE, DELETE",
+              desc: "Տվյալների ավելացում, թարմացում և ջնջում։",
+              badge1: "DML",
+              badge1Color: "bg-warning text-dark",
+              badge2: "Beginner",
+              badge2Color: "bg-success",
+            },
+            {
+              youtubeId: "M6lw8YmFxq4",
+              title: "SQL Data Manipulation",
+              desc: "Տվյալների մանիպուլյացիայի հրամաններ։",
+              badge1: "DML",
+              badge1Color: "bg-warning text-dark",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+
+          design: [
+            {
+              youtubeId: "W2Z7fbCLSTw",
+              title: "Database Normalization",
+              desc: "Տվյալների բազայի նորմալիզացիայի սկզբունքներ։",
+              badge1: "Design",
+              badge1Color: "bg-primary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+            {
+              youtubeId: "ztHopE5Wnpc",
+              title: "Database Design Tutorial",
+              desc: "Տվյալների բազայի ճիշտ նախագծում։",
+              badge1: "Design",
+              badge1Color: "bg-primary",
+              badge2: "Intermediate",
+              badge2Color: "bg-warning text-dark",
+            },
+          ],
+
+          advanced: [
+            {
+              youtubeId: "7mz73uXD9DA",
+              title: "SQL Indexes",
+              desc: "Ինդեքսներ և արագագործության օպտիմիզացիա։",
+              badge1: "Indexes",
+              badge1Color: "bg-danger",
+              badge2: "Advanced",
+              badge2Color: "bg-danger",
+            },
+            {
+              youtubeId: "k5E2AVpwsko",
+              title: "Stored Procedures",
+              desc: "Պահված պրոցեդուրաներ և ֆունկցիաներ։",
+              badge1: "Procedures",
+              badge1Color: "bg-danger",
+              badge2: "Advanced",
+              badge2Color: "bg-danger",
+            },
+          ],
+        };
+
+        for (const [category, videos] of Object.entries(data)) {
+          for (const video of videos) {
+            await addDoc(collection(db, "videos", category, "items"), video);
+          }
+        }
+
+        console.log("✅ Videos seeded to Firestore");
+      }
+
+      // seedVideos();
+
+      function renderSkeleton(category, count = 6) {
+        const grid = document.getElementById(`videos-${category}`);
+        if (!grid) return;
+
+        grid.innerHTML = "";
+
+        for (let i = 0; i < count; i++) {
+          const col = document.createElement("div");
+          col.className = "col-lg-4 col-md-6";
+
+          col.innerHTML = `
+      <div class="card video-card p-2">
+        <div class="ratio ratio-16x9 skeleton skeleton-video"></div>
+        <div class="card-body">
+          <div class="skeleton skeleton-title mb-2"></div>
+          <div class="skeleton skeleton-text mb-2"></div>
+          <div class="skeleton skeleton-text short"></div>
+        </div>
+      </div>
+    `;
+
+          grid.appendChild(col);
+        }
+      }
+
+      // ── Fetch all categories ──
+      async function fetchAll() {
+        const cats = ["basics", "select", "joins", "dml", "design", "advanced"];
+        const result = {};
+        for (const cat of cats) {
+          try {
+            const snap = await getDocs(collection(db, "videos", cat, "items"));
+            result[cat] = snap.docs.map((d) => ({ _id: d.id, ...d.data() }));
+          } catch (err) {
+            console.error(`Error loading videos/${cat}:`, err);
+            result[cat] = [];
+          }
+        }
+        return result;
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        const cats = ["basics", "select", "joins", "dml", "design", "advanced"];
+
+        // show skeletons
+        cats.forEach((c) => renderSkeleton(c));
+
+        window.remoteVideoData = await fetchAll();
+
+        renderAllVideos(window.remoteVideoData);
+        initAdminMode();
+      });
+    </script>
+
+    <!-- ===== VIDEO RENDER + ADMIN LOGIC ===== -->
+    <script>
+      const ADMIN_SESSION_KEY = "adminSession";
+
+      // ── Render all categories ──
+      function renderAllVideos(data) {
+        Object.entries(data).forEach(([cat, videos]) =>
+          renderCategory(cat, videos),
+        );
+      }
+
+      // ── Render one category's grid ──
+      function renderCategory(cat, videos) {
+        const grid = document.getElementById(`videos-${cat}`);
+        if (!grid) return;
+        grid.innerHTML = "";
+        if (!videos || videos.length === 0) {
+          grid.innerHTML = `<p class="text-muted ms-2">Տեսանյութեր չկան:</p>`;
+          return;
+        }
+        videos.forEach((v) => grid.appendChild(buildCard(cat, v)));
+      }
+
+      // ── Build one video card element ──
+      function buildCard(cat, v) {
+        const col = document.createElement("div");
+        col.className = "col-lg-4 col-md-6";
+
+        const badge1Html = v.badge1
+          ? `<span class="badge ${esc(v.badge1Color || "bg-primary")}">${esc(v.badge1)}</span>`
+          : "";
+        const badge2Html = v.badge2
+          ? `<span class="badge ${esc(v.badge2Color || "bg-success")}">${esc(v.badge2)}</span>`
+          : "";
+
+        col.innerHTML = `
+                <div class="card video-card" data-doc-id="${esc(v._id)}" data-category="${esc(cat)}">
+                  <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/${esc(v.youtubeId)}" allowfullscreen></iframe>
+                  </div>
+                  <div class="card-body">
+                    <h5>${esc(v.title)}</h5>
+                    <p>${esc(v.desc || "")}</p>
+                    ${badge1Html}${badge2Html}
+                  </div>
+                  <div class="admin-card-actions">
+                    <button class="btn-edit-v"   onclick="openEditModal('${esc(cat)}','${esc(v._id)}')">✏️ Խմբագրել</button>
+                    <button class="btn-delete-v" onclick="openVideoDeleteConfirm('${esc(cat)}','${esc(v._id)}')">🗑️ Ջնջել</button>
+                  </div>
+                </div>`;
+        return col;
+      }
+
+      // ── Admin mode init ──
+      function initAdminMode() {
+        const raw = localStorage.getItem(ADMIN_SESSION_KEY);
+        if (!raw) return;
+        const session = JSON.parse(raw);
+        document.body.classList.add("admin-mode");
+        document.getElementById("adminToolbar").classList.add("visible");
+        document.getElementById("adminEmailDisplay").textContent =
+          session.email;
+      }
+
+      // ════════════════════════════════════════
+      //  ADD / EDIT MODAL
+      // ════════════════════════════════════════
+      let _vEditDocId = null;
+      let _vEditCategory = null;
+
+      function openAddModal(category) {
+        _vEditDocId = null;
+        _vEditCategory = category;
+
+        document.getElementById("videoModalTitle").textContent =
+          "➕ Ավելացնել տեսանյութ";
+        document.getElementById("vModalCategory").value = category;
+        document.getElementById("vModalCategory").disabled = false;
+        document.getElementById("vModalYoutubeId").value = "";
+        document.getElementById("vModalTitle").value = "";
+        document.getElementById("vModalDesc").value = "";
+        document.getElementById("vModalBadge1").value = "";
+        document.getElementById("vModalBadge2").value = "";
+        document.getElementById("vModalBadge1Color").value = "bg-primary";
+        document.getElementById("vModalBadge2Color").value = "bg-success";
+        clearVModalError();
+
+        new bootstrap.Modal(document.getElementById("videoAdminModal")).show();
+      }
+
+      function openEditModal(category, docId) {
+        const v = (window.remoteVideoData[category] || []).find(
+          (x) => x._id === docId,
+        );
+        if (!v) return;
+
+        _vEditDocId = docId;
+        _vEditCategory = category;
+
+        document.getElementById("videoModalTitle").textContent =
+          "✏️ Խմբագրել տեսանյութը";
+        document.getElementById("vModalCategory").value = category;
+        document.getElementById("vModalCategory").disabled = true;
+        document.getElementById("vModalYoutubeId").value = v.youtubeId || "";
+        document.getElementById("vModalTitle").value = v.title || "";
+        document.getElementById("vModalDesc").value = v.desc || "";
+        document.getElementById("vModalBadge1").value = v.badge1 || "";
+        document.getElementById("vModalBadge2").value = v.badge2 || "";
+        document.getElementById("vModalBadge1Color").value =
+          v.badge1Color || "bg-primary";
+        document.getElementById("vModalBadge2Color").value =
+          v.badge2Color || "bg-success";
+        clearVModalError();
+
+        new bootstrap.Modal(document.getElementById("videoAdminModal")).show();
+      }
+
+      // ── Extract YouTube ID from URL or bare ID ──
+      function extractYoutubeId(input) {
+        input = input.trim();
+        // Already a bare ID (11 chars, no slash)
+        if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+        // youtu.be/ID
+        const short = input.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+        if (short) return short[1];
+        // youtube.com/watch?v=ID or /embed/ID
+        const long = input.match(/(?:v=|\/embed\/)([a-zA-Z0-9_-]{11})/);
+        if (long) return long[1];
+        return null;
+      }
+
+      async function saveVideo() {
+        clearVModalError();
+
+        const category =
+          _vEditCategory || document.getElementById("vModalCategory").value;
+        const rawYt = document.getElementById("vModalYoutubeId").value.trim();
+        const title = document.getElementById("vModalTitle").value.trim();
+        const desc = document.getElementById("vModalDesc").value.trim();
+        const badge1 = document.getElementById("vModalBadge1").value.trim();
+        const badge2 = document.getElementById("vModalBadge2").value.trim();
+        const badge1Color = document.getElementById("vModalBadge1Color").value;
+        const badge2Color = document.getElementById("vModalBadge2Color").value;
+
+        if (!rawYt) return showVModalError("YouTube ID կամ URL-ը պարտադիր է:");
+        if (!title) return showVModalError("Վերնագիրը պարտադիր է:");
+
+        const youtubeId = extractYoutubeId(rawYt);
+        if (!youtubeId) return showVModalError("Անվավեր YouTube ID կամ URL:");
+
+        const payload = {
+          youtubeId,
+          title,
+          desc,
+          badge1,
+          badge1Color,
+          badge2,
+          badge2Color,
+        };
+
+        const btn = document.getElementById("vModalSaveBtn");
+        btn.disabled = true;
+        btn.textContent = "⏳ Պահպանվում...";
+
+        try {
+          if (_vEditDocId) {
+            // UPDATE
+            await window.fbVideoUpdate(category, _vEditDocId, payload);
+            const arr = window.remoteVideoData[category];
+            const idx = arr.findIndex((x) => x._id === _vEditDocId);
+            if (idx !== -1) arr[idx] = { ...arr[idx], ...payload };
+            showToast("✅ Տեսանյութը թարմացվեց");
+          } else {
+            // ADD
+            const newId = await window.fbVideoAdd(category, payload);
+            if (!window.remoteVideoData[category])
+              window.remoteVideoData[category] = [];
+            window.remoteVideoData[category].push({ _id: newId, ...payload });
+            showToast("✅ Տեսանյութն ավելացվեց");
+          }
+
+          bootstrap.Modal.getInstance(
+            document.getElementById("videoAdminModal"),
+          ).hide();
+          renderCategory(category, window.remoteVideoData[category]);
+        } catch (err) {
+          console.error(err);
+          showVModalError("Firebase-ի սխալ: " + err.message);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "💾 Պահպանել";
+        }
+      }
+
+      // ════════════════════════════════════════
+      //  DELETE
+      // ════════════════════════════════════════
+      let _vDelCategory = null;
+      let _vDelDocId = null;
+
+      function openVideoDeleteConfirm(category, docId) {
+        _vDelCategory = category;
+        _vDelDocId = docId;
+        new bootstrap.Modal(
+          document.getElementById("confirmVideoDeleteModal"),
+        ).show();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .getElementById("confirmVideoDeleteBtn")
+          .addEventListener("click", async () => {
+            if (!_vDelCategory || !_vDelDocId) return;
+
+            const btn = document.getElementById("confirmVideoDeleteBtn");
+            btn.disabled = true;
+            btn.textContent = "⏳...";
+
+            try {
+              await window.fbVideoDelete(_vDelCategory, _vDelDocId);
+              window.remoteVideoData[_vDelCategory] = (
+                window.remoteVideoData[_vDelCategory] || []
+              ).filter((v) => v._id !== _vDelDocId);
+
+              bootstrap.Modal.getInstance(
+                document.getElementById("confirmVideoDeleteModal"),
+              ).hide();
+              renderCategory(
+                _vDelCategory,
+                window.remoteVideoData[_vDelCategory],
+              );
+              showToast("🗑️ Տեսանյութը ջնջվեց");
+            } catch (err) {
+              console.error(err);
+              alert("Firebase-ի սխալ ջնջելիս: " + err.message);
+            } finally {
+              btn.disabled = false;
+              btn.textContent = "Ջնջել";
+            }
+          });
+      });
+
+      function showGlobalLoader() {
+        const el = document.createElement("div");
+        el.id = "globalLoader";
+        el.style = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 3px;
+          width: 100%;
+          background: linear-gradient(90deg,#0d6efd,#198754);
+          animation: loadingBar 1.2s infinite;
+          z-index:9999;
+        `;
+        document.body.appendChild(el);
+      }
+
+      function hideGlobalLoader() {
+        document.getElementById("globalLoader")?.remove();
+      }
+
+      // ════════════════════════════════════════
+      //  HELPERS
+      // ════════════════════════════════════════
+      function showVModalError(msg) {
+        const el = document.getElementById("vModalError");
+        el.textContent = msg;
+        el.style.display = "block";
+      }
+      function clearVModalError() {
+        const el = document.getElementById("vModalError");
+        el.textContent = "";
+        el.style.display = "none";
+      }
+
+      function esc(str) {
+        const d = document.createElement("div");
+        d.textContent = str || "";
+        return d.innerHTML;
+      }
+
+      let _toastTimer;
+      function showToast(msg) {
+        let t = document.getElementById("adminToast");
+        if (!t) {
+          t = document.createElement("div");
+          t.id = "adminToast";
+          Object.assign(t.style, {
+            position: "fixed",
+            bottom: "28px",
+            right: "28px",
+            zIndex: "9999",
+            background: "#198754",
+            color: "#fff",
+            padding: "12px 22px",
+            borderRadius: "12px",
+            fontWeight: "600",
+            fontSize: ".95rem",
+            boxShadow: "0 4px 20px rgba(0,0,0,.25)",
+            transition: "opacity .3s",
+            opacity: "0",
+          });
+          document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.opacity = "1";
+        clearTimeout(_toastTimer);
+        _toastTimer = setTimeout(() => {
+          t.style.opacity = "0";
+        }, 3000);
+      }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
