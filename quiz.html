@@ -4,17 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SQL Թեստ - Ըստ Թեմաների</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <style>
-      /* ===== SMOOTH SCROLL ===== */
-      html {
-        scroll-behavior: smooth;
-      }
+      html { scroll-behavior: smooth; }
 
-      /* ===== PAGE BACKGROUND ===== */
       body {
         font-family: "Segoe UI", sans-serif;
         background:
@@ -26,7 +19,6 @@
         background-attachment: fixed;
       }
 
-      /* ===== HEADER ===== */
       .main-header {
         background: linear-gradient(135deg, #0d6efd, #292664);
         color: white;
@@ -36,11 +28,7 @@
         z-index: 1000;
         transition: all 0.3s ease;
       }
-
-      .main-header.scrolled {
-        padding: 15px 0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      }
+      .main-header.scrolled { padding: 15px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
       header nav a {
         position: relative;
@@ -50,27 +38,17 @@
         text-decoration: none !important;
         padding-bottom: 4px;
       }
-
       header nav a::after {
         content: "";
         position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 2px;
+        left: 0; bottom: 0;
+        width: 0; height: 2px;
         background-color: #ffffff;
         transition: width 0.25s ease;
       }
+      header nav a:hover::after { width: 100%; }
+      .navbar-brand::after { display: none !important; }
 
-      header nav a:hover::after {
-        width: 100%;
-      }
-
-      .navbar-brand::after {
-        display: none !important;
-      }
-
-      /* ===== MAIN CONTAINER ===== */
       main.container {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
@@ -78,40 +56,33 @@
         border-radius: 30px;
         margin-top: 60px;
         margin-bottom: 80px;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 25px 60px rgba(0,0,0,0.15);
       }
+      main h2 { text-align: center; font-weight: 800; color: #084298; margin-bottom: 40px; }
 
-      main h2 {
-        text-align: center;
-        font-weight: 800;
-        color: #084298;
-        margin-bottom: 40px;
-      }
+      .topic-section { margin-bottom: 60px; scroll-margin-top: 110px; }
 
-      /* ===== TOPIC SECTIONS ===== */
-      .topic-section {
-        margin-bottom: 60px;
-        /* offset for sticky header when jumping via anchor */
-        scroll-margin-top: 110px;
-      }
-
-      .topic-title {
-        font-weight: 700;
-        color: #0d6efd;
+      /* Wrap each topic title so we can inject an Add button beside it */
+      .topic-title-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin-bottom: 30px;
         padding-bottom: 15px;
         border-bottom: 3px solid #0d6efd;
+      }
+      .topic-title {
+        font-weight: 700;
+        color: #0d6efd;
         font-size: 1.8rem;
         display: flex;
         align-items: center;
         gap: 15px;
+        margin: 0;
+        padding: 0;
+        border: none;
       }
 
-      .topic-icon {
-        font-size: 2rem;
-      }
-
-      /* ===== QUESTION BLOCKS ===== */
       .question-block {
         background: #ffffff;
         border: 1px solid #e9ecef;
@@ -120,20 +91,9 @@
         margin-bottom: 25px;
         transition: all 0.3s ease;
       }
+      .question-block:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #0d6efd; }
+      .question-block strong { font-size: 1.1rem; color: #2c3e50; display: block; margin-bottom: 15px; }
 
-      .question-block:hover {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-        border-color: #0d6efd;
-      }
-
-      .question-block strong {
-        font-size: 1.1rem;
-        color: #2c3e50;
-        display: block;
-        margin-bottom: 15px;
-      }
-
-      /* ===== OPTIONS ===== */
       .option {
         padding: 12px 15px;
         border-radius: 10px;
@@ -142,125 +102,117 @@
         transition: background 0.2s;
         border: 1px solid transparent;
       }
+      .option:hover { background: #f8f9fa; border-color: #dee2e6; }
+      .option input[type="radio"] { margin-right: 10px; transform: scale(1.2); }
 
-      .option:hover {
-        background: #f8f9fa;
-        border-color: #dee2e6;
-      }
+      .correct   { background-color: #d4edda !important; border-color: #c3e6cb !important; color: #155724; }
+      .incorrect { background-color: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24; }
 
-      .option input[type="radio"] {
-        margin-right: 10px;
-        transform: scale(1.2);
-      }
+      .btn-primary { border-radius: 25px; padding: 12px 30px; font-weight: 600; }
 
-      /* ===== RESULTS ===== */
-      .correct {
-        background-color: #d4edda !important;
-        border-color: #c3e6cb !important;
-        color: #155724;
-      }
-
-      .incorrect {
-        background-color: #f8d7da !important;
-        border-color: #f5c6cb !important;
-        color: #721c24;
-      }
-
-      .question-result {
-        font-weight: 600;
-        padding: 10px;
-        border-radius: 8px;
-        font-size: 0.9rem;
-      }
-
-      /* ===== BUTTONS ===== */
-      .btn-check-one {
-        border-radius: 20px;
-        padding: 6px 20px;
-        font-weight: 600;
-      }
-
-      .btn-primary {
-        border-radius: 25px;
-        padding: 12px 30px;
-        font-weight: 600;
-      }
-
-      /* ===== FOOTER ===== */
-      footer {
-        background-color: #212529;
-        color: #adb5bd;
-        padding: 30px 0;
-        text-align: center;
-      }
+      footer { background-color: #212529; color: #adb5bd; padding: 30px 0; text-align: center; }
 
       @media (max-width: 768px) {
-        main.container {
-          padding: 30px 20px;
-        }
-
-        .topic-title {
-          font-size: 1.4rem;
-        }
+        main.container { padding: 30px 20px; }
+        .topic-title { font-size: 1.4rem; }
       }
-
-      /* ===== MOBILE MENU CENTERING ===== */
       @media (max-width: 991.98px) {
-        .navbar-collapse {
-          text-align: center; /* Centers the text of the links */
-          padding-top: 20px;
-          padding-bottom: 20px;
-        }
-
-        .navbar-nav {
-          align-items: center; /* Centers the flex items */
-        }
-
-        header nav a {
-          margin: 10px 0 !important; /* Adds vertical spacing between links */
-          display: inline-block; /* Allows the underline effect to stay centered under text */
-        }
+        .navbar-collapse { text-align: center; padding-top: 20px; padding-bottom: 20px; }
+        .navbar-nav { align-items: center; }
+        header nav a { margin: 10px 0 !important; display: inline-block; }
       }
+
+      /* ===== ADMIN TOOLBAR ===== */
+      #adminToolbar {
+        display: none;
+        background: linear-gradient(135deg, #fff8e1, #fff3cd);
+        border: 2px solid #ffc107;
+        border-radius: 15px;
+        padding: 14px 22px;
+        margin-bottom: 32px;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      #adminToolbar.visible { display: flex; }
+      #adminToolbar .admin-label { font-weight: 700; color: #856404; font-size: 0.95rem; }
+
+      /* Add button per topic title (hidden unless admin) */
+      .btn-add-in-topic {
+        display: none;
+        border-radius: 20px;
+        padding: 5px 18px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        background: #0d6efd;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background .2s;
+      }
+      .btn-add-in-topic:hover { background: #0b5ed7; }
+      body.admin-mode .btn-add-in-topic { display: inline-block; }
+
+      /* Edit / Delete buttons per question (hidden unless admin) */
+      .admin-actions-row {
+        display: none;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      body.admin-mode .admin-actions-row { display: flex; }
+
+      .btn-edit-q, .btn-delete-q {
+        border-radius: 20px;
+        padding: 4px 16px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all .2s;
+      }
+      .btn-edit-q   { background: #e8f0fe; color: #1a56db; }
+      .btn-edit-q:hover   { background: #1a56db; color: #fff; }
+      .btn-delete-q { background: #fde8e8; color: #c81e1e; }
+      .btn-delete-q:hover { background: #c81e1e; color: #fff; }
+
+      /* ===== ADD/EDIT MODAL ===== */
+      #quizAdminModal .modal-header {
+        background: linear-gradient(135deg, #0d6efd, #292664);
+        color: #fff;
+        border-radius: 12px 12px 0 0;
+      }
+      #quizAdminModal .modal-header .btn-close { filter: invert(1); }
+      #quizAdminModal .modal-title { font-weight: 700; }
+
+      .opt-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+      .opt-row input[type="text"] { flex: 1; }
+      .opt-row label {
+        white-space: nowrap; font-size: .85rem; color: #555;
+        display: flex; align-items: center; gap: 5px; cursor: pointer;
+      }
+      .opt-row input[type="radio"] { accent-color: #198754; width: 16px; height: 16px; cursor: pointer; }
     </style>
   </head>
   <body>
+
     <!-- ===== HEADER ===== -->
     <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-dark container">
-        <a
-          class="navbar-brand d-flex align-items-center gap-2 fw-bold"
-          href="#"
-        >
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
           <img src="./images/logo.png" alt="ASPU Logo" height="45" />
           <span class="d-none d-lg-inline">SQL ուսուցման Կայք</span>
         </a>
-
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="intro.html">Ներածություն</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="application.html">Կիրառությունը</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="commands.html">SQL հրամանները</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="videos.html">Տեսադասեր</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="quiz.html">Թեստ</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="intro.html">Ներածություն</a></li>
+            <li class="nav-item"><a class="nav-link" href="application.html">Կիրառությունը</a></li>
+            <li class="nav-item"><a class="nav-link" href="commands.html">SQL հրամանները</a></li>
+            <li class="nav-item"><a class="nav-link" href="videos.html">Տեսադասեր</a></li>
+            <li class="nav-item"><a class="nav-link" href="quiz.html">Թեստ</a></li>
           </ul>
         </div>
       </nav>
@@ -269,50 +221,179 @@
     <main class="container">
       <h2 class="text-center mb-5">SQL Թեստ - Ըստ Թեմաների</h2>
 
+      <!-- Admin toolbar — visible only when adminSession exists in localStorage -->
+      <div id="adminToolbar">
+        <span class="admin-label">🛡️ Admin ռեժիմ</span>
+        <span id="adminEmailDisplay" style="color:#856404; font-size:.9rem;"></span>
+        <span style="color:#aaa; font-size:.82rem; margin-left:4px;">— Ավելացնել/Խմբագրել/Ջնջել հարցեր ամեն բաժնից</span>
+      </div>
+
+      <!-- ── TOPIC SECTIONS ── -->
       <section class="topic-section" id="quiz-basics">
-        <h3 class="topic-title">📚 SQL Հիմունքներ</h3>
-        <div id="quiz-basics-questions" class="loading-text">Բեռնվում է...</div>
+        <div class="topic-title-wrap">
+          <h3 class="topic-title">📚 SQL Հիմունքներ</h3>
+          <button class="btn-add-in-topic" onclick="openAddModal('basics')">+ Ավելացնել</button>
+        </div>
+        <div id="quiz-basics-questions">Բեռնվում է...</div>
       </section>
 
       <section class="topic-section" id="quiz-select">
-        <h3 class="topic-title">🔍 SELECT և Հարցումներ</h3>
-        <div id="quiz-select-questions" class="loading-text">Բեռնվում է...</div>
+        <div class="topic-title-wrap">
+          <h3 class="topic-title">🔍 SELECT և Հարցումներ</h3>
+          <button class="btn-add-in-topic" onclick="openAddModal('select')">+ Ավելացնել</button>
+        </div>
+        <div id="quiz-select-questions">Բեռնվում է...</div>
       </section>
 
       <section class="topic-section" id="quiz-dml">
-        <h3 class="topic-title">✏️ INSERT, UPDATE, DELETE</h3>
-        <div id="quiz-dml-questions" class="loading-text">Բեռնվում է...</div>
+        <div class="topic-title-wrap">
+          <h3 class="topic-title">✏️ INSERT, UPDATE, DELETE</h3>
+          <button class="btn-add-in-topic" onclick="openAddModal('dml')">+ Ավելացնել</button>
+        </div>
+        <div id="quiz-dml-questions">Բեռնվում է...</div>
       </section>
 
       <section class="topic-section" id="quiz-aggregate">
-        <h3 class="topic-title">📊 Ագրեգատ Ֆունկցիաներ</h3>
-        <div id="quiz-aggregate-questions" class="loading-text">
-          Բեռնվում է...
+        <div class="topic-title-wrap">
+          <h3 class="topic-title">📊 Ագրեգատ Ֆունկցիաներ</h3>
+          <button class="btn-add-in-topic" onclick="openAddModal('aggregate')">+ Ավելացնել</button>
         </div>
+        <div id="quiz-aggregate-questions">Բեռնվում է...</div>
       </section>
 
       <section class="topic-section" id="quiz-joins">
-        <h3 class="topic-title">🔗 JOIN-եր և Կապեր</h3>
-        <div id="quiz-joins-questions" class="loading-text">Բեռնվում է...</div>
+        <div class="topic-title-wrap">
+          <h3 class="topic-title">🔗 JOIN-եր և Կապեր</h3>
+          <button class="btn-add-in-topic" onclick="openAddModal('joins')">+ Ավելացնել</button>
+        </div>
+        <div id="quiz-joins-questions">Բեռնվում է...</div>
       </section>
 
-      <div class="text-center mt-4">
-        <a href="index.html" class="btn btn-primary btn-lg">Վերադառնալ</a>
+      <section class="topic-section" id="quiz-design">
+        <div class="topic-title-wrap">
+          <h3 class="topic-title">🗄️ Աղյուսակի Ձևավորում</h3>
+          <button class="btn-add-in-topic" onclick="openAddModal('design')">+ Ավելացնել</button>
+        </div>
+        <div id="quiz-design-questions">Բեռնվում է...</div>
+      </section>
+
+      <section class="topic-section" id="quiz-advanced">
+        <div class="topic-title-wrap">
+          <h3 class="topic-title">🚀 Առաջադեմ SQL</h3>
+          <button class="btn-add-in-topic" onclick="openAddModal('advanced')">+ Ավելացնել</button>
+        </div>
+        <div id="quiz-advanced-questions">Բեռնվում է...</div>
+      </section>
+
+     <div class="text-center mt-5">
+        <a href="index.html" class="btn btn-primary">
+          Վերադառնալ հիմնական էջ
+        </a>
       </div>
     </main>
 
+    <!-- ===== ADD / EDIT MODAL ===== -->
+    <div class="modal fade" id="quizAdminModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border-radius:15px; overflow:hidden;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="quizModalTitle">Ավելացնել հարց</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Կատեգորիա</label>
+              <select id="modalCategory" class="form-select">
+                <option value="basics">📚 SQL Հիմունքներ</option>
+                <option value="select">🔍 SELECT և Հարցումներ</option>
+                <option value="dml">✏️ INSERT, UPDATE, DELETE</option>
+                <option value="aggregate">📊 Ագրեգատ Ֆունկցիաներ</option>
+                <option value="joins">🔗 JOIN-եր և Կապեր</option>
+                <option value="design">🗄️ Աղյուսակի Ձևավորում</option>
+                <option value="advanced">🚀 Առաջադեմ SQL</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                Հարց <span class="text-danger">*</span>
+              </label>
+              <textarea id="modalQuestion" class="form-control" rows="3"
+                placeholder="Մուտքագրեք հարցը..."></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                Պատասխանի տարբերակներ <span class="text-danger">*</span>
+                <small class="text-muted fw-normal ms-2">
+                  (ռադիո կոճակով ընտրեք ճիշտ պատասխանը)
+                </small>
+              </label>
+              <div id="modalOptions">
+                <div class="opt-row">
+                  <span class="fw-bold text-muted" style="width:18px">A</span>
+                  <input type="text" class="form-control modal-opt-input" placeholder="Տարբերակ A" />
+                  <label><input type="radio" name="modalCorrect" value="0" /> Ճիշտ</label>
+                </div>
+                <div class="opt-row">
+                  <span class="fw-bold text-muted" style="width:18px">B</span>
+                  <input type="text" class="form-control modal-opt-input" placeholder="Տարբերակ B" />
+                  <label><input type="radio" name="modalCorrect" value="1" /> Ճիշտ</label>
+                </div>
+                <div class="opt-row">
+                  <span class="fw-bold text-muted" style="width:18px">C</span>
+                  <input type="text" class="form-control modal-opt-input" placeholder="Տարբերակ C" />
+                  <label><input type="radio" name="modalCorrect" value="2" /> Ճիշտ</label>
+                </div>
+                <div class="opt-row">
+                  <span class="fw-bold text-muted" style="width:18px">D</span>
+                  <input type="text" class="form-control modal-opt-input" placeholder="Տարբերակ D" />
+                  <label><input type="radio" name="modalCorrect" value="3" /> Ճիշտ</label>
+                </div>
+              </div>
+            </div>
+
+            <div id="modalError" class="text-danger fw-bold" style="display:none;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Չեղարկել</button>
+            <button type="button" class="btn btn-primary" id="modalSaveBtn" onclick="saveQuestion()">
+              💾 Պահպանել
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CONFIRM DELETE MODAL ===== -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" style="max-width:400px;">
+        <div class="modal-content" style="border-radius:15px; overflow:hidden;">
+          <div class="modal-header" style="background:#dc3545; color:#fff;">
+            <h5 class="modal-title">🗑️ Հաստատե՞ք ջնջումը</h5>
+            <button type="button" class="btn-close" style="filter:invert(1);" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body text-center py-4">
+            <p class="mb-0">Այս հարցը կջնջվի Firestore-ից և չի կարող վերականգնվել:</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Չեղարկել</button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Ջնջել</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FIREBASE MODULE ===== -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import {
         getFirestore,
-        doc,
-        setDoc,
-        addDoc,
-        collection,
-        getDocs,
+        doc, addDoc, updateDoc, deleteDoc,
+        collection, getDocs,
       } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-      // 1. Սկզբից դրեք Config-ը
       const firebaseConfig = {
         apiKey: "AIzaSyBdKdi6gA6Ueqoqk-Czb0oA5IPbnFtg6fc",
         authDomain: "sql-learning-site.firebaseapp.com",
@@ -323,552 +404,33 @@
         measurementId: "G-6NVGFKT77X",
       };
 
-      // 2. Init արեք Firebase-ը
       const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+      const db  = getFirestore(app);
 
-      let remoteQuizData = {};
+      // ── Expose CRUD helpers to global scope ──
 
-      const allQuestions = {
-        basics: [
-          {
-            q: "Ո՞ր հրամանը կվերադարձնի բոլոր տվյալները 'Users' աղյուսակից։",
-            options: [
-              "GET * FROM Users;",
-              "SELECT * FROM Users;",
-              "SHOW ALL Users;",
-              "FETCH * Users;",
-            ],
-            correct: 1,
-          },
-          {
-            q: "Ո՞ր հրամանն է ստեղծում նոր աղյուսակ:",
-            options: ["CREATE TABLE", "ADD TABLE", "NEW TABLE", "INSERT TABLE"],
-            correct: 0,
-          },
-          {
-            q: "Ո՞ր հրամանն է ջնջում աղյուսակը:",
-            options: [
-              "DELETE TABLE",
-              "DROP TABLE",
-              "REMOVE TABLE",
-              "ERASE TABLE",
-            ],
-            correct: 1,
-          },
-          {
-            q: "Ո՞ր հրամանն է օգտագործվում տվյալների բազա ստեղծելու համար:",
-            options: [
-              "NEW DATABASE",
-              "CREATE DATABASE",
-              "ADD DATABASE",
-              "MAKE DATABASE",
-            ],
-            correct: 1,
-          },
-        ],
-
-        select: [
-          {
-            q: "WHERE պայմանը օգտագործվում է՝",
-            options: [
-              "Տվյալները ֆիլտրելու համար",
-              "Աղյուսակ ստեղծելու համար",
-              "Ավելացնելու համար",
-              "Ցուցադրելու բոլոր տվյալները",
-            ],
-            correct: 0,
-          },
-          {
-            q: "ORDER BY հրամանը՝",
-            options: [
-              "Դասավորում է արդյունքը",
-              "Ջնջում է տվյալներ",
-              "Ավելացնում է տվյալներ",
-              "Փոխում է սյունակների անունները",
-            ],
-            correct: 0,
-          },
-          {
-            q: "LIKE օպերատորը՝",
-            options: [
-              "Ֆիլտրում է տեքստային ձևաչափով",
-              "Ավելացնում է նոր սյունակ",
-              "Հաշվում է արժեքներ",
-              "Փոխում է աղյուսակ",
-            ],
-            correct: 0,
-          },
-          {
-            q: "IN օպերատորը՝",
-            options: [
-              "Ստուգում է արժեքը ցուցակի մեջ",
-              "Ավելացնում է արժեքներ",
-              "Ջնջում է աղյուսակ",
-              "Փոխում է տվյալներ",
-            ],
-            correct: 0,
-          },
-          {
-            q: "BETWEEN օպերատորը՝",
-            options: [
-              "Սահմանում է միջակայք",
-              "Հաշվում է միջինը",
-              "Փոխում է աղյուսակ",
-              "Ջնջում է",
-            ],
-            correct: 0,
-          },
-          {
-            q: "DISTINCT բառը՝",
-            options: [
-              "Հեռացնում է կրկնվող արժեքները",
-              "Ավելացնում է նոր սյունակ",
-              "Փոխում է աղյուսակը",
-              "Թարմացնում է",
-            ],
-            correct: 0,
-          },
-          {
-            q: "AS օգտագործվում է՝",
-            options: [
-              "Անվանման համար (alias)",
-              "Ավելացնելու համար",
-              "Ջնջելու համար",
-              "Փոփոխելու համար",
-            ],
-            correct: 0,
-          },
-          {
-            q: "SUBQUERY (ենթահարցում) SQL-ում՝",
-            options: [
-              "Հարցում մի ուրիշ հարցման ներսում",
-              "Աղյուսակների միացում",
-              "Տվյալների ջնջում",
-              "Նոր սյունակի ստեղծում",
-            ],
-            correct: 0,
-          },
-        ],
-
-        dml: [
-          {
-            q: "INSERT հրամանը ինչի համար է օգտագործվում?",
-            options: [
-              "Տվյալների հեռացում",
-              "Նոր տվյալների ավելացում",
-              "Տվյալների որոնում",
-              "Աղյուսակի վերացում",
-            ],
-            correct: 1,
-          },
-          {
-            q: "UPDATE հրամանը ...",
-            options: [
-              "Հեռացնում է տվյալներ",
-              "Փոփոխում է տվյալներ",
-              "Ցուցադրում է աղյուսակը",
-              "Ավելացնում է սյունակ",
-            ],
-            correct: 1,
-          },
-          {
-            q: "DELETE հրամանը ...",
-            options: [
-              "Ավելացնում է տվյալներ",
-              "Ջնջում է տվյալներ",
-              "Թարմացնում է աղյուսակը",
-              "Ավելացնում է աղյուսակ",
-            ],
-            correct: 1,
-          },
-          {
-            q: "Ո՞ր հրամանն է հեռացնում աղյուսակի բոլոր տվյալները՝ առանց աղյուսակը ջնջելու:",
-            options: [
-              "DROP TABLE",
-              "DELETE TABLE",
-              "TRUNCATE TABLE",
-              "CLEAR TABLE",
-            ],
-            correct: 2,
-          },
-          {
-            q: "NULL արժեքը SQL-ում նշանակում է՝",
-            options: [
-              "Զրո",
-              "Դատարկ տող",
-              "Անհայտ կամ բացակայող արժեք",
-              "Կեղծ արժեք",
-            ],
-            correct: 2,
-          },
-          {
-            q: "Ո՞ր հրամանն է ավելացնում նոր սյունակ:",
-            options: [
-              "ADD COLUMN",
-              "ALTER TABLE",
-              "CREATE COLUMN",
-              "MODIFY COLUMN",
-            ],
-            correct: 1,
-          },
-        ],
-
-        aggregate: [
-          {
-            q: "COUNT() ֆունկցիան՝",
-            options: [
-              "Հաշվում է տողերի քանակը",
-              "Ավելացնում է տվյալներ",
-              "Ջնջում է տվյալներ",
-              "Դասավորում է",
-            ],
-            correct: 0,
-          },
-          {
-            q: "AVG() ֆունկցիան հաշվարկում է՝",
-            options: [
-              "Տողի երկարությունը",
-              "Միջին արժեքը",
-              "Տողի քանակը",
-              "Գումարը",
-            ],
-            correct: 1,
-          },
-          {
-            q: "GROUP BY օգտագործվում է՝",
-            options: [
-              "Տվյալները խմբավորելու համար",
-              "Ջնջելու համար",
-              "Փոխելու համար",
-              "Հաշվելու համար",
-            ],
-            correct: 0,
-          },
-          {
-            q: "HAVING հրամանը կիրառվում է՝",
-            options: [
-              "GROUP BY-ից հետո պայման դնելու համար",
-              "Աղյուսակ ստեղծելու համար",
-              "Տվյալներ ավելացնելու համար",
-              "Ջնջելու համար",
-            ],
-            correct: 0,
-          },
-          {
-            q: "MIN() վերադարձնում է՝",
-            options: ["Մինիմալ արժեքը", "Մաքսիմալ արժեքը", "Գումարը", "Միջինը"],
-            correct: 0,
-          },
-          {
-            q: "MAX() վերադարձնում է՝",
-            options: ["Մաքսիմալ արժեքը", "Մինիմալ արժեքը", "Գումարը", "Միջինը"],
-            correct: 0,
-          },
-          {
-            q: "SUM() հաշվարկում է՝",
-            options: ["Գումարը", "Միջինը", "Քանակը", "Ամենամեծը"],
-            correct: 0,
-          },
-        ],
-
-        joins: [
-          {
-            q: "JOIN հրամանը՝",
-            options: [
-              "Միացնում է աղյուսակները",
-              "Ջնջում է տվյալները",
-              "Փոխում է սյունակները",
-              "Ավելացնում է սյունակ",
-            ],
-            correct: 0,
-          },
-          {
-            q: "INNER JOIN վերադարձնում է՝",
-            options: [
-              "Միայն համընկնող տողերը",
-              "Բոլոր տողերը",
-              "Առաջինը միայն",
-              "Երկրորդը միայն",
-            ],
-            correct: 0,
-          },
-          {
-            q: "LEFT JOIN վերադարձնում է՝",
-            options: [
-              "Ձախ աղյուսակի բոլոր տողերը",
-              "Աջ աղյուսակի բոլոր տողերը",
-              "Միայն ընդհանուրները",
-              "Ավելի փոքրերը",
-            ],
-            correct: 0,
-          },
-          {
-            q: "RIGHT JOIN վերադարձնում է՝",
-            options: [
-              "Ձախ աղյուսակի բոլոր տողերը",
-              "Միայն ընդհանուր տողերը",
-              "Աջ աղյուսակի բոլոր տողերը",
-              "Բոլոր տողերը երկու աղյուսակից",
-            ],
-            correct: 2,
-          },
-          {
-            q: "FULL OUTER JOIN վերադարձնում է՝",
-            options: [
-              "Միայն համընկնող տողերը",
-              "Ձախ աղյուսակի տողերը",
-              "Աջ աղյուսակի տողերը",
-              "Բոլոր տողերը երկու աղյուսակից",
-            ],
-            correct: 3,
-          },
-          {
-            q: "UNION օպերատորը՝",
-            options: [
-              "Միացնում է երկու SELECT հարցումների արդյունքները",
-              "Ջնջում է կրկնվող աղյուսակները",
-              "Ստեղծում է նոր տվյալների բազա",
-              "Փոխում է սյունակի տիպը",
-            ],
-            correct: 0,
-          },
-          {
-            q: "UNION ALL-ը UNION-ից տարբերվում է նրանով, որ՝",
-            options: [
-              "Ավելի արագ է աշխատում",
-              "Վերադարձնում է նաև կրկնվող տողերը",
-              "Աշխատում է միայն թվային տվյալների հետ",
-              "Ջնջում է NULL արժեքները",
-            ],
-            correct: 1,
-          },
-        ],
-
-        design: [
-          {
-            q: "SQL-ում PRIMARY KEY-ը՝",
-            options: [
-              "Յուրահատուկ նույնացուցիչ է",
-              "Գրառման անունն է",
-              "Աղյուսակի անվանումն է",
-              "Կոդավորման ձև է",
-            ],
-            correct: 0,
-          },
-          {
-            q: "FOREIGN KEY-ը SQL-ում՝",
-            options: [
-              "Յուրահատուկ նույնացուցիչ է",
-              "Կապ է ստեղծում երկու աղյուսակի միջև",
-              "Ջնջում է կրկնող արժեքները",
-              "Ինդեքս է ստեղծում",
-            ],
-            correct: 1,
-          },
-          {
-            q: "NOT NULL սահմանափակումը՝",
-            options: [
-              "Թույլ է տալիս NULL արժեքներ",
-              "Ջնջում է NULL արժեքները",
-              "Արգելում է NULL արժեքներ",
-              "Փոխում է NULL-ը զրոյի",
-            ],
-            correct: 2,
-          },
-          {
-            q: "UNIQUE սահմանափակումը ապահովում է՝",
-            options: [
-              "Բոլոր արժեքները լինեն NULL",
-              "Սյունակի բոլոր արժեքները լինեն տարբեր",
-              "Արժեքները լինեն թվային",
-              "Սյունակը ունենա PRIMARY KEY",
-            ],
-            correct: 1,
-          },
-          {
-            q: "CHECK սահմանափակումը SQL-ում՝",
-            options: [
-              "Ստուգում է օգտատիրոջ գաղտնաբառը",
-              "Սահմանում է պայման սյունակի արժեքների համար",
-              "Ջնջում է կրկնվող տվյալները",
-              "Ստեղծում է նոր աղյուսակ",
-            ],
-            correct: 1,
-          },
-          {
-            q: "DEFAULT սահմանափակումը՝",
-            options: [
-              "Ջնջում է դատարկ արժեքները",
-              "Սահմանում է լռելյայն արժեք սյունակի համար",
-              "Ստեղծում է ինդեքս",
-              "Կապում է երկու աղյուսակ",
-            ],
-            correct: 1,
-          },
-          {
-            q: "AUTO_INCREMENT հատկությունը՝",
-            options: [
-              "Ավտոմատ կրկնապատկում է արժեքը",
-              "Ավտոմատ մեծացնում է թվային արժեքը ամեն նոր տողի ժամանակ",
-              "Ջնջում է ամենամեծ արժեքը",
-              "Ստեղծում է նոր սյունակ",
-            ],
-            correct: 1,
-          },
-        ],
-
-        advanced: [
-          {
-            q: "INDEX-ը SQL-ում ստեղծվում է՝",
-            options: [
-              "Տվյալները ջնջելու համար",
-              "Տվյալների որոնման արագությունը բարձրացնելու համար",
-              "Աղյուսակ ստեղծելու համար",
-              "Կրկնվող արժեքները հեռացնելու համար",
-            ],
-            correct: 1,
-          },
-          {
-            q: "EXISTS օպերատորը SQL-ում՝",
-            options: [
-              "Ստուգում է՝ արդյոք ենթահարցումը վերադարձնում է տողեր",
-              "Հաշվում է տողերի քանակը",
-              "Ջնջում է գոյություն ունեցող տվյալները",
-              "Ստեղծում է նոր ինդեքս",
-            ],
-            correct: 0,
-          },
-          {
-            q: "CASE արտահայտությունը SQL-ում՝",
-            options: [
-              "Ջնջում է պայմանական տողերը",
-              "Ստեղծում է նոր աղյուսակ",
-              "Կատարում է պայմանական տրամաբանություն (if-else)",
-              "Կրկնօրինակում է աղյուսակը",
-            ],
-            correct: 2,
-          },
-          {
-            q: "COALESCE() ֆունկցիան՝",
-            options: [
-              "Վերադարձնում է ամենամեծ արժեքը",
-              "Վերադարձնում է առաջին NOT NULL արժեքը ցուցակից",
-              "Հաշվարկում է տողերի գումարը",
-              "Ջնջում է NULL արժեքները",
-            ],
-            correct: 1,
-          },
-          {
-            q: "CAST() ֆունկցիան SQL-ում օգտագործվում է՝",
-            options: [
-              "Տվյալների տիպը փոխակերպելու համար",
-              "Տողերը կրկնօրինակելու համար",
-              "Ջնջելու NULL արժեքները",
-              "Աղյուսակները միացնելու համար",
-            ],
-            correct: 0,
-          },
-          {
-            q: "VIEW-ը SQL-ում՝",
-            options: [
-              "Ֆիզիկական աղյուսակ է",
-              "Պահպանված SELECT հարցման վիրտուալ աղյուսակ է",
-              "Ինդեքս ստեղծելու հրաման է",
-              "Տվյալների կրկնօրինակ է",
-            ],
-            correct: 1,
-          },
-          {
-            q: "STORED PROCEDURE-ը՝",
-            options: [
-              "Պահպանված SQL հրամանների շարք է, որը կարելի է կրկին կանչել",
-              "Ջնջում է ամբողջ տվյալների բազան",
-              "Ավտոմատ թարմացնում է ինդեքսները",
-              "Ստեղծում է օգտատեր",
-            ],
-            correct: 0,
-          },
-          {
-            q: "TRIGGER-ը SQL-ում՝",
-            options: [
-              "Ձեռքով գործարկվող հրաման է",
-              "Ավտոմատ կատարվող գործողություն է՝ կապված աղյուսակի իրադարձության հետ",
-              "Ստեղծում է նոր VIEW",
-              "Ջնջում է ինդեքսը",
-            ],
-            correct: 1,
-          },
-          {
-            q: "TRANSACTION-ը SQL-ում ապահովում է՝",
-            options: [
-              "Տվյալների արագ ջնջում",
-              "Հրամանների խումբն ամբողջությամբ կատարվի կամ ամբողջությամբ չեղարկվի",
-              "Ինդեքսների ավտոմատ թարմացում",
-              "Աղյուսակների կրկնօրինակում",
-            ],
-            correct: 1,
-          },
-          {
-            q: "ROLLBACK հրամանը՝",
-            options: [
-              "Հաստատում է transaction-ի փոփոխությունները",
-              "Չեղարկում է transaction-ի կատարված փոփոխությունները",
-              "Ջնջում է ամբողջ աղյուսակը",
-              "Ստեղծում է նոր VIEW",
-            ],
-            correct: 1,
-          },
-          {
-            q: "COMMIT հրամանը՝",
-            options: [
-              "Չեղարկում է բոլոր փոփոխությունները",
-              "Հաստատում և պահպանում է transaction-ի փոփոխությունները",
-              "Ջնջում է վերջին տողը",
-              "Փակում է տվյալների բազան",
-            ],
-            correct: 1,
-          },
-        ],
+      window.fbAdd = async (category, payload) => {
+        const ref = await addDoc(collection(db, "quiz", category, "questions"), payload);
+        return ref.id;
       };
 
-      // 3. Ֆունկցիան, որը տվյալները կուղարկի Firestore
-      async function autoUpload() {
-        console.log("Սկսվում է վերբեռնումը...");
-        try {
-          for (const [category, questions] of Object.entries(allQuestions)) {
-            await setDoc(doc(db, "quiz", category), { active: true });
-            for (const q of questions) {
-              await addDoc(collection(db, "quiz", category, "questions"), q);
-            }
-          }
-          console.log("Բոլոր հարցերը հաջողությամբ վերբեռնվեցին Firestore!");
-          alert("Տվյալները բազայում են: Այժմ կարող եք անջատել autoUpload-ը:");
-        } catch (e) {
-          console.error("Վերբեռնման սխալ:", e);
-        }
-      }
+      window.fbUpdate = async (category, docId, payload) => {
+        await updateDoc(doc(db, "quiz", category, "questions", docId), payload);
+      };
 
-      // ԱՅՍ ՏՈՂԸ ՄԵԿ ԱՆԳԱՄ ՄԻԱՑՐԵՔ (ջնջեք //), ԷՋԸ ԹԱՐՄԱՑՐԵՔ, ՀԵՏՈ ՆՈՐԻՑ ԱՆՋԱՏԵՔ
-      // autoUpload();
+      window.fbDelete = async (category, docId) => {
+        await deleteDoc(doc(db, "quiz", category, "questions", docId));
+      };
 
-      async function fetchQuizData() {
-        const categories = [
-          "basics",
-          "select",
-          "dml",
-          "aggregate",
-          "joins",
-          "design",
-          "advanced",
-        ];
+      // ── Fetch all categories on load ──
+      async function fetchAll() {
+        const categories = ["basics","select","dml","aggregate","joins","design","advanced"];
         const result = {};
         for (const cat of categories) {
           try {
-            const snap = await getDocs(
-              collection(db, "quiz", cat, "questions"),
-            );
-            result[cat] = snap.docs.map((doc) => doc.data());
+            const snap = await getDocs(collection(db, "quiz", cat, "questions"));
+            // attach Firestore docId as _id on each question object
+            result[cat] = snap.docs.map(d => ({ _id: d.id, ...d.data() }));
           } catch (err) {
             console.error(`Error loading ${cat}:`, err);
             result[cat] = [];
@@ -877,53 +439,85 @@
         return result;
       }
 
+      document.addEventListener("DOMContentLoaded", async () => {
+        window.remoteQuizData = await fetchAll();
+        renderQuiz(window.remoteQuizData);
+        initAdminMode();
+      });
+    </script>
+
+    <!-- ===== QUIZ RENDER + ADMIN LOGIC ===== -->
+    <script>
+      const ADMIN_SESSION_KEY = "adminSession";
+
+      // ── Render all categories ──
       function renderQuiz(data) {
-        Object.entries(data).forEach(([category, questions]) => {
-          const container = document.getElementById(
-            `quiz-${category}-questions`,
-          );
-          if (!container || questions.length === 0) return;
+        Object.entries(data).forEach(([cat, questions]) => {
+          const container = document.getElementById(`quiz-${cat}-questions`);
+          if (!container) return;
           container.innerHTML = "";
-          questions.forEach((item, i) => {
-            const html = `
-          <div class="question-block" data-category="${category}" data-index="${i}">
-            <strong>${i + 1}. ${item.q}</strong>
-            <div class="options-list mt-3">
-              ${item.options
-                .map(
-                  (opt, j) => `
-                <label class="option d-block">
-                  <input type="radio" name="q-${category}-${i}" value="${j}"> ${opt}
-                </label>
-              `,
-                )
-                .join("")}
-            </div>
-            <button class="btn btn-sm btn-outline-primary mt-3 check-btn">Ստուգել</button>
-            <div class="result-msg mt-2 fw-bold"></div>
-          </div>
-        `;
-            container.insertAdjacentHTML("beforeend", html);
-          });
+          if (!questions || questions.length === 0) {
+            container.innerHTML = `<p class="text-muted">Հարցեր չկան:</p>`;
+            return;
+          }
+          questions.forEach((item, i) => renderQuestion(container, cat, item, i));
         });
       }
 
-      document.addEventListener("DOMContentLoaded", async () => {
-        remoteQuizData = await fetchQuizData();
-        renderQuiz(remoteQuizData);
-      });
+      // ── Render one question block ──
+      function renderQuestion(container, category, item, i) {
+        const div = document.createElement("div");
+        div.className = "question-block";
+        div.dataset.category = category;
+        div.dataset.index    = String(i);
+        div.dataset.docId    = item._id || "";
 
+        div.innerHTML = `
+          <strong>${i + 1}. ${esc(item.q)}</strong>
+          <div class="options-list mt-3">
+            ${item.options.map((opt, j) => `
+              <label class="option d-block">
+                <input type="radio" name="q-${category}-${i}" value="${j}"> ${esc(opt)}
+              </label>
+            `).join("")}
+          </div>
+          <button class="btn btn-sm btn-outline-primary mt-3 check-btn">Ստուգել</button>
+          <div class="result-msg mt-2 fw-bold"></div>
+          <div class="admin-actions-row">
+            <button class="btn-edit-q"
+              onclick="openEditModal('${category}','${item._id}')">✏️ Խմբագրել</button>
+            <button class="btn-delete-q"
+              onclick="openDeleteConfirm('${category}','${item._id}')">🗑️ Ջնջել</button>
+          </div>
+        `;
+        container.appendChild(div);
+      }
+
+      // ── Re-render one category ──
+      function rerenderCategory(cat) {
+        const container = document.getElementById(`quiz-${cat}-questions`);
+        if (!container) return;
+        container.innerHTML = "";
+        const questions = window.remoteQuizData[cat] || [];
+        if (questions.length === 0) {
+          container.innerHTML = `<p class="text-muted">Հարցեր չկան:</p>`;
+          return;
+        }
+        questions.forEach((item, i) => renderQuestion(container, cat, item, i));
+      }
+
+      // ── Check answer (original logic, unchanged) ──
       document.addEventListener("click", (e) => {
         if (!e.target.classList.contains("check-btn")) return;
-        const block = e.target.closest(".question-block");
-        const cat = block.dataset.category;
-        const idx = block.dataset.index;
-        const question = remoteQuizData[cat][idx];
+        const block    = e.target.closest(".question-block");
+        const cat      = block.dataset.category;
+        const idx      = parseInt(block.dataset.index);
+        const question = window.remoteQuizData[cat][idx];
         const selected = block.querySelector("input:checked")?.value;
-        const msg = block.querySelector(".result-msg");
-        block
-          .querySelectorAll(".option")
-          .forEach((el) => el.classList.remove("correct", "incorrect"));
+        const msg      = block.querySelector(".result-msg");
+
+        block.querySelectorAll(".option").forEach(el => el.classList.remove("correct","incorrect"));
+
         if (selected === undefined) {
           msg.textContent = "Ընտրեք պատասխանը";
           msg.style.color = "orange";
@@ -931,8 +525,7 @@
         }
         block.querySelectorAll(".option").forEach((el, j) => {
           if (j == question.correct) el.classList.add("correct");
-          if (j == selected && j != question.correct)
-            el.classList.add("incorrect");
+          if (j == selected && j != question.correct) el.classList.add("incorrect");
         });
         if (selected == question.correct) {
           msg.textContent = "Ճիշտ է ✅";
@@ -942,7 +535,204 @@
           msg.style.color = "red";
         }
       });
+
+      // ── Admin mode: show toolbar + edit/delete buttons ──
+      function initAdminMode() {
+        const raw = localStorage.getItem(ADMIN_SESSION_KEY);
+        if (!raw) return;
+        const session = JSON.parse(raw);
+        document.body.classList.add("admin-mode");
+        document.getElementById("adminToolbar").classList.add("visible");
+        document.getElementById("adminEmailDisplay").textContent = session.email;
+      }
+
+      // ════════════════════════════════════════
+      //  ADD / EDIT MODAL
+      // ════════════════════════════════════════
+      let _editDocId   = null;   // null = Add mode
+      let _editCategory = null;
+
+      function openAddModal(category) {
+        _editDocId   = null;
+        _editCategory = category;
+
+        document.getElementById("quizModalTitle").textContent = "➕ Ավելացնել հարց";
+        document.getElementById("modalCategory").value    = category;
+        document.getElementById("modalCategory").disabled = false;
+        document.getElementById("modalQuestion").value    = "";
+        document.querySelectorAll(".modal-opt-input").forEach(el => el.value = "");
+        document.querySelectorAll("input[name='modalCorrect']").forEach(r => r.checked = false);
+        clearModalError();
+
+        new bootstrap.Modal(document.getElementById("quizAdminModal")).show();
+      }
+
+      function openEditModal(category, docId) {
+        const q = (window.remoteQuizData[category] || []).find(x => x._id === docId);
+        if (!q) return;
+
+        _editDocId    = docId;
+        _editCategory = category;
+
+        document.getElementById("quizModalTitle").textContent = "✏️ Խմբագրել հարցը";
+        document.getElementById("modalCategory").value    = category;
+        document.getElementById("modalCategory").disabled = true; // can't move to another category
+        document.getElementById("modalQuestion").value    = q.q;
+
+        const inputs = document.querySelectorAll(".modal-opt-input");
+        q.options.forEach((opt, i) => { if (inputs[i]) inputs[i].value = opt; });
+
+        document.querySelectorAll("input[name='modalCorrect']")
+          .forEach(r => { r.checked = parseInt(r.value) === q.correct; });
+
+        clearModalError();
+        new bootstrap.Modal(document.getElementById("quizAdminModal")).show();
+      }
+
+      async function saveQuestion() {
+        clearModalError();
+
+        const category  = _editCategory || document.getElementById("modalCategory").value;
+        const q         = document.getElementById("modalQuestion").value.trim();
+        const optInputs = document.querySelectorAll(".modal-opt-input");
+        const options   = Array.from(optInputs).map(el => el.value.trim());
+        const correctEl = document.querySelector("input[name='modalCorrect']:checked");
+
+        if (!q)                    return showModalError("Հարցը չի կարող դատարկ լինել:");
+        if (options.some(o => !o)) return showModalError("Բոլոր 4 տարբերակները պարտադիր են:");
+        if (!correctEl)            return showModalError("Ընտրեք ճիշտ պատասխանը:");
+
+        const correct = parseInt(correctEl.value);
+        const payload = { q, options, correct };
+
+        const btn = document.getElementById("modalSaveBtn");
+        btn.disabled    = true;
+        btn.textContent = "⏳ Պահպանվում...";
+
+        try {
+          if (_editDocId) {
+            // ── UPDATE in Firestore ──
+            await window.fbUpdate(category, _editDocId, payload);
+
+            // Update local cache
+            const arr = window.remoteQuizData[category];
+            const idx = arr.findIndex(x => x._id === _editDocId);
+            if (idx !== -1) arr[idx] = { ...arr[idx], ...payload };
+
+            showToast("✅ Հարցը թարմացվեց");
+          } else {
+            // ── ADD to Firestore ──
+            const newId = await window.fbAdd(category, payload);
+
+            // Update local cache
+            if (!window.remoteQuizData[category]) window.remoteQuizData[category] = [];
+            window.remoteQuizData[category].push({ _id: newId, ...payload });
+
+            showToast("✅ Հարցն ավելացվեց");
+          }
+
+          bootstrap.Modal.getInstance(document.getElementById("quizAdminModal")).hide();
+          rerenderCategory(category);
+
+        } catch (err) {
+          console.error(err);
+          showModalError("Firebase-ի սխալ: " + err.message);
+        } finally {
+          btn.disabled    = false;
+          btn.textContent = "💾 Պահպանել";
+        }
+      }
+
+      // ════════════════════════════════════════
+      //  DELETE
+      // ════════════════════════════════════════
+      let _delCategory = null;
+      let _delDocId    = null;
+
+      function openDeleteConfirm(category, docId) {
+        _delCategory = category;
+        _delDocId    = docId;
+        new bootstrap.Modal(document.getElementById("confirmDeleteModal")).show();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("confirmDeleteBtn").addEventListener("click", async () => {
+          if (!_delCategory || !_delDocId) return;
+
+          const btn = document.getElementById("confirmDeleteBtn");
+          btn.disabled    = true;
+          btn.textContent = "⏳...";
+
+          try {
+            // ── DELETE from Firestore ──
+            await window.fbDelete(_delCategory, _delDocId);
+
+            // Remove from local cache
+            window.remoteQuizData[_delCategory] =
+              (window.remoteQuizData[_delCategory] || []).filter(q => q._id !== _delDocId);
+
+            bootstrap.Modal.getInstance(document.getElementById("confirmDeleteModal")).hide();
+            rerenderCategory(_delCategory);
+            showToast("🗑️ Հարցը ջնջվեց");
+
+          } catch (err) {
+            console.error(err);
+            alert("Firebase-ի սխալ ջնջելիս: " + err.message);
+          } finally {
+            btn.disabled    = false;
+            btn.textContent = "Ջնջել";
+          }
+        });
+      });
+
+      // ════════════════════════════════════════
+      //  HELPERS
+      // ════════════════════════════════════════
+      function showModalError(msg) {
+        const el = document.getElementById("modalError");
+        el.textContent  = msg;
+        el.style.display = "block";
+      }
+      function clearModalError() {
+        const el = document.getElementById("modalError");
+        el.textContent  = "";
+        el.style.display = "none";
+      }
+
+      function esc(str) {
+        const d = document.createElement("div");
+        d.textContent = str || "";
+        return d.innerHTML;
+      }
+
+      let _toastTimer;
+      function showToast(msg) {
+        let t = document.getElementById("adminToast");
+        if (!t) {
+          t = document.createElement("div");
+          t.id = "adminToast";
+          Object.assign(t.style, {
+            position:"fixed", bottom:"28px", right:"28px", zIndex:"9999",
+            background:"#198754", color:"#fff", padding:"12px 22px",
+            borderRadius:"12px", fontWeight:"600", fontSize:".95rem",
+            boxShadow:"0 4px 20px rgba(0,0,0,.25)", transition:"opacity .3s",
+            opacity:"0",
+          });
+          document.body.appendChild(t);
+        }
+        t.textContent  = msg;
+        t.style.opacity = "1";
+        clearTimeout(_toastTimer);
+        _toastTimer = setTimeout(() => { t.style.opacity = "0"; }, 3000);
+      }
+
+      // ── Sticky header on scroll (original) ──
+      window.addEventListener("scroll", () => {
+        document.querySelector(".main-header")
+          .classList.toggle("scrolled", window.scrollY > 50);
+      });
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
