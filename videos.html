@@ -1341,10 +1341,26 @@
           ? `<span class="badge ${esc(v.badge2Color || "bg-success")}">${esc(v.badge2)}</span>`
           : "";
 
+function getEmbedUrl(v) {
+  // YouTube (if youtubeId exists)
+  if (v.youtubeId) {
+    return `https://www.youtube.com/embed/${v.youtubeId}`;
+  }
+
+  // Google Drive
+  if (v.videoUrl && v.videoUrl.includes("drive.google.com")) {
+    const match = v.videoUrl.match(/\/d\/(.*?)\//);
+    if (!match) return "";
+    return `https://drive.google.com/file/d/${match[1]}/preview`;
+  }
+
+  return "";
+}
+
         col.innerHTML = `
                 <div class="card video-card" data-doc-id="${esc(v._id)}" data-category="${esc(cat)}">
                   <div class="ratio ratio-16x9">
-                    <iframe src="https://www.youtube.com/embed/${esc(v.youtubeId)}" allowfullscreen></iframe>
+                    <iframe src="${getEmbedUrl(v)}" allowfullscreen></iframe>
                   </div>
                   <div class="card-body">
                     <h5>${esc(v.title)}</h5>
@@ -1426,14 +1442,42 @@
       // ── Extract YouTube ID from URL or bare ID ──
       function extractYoutubeId(input) {
         input = input.trim();
-        // Already a bare ID (11 chars, no slash)
+
+        // pure ID
         if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
-        // youtu.be/ID
+
+        // youtu.be
         const short = input.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
         if (short) return short[1];
-        // youtube.com/watch?v=ID or /embed/ID
+
+        // youtube.com
         const long = input.match(/(?:v=|\/embed\/)([a-zA-Z0-9_-]{11})/);
         if (long) return long[1];
+
+        return null;
+      }
+
+      function parseVideoInput(input) {
+        const raw = input.trim();
+
+        const ytId = extractYoutubeId(raw);
+
+        if (ytId) {
+          return {
+            type: "youtube",
+            youtubeId: ytId,
+            videoUrl: raw,
+          };
+        }
+
+        if (raw.includes("drive.google.com")) {
+          return {
+            type: "drive",
+            youtubeId: null,
+            videoUrl: raw,
+          };
+        }
+
         return null;
       }
 
@@ -1442,22 +1486,27 @@
 
         const category =
           _vEditCategory || document.getElementById("vModalCategory").value;
-        const rawYt = document.getElementById("vModalYoutubeId").value.trim();
+
+        const raw = document.getElementById("vModalYoutubeId").value.trim();
         const title = document.getElementById("vModalTitle").value.trim();
         const desc = document.getElementById("vModalDesc").value.trim();
+
         const badge1 = document.getElementById("vModalBadge1").value.trim();
         const badge2 = document.getElementById("vModalBadge2").value.trim();
         const badge1Color = document.getElementById("vModalBadge1Color").value;
         const badge2Color = document.getElementById("vModalBadge2Color").value;
 
-        if (!rawYt) return showVModalError("YouTube ID կամ URL-ը պարտադիր է:");
-        if (!title) return showVModalError("Վերնագիրը պարտադիր է:");
+        if (!raw) return showVModalError("Link պարտադիր է");
+        if (!title) return showVModalError("Վերնագիր պարտադիր է");
 
-        const youtubeId = extractYoutubeId(rawYt);
-        if (!youtubeId) return showVModalError("Անվավեր YouTube ID կամ URL:");
+        const parsed = parseVideoInput(raw);
+
+        if (!parsed) {
+          return showVModalError("Միայն YouTube կամ Google Drive link");
+        }
 
         const payload = {
-          youtubeId,
+          ...parsed,
           title,
           desc,
           badge1,
@@ -1472,28 +1521,35 @@
 
         try {
           if (_vEditDocId) {
-            // UPDATE
             await window.fbVideoUpdate(category, _vEditDocId, payload);
+
             const arr = window.remoteVideoData[category];
             const idx = arr.findIndex((x) => x._id === _vEditDocId);
             if (idx !== -1) arr[idx] = { ...arr[idx], ...payload };
-            showToast("✅ Տեսանյութը թարմացվեց");
+
+            showToast("✅ Թարմացվեց");
           } else {
-            // ADD
             const newId = await window.fbVideoAdd(category, payload);
+
             if (!window.remoteVideoData[category])
               window.remoteVideoData[category] = [];
-            window.remoteVideoData[category].push({ _id: newId, ...payload });
-            showToast("✅ Տեսանյութն ավելացվեց");
+
+            window.remoteVideoData[category].push({
+              _id: newId,
+              ...payload,
+            });
+
+            showToast("✅ Ավելացվեց");
           }
 
           bootstrap.Modal.getInstance(
             document.getElementById("videoAdminModal"),
           ).hide();
+
           renderCategory(category, window.remoteVideoData[category]);
         } catch (err) {
           console.error(err);
-          showVModalError("Firebase-ի սխալ: " + err.message);
+          showVModalError("Firebase error: " + err.message);
         } finally {
           btn.disabled = false;
           btn.textContent = "💾 Պահպանել";
