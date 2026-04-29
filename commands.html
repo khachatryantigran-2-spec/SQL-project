@@ -9,7 +9,6 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     />
     <style>
-      /* ===== GLOBAL ===== */
       html,
       body {
         overflow-x: hidden;
@@ -29,7 +28,7 @@
         background-attachment: fixed;
       }
 
-      /* ===== HEADER (Synchronized with application.html) ===== */
+      /* ===== HEADER ===== */
       .main-header {
         background: linear-gradient(135deg, #0d6efd, #292664);
         color: white;
@@ -42,7 +41,6 @@
           padding 0.3s ease;
       }
 
-      /* This class is toggled via JavaScript when scrolling */
       .main-header.scrolled {
         padding: 15px 0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -87,13 +85,11 @@
         display: none !important;
         content: none !important;
       }
-
       .navbar-brand:hover {
         opacity: 0.8;
         text-decoration: none !important;
       }
 
-      /* Mobile Adjustment */
       @media (max-width: 768px) {
         .main-header {
           text-align: center;
@@ -103,6 +99,7 @@
           font-size: 1.5rem;
         }
       }
+
       /* ===== MAIN CARD ===== */
       main.container {
         background: rgba(255, 255, 255, 0.95);
@@ -112,29 +109,145 @@
         margin-top: 40px;
         margin-bottom: 40px;
         box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-        max-width: 95%; /* Թույլ չի տալիս կոնտեյներին կպչել էկրանի եզրերին */
+        max-width: 95%;
       }
 
-      h2 {
-        margin-top: 35px;
-        color: #0d6efd;
+      /* ===== ACCORDION CUSTOM STYLES ===== */
+      .sql-accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .sql-item {
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e2e8f0;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .sql-item:hover {
+        box-shadow: 0 6px 20px rgba(13, 110, 253, 0.15);
+      }
+
+      .sql-trigger {
+        width: 100%;
+        background: linear-gradient(135deg, #f8faff 0%, #eef3ff 100%);
+        border: none;
+        padding: 18px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.25s ease;
+        border-radius: 0;
+      }
+
+      .sql-trigger:hover {
+        background: linear-gradient(135deg, #e8f0ff 0%, #dce8ff 100%);
+      }
+
+      .sql-item.open .sql-trigger {
+        background: linear-gradient(135deg, #0d6efd 0%, #292664 100%);
+        color: white;
+      }
+
+      .sql-trigger .cmd-badge {
+        background: linear-gradient(135deg, #0d6efd, #292664);
+        color: white;
+        font-family: "Courier New", monospace;
         font-weight: 700;
-        border-bottom: 2px solid #e9ecef;
-        padding-bottom: 10px;
+        font-size: 0.95rem;
+        padding: 6px 14px;
+        border-radius: 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition:
+          background 0.25s ease,
+          color 0.25s ease;
       }
 
-      /* ===== CODE BLOCKS (Կարևորագույն մասը) ===== */
+      .sql-item.open .sql-trigger .cmd-badge {
+        background: rgba(255, 255, 255, 0.25);
+        color: white;
+      }
+
+      .sql-trigger .cmd-title {
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: #1e293b;
+        flex: 1;
+        transition: color 0.25s ease;
+      }
+
+      .sql-item.open .sql-trigger .cmd-title {
+        color: white;
+      }
+
+      .sql-trigger .cmd-desc {
+        font-size: 0.85rem;
+        color: #64748b;
+        flex: 2;
+        transition: color 0.25s ease;
+      }
+
+      .sql-item.open .sql-trigger .cmd-desc {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .sql-trigger .chevron {
+        font-size: 1.1rem;
+        color: #0d6efd;
+        transition:
+          transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+          color 0.25s ease;
+        flex-shrink: 0;
+      }
+
+      .sql-item.open .sql-trigger .chevron {
+        transform: rotate(180deg);
+        color: white;
+      }
+
+      .sql-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        background: #fff;
+      }
+
+      .sql-item.open .sql-panel {
+        max-height: 2000px;
+      }
+
+      .sql-panel-inner {
+        padding: 24px;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      .sql-panel-inner p {
+        color: #374151;
+        margin-bottom: 14px;
+        line-height: 1.7;
+      }
+
+      /* ===== CODE BLOCKS ===== */
       pre {
         background-color: #1e1e1e !important;
         color: #d4d4d4 !important;
         padding: 20px;
         border-radius: 12px;
-        overflow-x: auto; /* Թույլ է տալիս սքրոլ միայն կոդի ներսում */
+        overflow-x: auto;
         max-width: 100%;
-        position: relative; /* Կոճակի դիրքի համար */
-        white-space: pre; /* Պահպանում է SQL-ի կառուցվածքը */
+        position: relative;
+        white-space: pre;
         word-wrap: normal;
         border: 1px solid #333;
+        margin-bottom: 0;
+        font-size: 0.9rem;
+        line-height: 1.6;
       }
 
       .copy-btn {
@@ -149,6 +262,37 @@
         border-radius: 5px;
         cursor: pointer;
         z-index: 5;
+        transition: background 0.2s;
+      }
+
+      .copy-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ===== SQL KEYWORDS COLORING ===== */
+      .kw {
+        color: #569cd6;
+        font-weight: 600;
+      }
+      .cm {
+        color: #6a9955;
+        font-style: italic;
+      }
+      .st {
+        color: #ce9178;
+      }
+      .nm {
+        color: #b5cea8;
+      }
+
+      /* ===== PRACTICE BOX ===== */
+      .sql-practice-box {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid #dee2e6;
+        text-align: center;
+        margin-top: 40px;
       }
 
       .btn-beautiful {
@@ -161,7 +305,7 @@
         text-decoration: none;
         display: inline-flex;
         align-items: center;
-        gap: 10px; /* Տեքստի և սլաքի միջև բացվածքը */
+        gap: 10px;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
         margin-bottom: 30px;
@@ -173,20 +317,11 @@
         background: linear-gradient(135deg, #0b5ed7 0%, #1a1841 100%);
       }
 
+      .btn-beautiful:hover i {
+        transform: translateX(-5px);
+      }
       .btn-beautiful i {
         transition: transform 0.3s ease;
-      }
-
-      .btn-beautiful:hover i {
-        transform: translateX(-5px); /* Սլաքը շարժվում է դեպի ձախ */
-      }
-
-      .sql-practice-box {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        border-radius: 20px;
-        padding: 30px;
-        border: 1px solid #dee2e6;
-        text-align: center;
       }
 
       footer {
@@ -196,48 +331,31 @@
         text-align: center;
       }
 
-      /* ===== MOBILE OPTIMIZATION ===== */
       @media (max-width: 768px) {
         main.container {
           padding: 20px 15px;
           margin-top: 20px;
-          margin-bottom: 20px;
           border-radius: 15px;
           width: 92%;
         }
-
-        h1 {
-          font-size: 1.5rem;
+        .sql-trigger {
+          padding: 14px 16px;
+          gap: 10px;
+          flex-wrap: wrap;
         }
-        h2 {
-          font-size: 1.2rem;
+        .cmd-desc {
+          display: none;
         }
-
         pre {
-          padding: 15px;
-          font-size: 0.8rem;
-          margin: 15px 0;
+          font-size: 0.78rem;
         }
-
-        .sql-practice-box {
-          padding: 20px 15px;
-          margin: 30px 0;
-        }
-      }
-      @media (max-width: 768px) {
         header {
           text-align: center;
           padding: 20px 0;
         }
-
         .navbar-brand {
           font-size: 1.5rem;
         }
-
-        .navbar-nav .nav-link {
-          margin: 5px 0;
-        }
-
         .navbar-brand span {
           display: none;
         }
@@ -247,7 +365,6 @@
   <body>
     <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-dark container">
-        <!-- LOGO + TITLE -->
         <a
           class="navbar-brand d-flex align-items-center gap-2 fw-bold"
           href="#"
@@ -258,9 +375,8 @@
             height="45"
             class="d-inline-block align-text-top"
           />
-           <span class="d-none d-lg-inline">SQL ուսուցման Կայք</span>
+          <span class="d-none d-lg-inline">SQL ուսուցման Կայք</span>
         </a>
-
         <button
           class="navbar-toggler"
           type="button"
@@ -269,7 +385,6 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
@@ -293,14 +408,28 @@
     </header>
 
     <main class="container mt-5">
-      <h1 class="text-center mb-5">SQL հրամաններ և օրինակներ</h1>
-
-      <h2>1. SELECT</h2>
-      <p>
-        SELECT հրամանը օգտագործվում է տվյալներ ընտրելու համար տվյալների բազայից:
-        Կարող ենք ընտրել ամբողջ աղյուսակը կամ միայն որոշ սյունակներ:
+      <h1 class="text-center mb-2">SQL հրամաններ և օրինակներ</h1>
+      <p class="text-center text-muted mb-5">
+        Սեղմիր հրամանի վրա՝ մանրամասները տեսնելու համար
       </p>
-      <pre>
+
+      <div class="sql-accordion">
+        <!-- 1. SELECT -->
+        <div class="sql-item" id="item-1">
+          <button class="sql-trigger" onclick="toggleItem('item-1')">
+            <span class="cmd-badge">SELECT</span>
+            <span class="cmd-title">1. SELECT</span>
+            <span class="cmd-desc">Ընտրել տվյալներ տվյալների բազայից</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>
+                SELECT հրամանը օգտագործվում է տվյալներ ընտրելու համար տվյալների
+                բազայից: Կարող ենք ընտրել ամբողջ աղյուսակը կամ միայն որոշ
+                սյունակներ:
+              </p>
+              <pre>
 -- Բոլոր տողերը և սյունակները
 SELECT * FROM Users;
 
@@ -308,14 +437,26 @@ SELECT * FROM Users;
 SELECT name, age FROM Users;
 
 -- Հեռացում կրկնվող արժեքների
-SELECT DISTINCT age FROM Users;
-      </pre>
-      <p>Օրինակ՝ դասավորել ըստ տարիքի:</p>
-      <pre>SELECT name, age FROM Users ORDER BY age DESC;</pre>
+SELECT DISTINCT age FROM Users;</pre
+              >
+              <p class="mt-3">Օրինակ՝ դասավորել ըստ տարիքի:</p>
+              <pre>SELECT name, age FROM Users ORDER BY age DESC;</pre>
+            </div>
+          </div>
+        </div>
 
-      <h2>2. INSERT</h2>
-      <p>INSERT հրամանը ավելացնում է նոր տվյալներ աղյուսակում:</p>
-      <pre>
+        <!-- 2. INSERT -->
+        <div class="sql-item" id="item-2">
+          <button class="sql-trigger" onclick="toggleItem('item-2')">
+            <span class="cmd-badge">INSERT</span>
+            <span class="cmd-title">2. INSERT</span>
+            <span class="cmd-desc">Ավելացնել նոր տվյալներ աղյուսակում</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>INSERT հրամանը ավելացնում է նոր տվյալներ աղյուսակում:</p>
+              <pre>
 INSERT INTO Users (name, age, city)
 VALUES ('Անի', 20, 'Երևան');
 
@@ -323,34 +464,71 @@ VALUES ('Անի', 20, 'Երևան');
 INSERT INTO Users (name, age, city)
 VALUES 
 ('Մարի', 22, 'Գյումրի'),
-('Արամ', 19, 'Երևան');
-      </pre>
+('Արամ', 19, 'Երևան');</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>3. UPDATE</h2>
-      <p>
-        UPDATE-ը փոխում է գոյություն ունեցող տվյալները՝ ըստ որոշակի պայմանների:
-      </p>
-      <pre>
+        <!-- 3. UPDATE -->
+        <div class="sql-item" id="item-3">
+          <button class="sql-trigger" onclick="toggleItem('item-3')">
+            <span class="cmd-badge">UPDATE</span>
+            <span class="cmd-title">3. UPDATE</span>
+            <span class="cmd-desc">Փոփոխել գոյություն ունեցող տվյալները</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>
+                UPDATE-ը փոխում է գոյություն ունեցող տվյալները՝ ըստ որոշակի
+                պայմանների:
+              </p>
+              <pre>
 -- Թարմացնել Անիի տարիքը
 UPDATE Users SET age=21 WHERE name='Անի';
 
 -- Թարմացնել բոլոր օգտագործողների քաղաքը
-UPDATE Users SET city='Վանաձոր' WHERE city='Գյումրի';
-      </pre>
+UPDATE Users SET city='Վանաձոր' WHERE city='Գյումրի';</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>4. DELETE</h2>
-      <p>DELETE հրամանը ջնջում է տվյալներ ըստ պայմանների:</p>
-      <pre>
+        <!-- 4. DELETE -->
+        <div class="sql-item" id="item-4">
+          <button class="sql-trigger" onclick="toggleItem('item-4')">
+            <span class="cmd-badge">DELETE</span>
+            <span class="cmd-title">4. DELETE</span>
+            <span class="cmd-desc">Ջնջել տվյալներ ըստ պայմանների</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>DELETE հրամանը ջնջում է տվյալներ ըստ պայմանների:</p>
+              <pre>
 -- Ջնջել 18 տարեկանից փոքր օգտագործողներին
 DELETE FROM Users WHERE age < 18;
 
 -- Ջնջել բոլոր օգտագործողներին (Ուշադրություն!)
-DELETE FROM Users;
-      </pre>
+DELETE FROM Users;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>5. CREATE TABLE & ALTER TABLE</h2>
-      <p>Աղյուսակ ստեղծելու և փոփոխելու հրամաններ:</p>
-      <pre>
+        <!-- 5. CREATE TABLE & ALTER TABLE -->
+        <div class="sql-item" id="item-5">
+          <button class="sql-trigger" onclick="toggleItem('item-5')">
+            <span class="cmd-badge">CREATE / ALTER</span>
+            <span class="cmd-title">5. CREATE TABLE & ALTER TABLE</span>
+            <span class="cmd-desc">Աղյուսակ ստեղծել և փոփոխել</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>Աղյուսակ ստեղծելու և փոփոխելու հրամաններ:</p>
+              <pre>
 -- Աղյուսակ ստեղծել
 CREATE TABLE Users (
   ID INT PRIMARY KEY,
@@ -363,21 +541,45 @@ CREATE TABLE Users (
 ALTER TABLE Users ADD COLUMN email VARCHAR(100);
 
 -- Փոխել սյունակի տեսակը
-ALTER TABLE Users MODIFY COLUMN age SMALLINT;
-      </pre>
+ALTER TABLE Users MODIFY COLUMN age SMALLINT;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>6. DROP TABLE & DROP COLUMN</h2>
-      <pre>
+        <!-- 6. DROP -->
+        <div class="sql-item" id="item-6">
+          <button class="sql-trigger" onclick="toggleItem('item-6')">
+            <span class="cmd-badge">DROP</span>
+            <span class="cmd-title">6. DROP TABLE & DROP COLUMN</span>
+            <span class="cmd-desc">Ջնջել աղյուսակ կամ սյունակ</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- Աղյուսակ ջնջել
 DROP TABLE Users;
 
 -- Սյունակ ջնջել
-ALTER TABLE Users DROP COLUMN email;
-      </pre>
+ALTER TABLE Users DROP COLUMN email;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>7. WHERE պայմաններ</h2>
-      <p>WHERE-ով սահմանում ենք ֆիլտրի պայմաններ:</p>
-      <pre>
+        <!-- 7. WHERE -->
+        <div class="sql-item" id="item-7">
+          <button class="sql-trigger" onclick="toggleItem('item-7')">
+            <span class="cmd-badge">WHERE</span>
+            <span class="cmd-title">7. WHERE պայմաններ</span>
+            <span class="cmd-desc">Ֆիլտրելու պայմաններ սահմանել</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>WHERE-ով սահմանում ենք ֆիլտրի պայմաններ:</p>
+              <pre>
 -- հավասարություն
 SELECT * FROM Users WHERE city='Երևան';
 
@@ -386,60 +588,132 @@ SELECT * FROM Users WHERE age>20 AND city='Երևան';
 
 -- OR և NOT օպերատորներ
 SELECT * FROM Users WHERE age<18 OR city='Գյումրի';
-SELECT * FROM Users WHERE NOT age=20;
-      </pre>
+SELECT * FROM Users WHERE NOT age=20;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>8. LIKE և IN օպերատորներ</h2>
-      <pre>
+        <!-- 8. LIKE & IN -->
+        <div class="sql-item" id="item-8">
+          <button class="sql-trigger" onclick="toggleItem('item-8')">
+            <span class="cmd-badge">LIKE / IN</span>
+            <span class="cmd-title">8. LIKE և IN օպերատորներ</span>
+            <span class="cmd-desc">Տեքստային ֆիլտր և արժեքների ցուցակ</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- LIKE օգտագործում ենք տեքստային ֆիլտրի համար
 SELECT * FROM Users WHERE name LIKE 'Ա%';
 
 -- IN օգտագործում ենք արժեքների ցուցակի համար
-SELECT * FROM Users WHERE city IN ('Երևան','Գյումրի');
-      </pre>
+SELECT * FROM Users WHERE city IN ('Երևան','Գյումրի');</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>9. BETWEEN & IS NULL</h2>
-      <pre>
+        <!-- 9. BETWEEN & IS NULL -->
+        <div class="sql-item" id="item-9">
+          <button class="sql-trigger" onclick="toggleItem('item-9')">
+            <span class="cmd-badge">BETWEEN / NULL</span>
+            <span class="cmd-title">9. BETWEEN & IS NULL</span>
+            <span class="cmd-desc">Միջակայք և NULL արժեքներ</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- Միջակայք
 SELECT * FROM Users WHERE age BETWEEN 18 AND 25;
 
 -- NULL արժեքներ
-SELECT * FROM Users WHERE email IS NULL;
-      </pre>
+SELECT * FROM Users WHERE email IS NULL;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>10. AGGREGATE ֆունկցիաներ</h2>
-      <p>Հաշվարկներ և խմբավորումներ:</p>
-      <pre>
+        <!-- 10. AGGREGATE -->
+        <div class="sql-item" id="item-10">
+          <button class="sql-trigger" onclick="toggleItem('item-10')">
+            <span class="cmd-badge">AGGREGATE</span>
+            <span class="cmd-title">10. AGGREGATE ֆունկցիաներ</span>
+            <span class="cmd-desc">COUNT, AVG, SUM, MIN, MAX</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>Հաշվարկներ և խմբավորումներ:</p>
+              <pre>
 SELECT COUNT(*) FROM Users;         -- Հաշվել տողերի քանակը
 SELECT AVG(age) FROM Users;         -- Միջին տարիքը
 SELECT SUM(age) FROM Users;         -- Տարիքների գումարը
 SELECT MIN(age) FROM Users;         -- Նվազագույն տարիքը
-SELECT MAX(age) FROM Users;         -- Ամենամեծ տարիքը
-      </pre>
+SELECT MAX(age) FROM Users;         -- Ամենամեծ տարիքը</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>11. GROUP BY & HAVING</h2>
-      <pre>
+        <!-- 11. GROUP BY & HAVING -->
+        <div class="sql-item" id="item-11">
+          <button class="sql-trigger" onclick="toggleItem('item-11')">
+            <span class="cmd-badge">GROUP BY</span>
+            <span class="cmd-title">11. GROUP BY & HAVING</span>
+            <span class="cmd-desc">Խմբավորել և ֆիլտրել արդյունքները</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- Խմբավորել ըստ քաղաքի
 SELECT city, COUNT(*) FROM Users GROUP BY city;
 
 -- Խմբավորել եւ ֆիլտրել
 SELECT city, COUNT(*) FROM Users 
 GROUP BY city 
-HAVING COUNT(*) > 1;
-      </pre>
+HAVING COUNT(*) > 1;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>12. ORDER BY & LIMIT</h2>
-      <pre>
+        <!-- 12. ORDER BY & LIMIT -->
+        <div class="sql-item" id="item-12">
+          <button class="sql-trigger" onclick="toggleItem('item-12')">
+            <span class="cmd-badge">ORDER / LIMIT</span>
+            <span class="cmd-title">12. ORDER BY & LIMIT</span>
+            <span class="cmd-desc">Դասավորել և սահմանափակել արդյունքը</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- Դասավորել ըստ տարիքի
 SELECT * FROM Users ORDER BY age ASC;
 
 -- Դասավորել և սահմանափակել արդյունքը
-SELECT * FROM Users ORDER BY age DESC LIMIT 5;
-      </pre>
+SELECT * FROM Users ORDER BY age DESC LIMIT 5;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>13. JOIN-ներ</h2>
-      <p>Միացնում ենք տարբեր աղյուսակներ:</p>
-      <pre>
+        <!-- 13. JOIN -->
+        <div class="sql-item" id="item-13">
+          <button class="sql-trigger" onclick="toggleItem('item-13')">
+            <span class="cmd-badge">JOIN</span>
+            <span class="cmd-title">13. JOIN-ներ</span>
+            <span class="cmd-desc">Միացնել տարբեր աղյուսակներ</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <p>Միացնում ենք տարբեր աղյուսակներ:</p>
+              <pre>
 -- INNER JOIN: միայն համընկնող տողերը
 SELECT Users.name, Orders.amount
 FROM Users
@@ -458,11 +732,23 @@ RIGHT JOIN Orders ON Users.ID = Orders.user_id;
 -- FULL JOIN (եթե աջակցվում է)
 SELECT Users.name, Orders.amount
 FROM Users
-FULL OUTER JOIN Orders ON Users.ID = Orders.user_id;
-      </pre>
+FULL OUTER JOIN Orders ON Users.ID = Orders.user_id;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>14. TRANSACTIONS</h2>
-      <pre>
+        <!-- 14. TRANSACTIONS -->
+        <div class="sql-item" id="item-14">
+          <button class="sql-trigger" onclick="toggleItem('item-14')">
+            <span class="cmd-badge">TRANSACTION</span>
+            <span class="cmd-title">14. TRANSACTIONS</span>
+            <span class="cmd-desc">Թարմացնել, հաստատել կամ հակադարձել</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- Թարմացնել մի քանի աղյուսակ և հաստատել
 START TRANSACTION;
 UPDATE Users SET age=25 WHERE name='Անի';
@@ -472,30 +758,68 @@ COMMIT;
 -- Հակադարձել (rollback)
 START TRANSACTION;
 DELETE FROM Users WHERE age<18;
-ROLLBACK;
-      </pre>
+ROLLBACK;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>15. INDEXES</h2>
-      <pre>
+        <!-- 15. INDEXES -->
+        <div class="sql-item" id="item-15">
+          <button class="sql-trigger" onclick="toggleItem('item-15')">
+            <span class="cmd-badge">INDEX</span>
+            <span class="cmd-title">15. INDEXES</span>
+            <span class="cmd-desc"
+              >Ավելացնել ինդեքս արագ որոնումների համար</span
+            >
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- Ավելացնել ինդեքս արագ որոնումների համար
 CREATE INDEX idx_name ON Users(name);
 
 -- Ջնջել ինդեքս
-DROP INDEX idx_name ON Users;
-      </pre>
+DROP INDEX idx_name ON Users;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>16. VIEWS</h2>
-      <pre>
+        <!-- 16. VIEWS -->
+        <div class="sql-item" id="item-16">
+          <button class="sql-trigger" onclick="toggleItem('item-16')">
+            <span class="cmd-badge">VIEW</span>
+            <span class="cmd-title">16. VIEWS</span>
+            <span class="cmd-desc">Ստեղծել և օգտագործել դիտումներ</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- Ստեղծել դիտում
 CREATE VIEW ActiveUsers AS
 SELECT * FROM Users WHERE active=1;
 
 -- Օգտագործել դիտումը
-SELECT * FROM ActiveUsers;
-      </pre>
+SELECT * FROM ActiveUsers;</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>17. PRIMARY KEY & FOREIGN KEY</h2>
-      <pre>
+        <!-- 17. PRIMARY KEY & FOREIGN KEY -->
+        <div class="sql-item" id="item-17">
+          <button class="sql-trigger" onclick="toggleItem('item-17')">
+            <span class="cmd-badge">KEY</span>
+            <span class="cmd-title">17. PRIMARY KEY & FOREIGN KEY</span>
+            <span class="cmd-desc">Հիմնական և արտաքին բանալիներ</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- PRIMARY KEY
 CREATE TABLE Users (
   ID INT PRIMARY KEY,
@@ -507,11 +831,23 @@ CREATE TABLE Orders (
   ID INT PRIMARY KEY,
   user_id INT,
   FOREIGN KEY (user_id) REFERENCES Users(ID)
-);
-      </pre>
+);</pre
+              >
+            </div>
+          </div>
+        </div>
 
-      <h2>18. UNIQUE & CHECK</h2>
-      <pre>
+        <!-- 18. UNIQUE & CHECK -->
+        <div class="sql-item" id="item-18">
+          <button class="sql-trigger" onclick="toggleItem('item-18')">
+            <span class="cmd-badge">UNIQUE / CHECK</span>
+            <span class="cmd-title">18. UNIQUE & CHECK</span>
+            <span class="cmd-desc">Եզակիություն և պայմանի ստուգում</span>
+            <span class="chevron">▼</span>
+          </button>
+          <div class="sql-panel">
+            <div class="sql-panel-inner">
+              <pre>
 -- UNIQUE
 CREATE TABLE Users (
   ID INT PRIMARY KEY,
@@ -522,8 +858,13 @@ CREATE TABLE Users (
 CREATE TABLE Users (
   ID INT PRIMARY KEY,
   age INT CHECK(age>0)
-);
-      </pre>
+);</pre
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end accordion -->
 
       <div class="sql-practice-box text-center mt-5">
         <h4 class="mb-3">Փորձիր SQL-ը գործնականում</h4>
@@ -531,24 +872,23 @@ CREATE TABLE Users (
           Սեղմիր ներքևի կոճակը և բացիր առցանց SQL Live Editor՝ քո հարցումները
           անմիջապես փորձարկելու համար։
         </p>
-
         <a
           href="https://sqliteonline.com"
           target="_blank"
           class="btn btn-primary"
-          style="margin-bottom: 50px"
+          style="margin-bottom: 10px"
         >
           🚀 Բացել SQL Live Editor
         </a>
       </div>
     </main>
 
-    <div class="text-center mt-5">
+    <div class="text-center mt-4 mb-4">
       <a href="index.html" class="btn-beautiful">
         <i>←</i> Վերադառնալ հիմնական էջ
       </a>
     </div>
-    <div id="backToTop">↑</div>
+
     <footer>
       <div class="container">
         <p class="mb-1">
@@ -559,37 +899,54 @@ CREATE TABLE Users (
         </p>
       </div>
     </footer>
+
     <script>
+      function toggleItem(id) {
+        const item = document.getElementById(id);
+        const isOpen = item.classList.contains("open");
+
+        // Close all
+        document
+          .querySelectorAll(".sql-item.open")
+          .forEach((el) => el.classList.remove("open"));
+
+        // Open clicked (if it wasn't already open)
+        if (!isOpen) {
+          item.classList.add("open");
+          // Smooth scroll so the item is visible
+          setTimeout(() => {
+            item.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 50);
+        }
+      }
+
+      // Copy buttons
       document.querySelectorAll("pre").forEach((codeBlock) => {
-        // Ստեղծել կոճակը
         const button = document.createElement("button");
         button.className = "copy-btn";
         button.type = "button";
         button.innerText = "Copy";
-
-        // Ավելացնել կոճակը կոդի բլոկի մեջ
         codeBlock.appendChild(button);
 
-        button.addEventListener("click", () => {
-          // Վերցնել տեքստը (բացառելով հենց կոճակի տեքստը)
+        button.addEventListener("click", (e) => {
+          e.stopPropagation();
           const code = codeBlock.innerText.replace("Copy", "").trim();
-
           navigator.clipboard
             .writeText(code)
             .then(() => {
               button.innerText = "Copied!";
-              button.classList.add("copied");
-
-              // Հետ բերել նախնական տեսքին 2 վայրկյան անց
               setTimeout(() => {
                 button.innerText = "Copy";
-                button.classList.remove("copied");
               }, 2000);
             })
-            .catch((err) => {
-              console.error("Error in copying text: ", err);
-            });
+            .catch((err) => console.error("Error copying:", err));
         });
+      });
+
+      // Sticky header shrink
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector(".main-header");
+        header.classList.toggle("scrolled", window.scrollY > 50);
       });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
